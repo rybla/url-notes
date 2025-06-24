@@ -3,7 +3,7 @@
     --panel--color: color-mix(
         in hsl,
         transparent,
-        light-dark(black, white) 20%
+        light-dark(black, white) 10%
     );
     --accent--color: color-mix(in hsl, transparent, #cc8500 60%);
     /* --accent--color: #cc8500; */
@@ -17,7 +17,7 @@ body {
     margin: 0;
     padding: 0;
 
-    scroll-behavior: none;
+    scroll-behavior: smooth;
 
     background-color: var(--background--color);
     color: var(--text--color);
@@ -29,38 +29,46 @@ body {
 }
 
 .App {
+    position: relative;
+    isolation: isolate;
+
     margin: auto;
     width: 100vw;
     max-width: 600px;
-    height: 100vh;
+    /* height: 100vh; */
 
     display: flex;
     flex-direction: column;
+    gap: 1rem;
 
     & > .Header {
-        flex: 0 0 auto;
+        /* flex: 0 0 auto; */
+
+        position: sticky;
+        top: 0;
     }
 
     & > .notes {
-        flex: 1 1 0;
+        /* flex: 1 1 0;
         overflow-y: auto;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* Internet Explorer/Edge */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
         &::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            display: none;
         }
         min-height: 0;
-        scroll-behavior: smooth;
+        scroll-behavior: smooth; */
     }
 }
 
 .Header {
-    margin: 0.5rem;
+    /* margin: 0.5rem; */
     padding: 0.5rem;
 
-    border-radius: 0.5rem;
+    /* border-radius: 0.5rem; */
 
     background: var(--panel--color);
+    backdrop-filter: blur(10px);
 
     & > .title {
     }
@@ -68,6 +76,7 @@ body {
 
 .Note {
     margin: 0.5rem;
+    scroll-margin-top: 2.5rem;
     padding: 0.5rem 0;
 
     border-radius: 0.5rem;
