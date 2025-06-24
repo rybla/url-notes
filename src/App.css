@@ -42,22 +42,11 @@ body {
     gap: 1rem;
 
     & > .Header {
-        /* flex: 0 0 auto; */
-
         position: sticky;
         top: 0;
     }
 
     & > .notes {
-        /* flex: 1 1 0;
-        overflow-y: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        &::-webkit-scrollbar {
-            display: none;
-        }
-        min-height: 0;
-        scroll-behavior: smooth; */
     }
 }
 
