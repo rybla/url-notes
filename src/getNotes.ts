@@ -36,6 +36,8 @@ export default async function getNotes(): Promise<Note[]> {
   if (!(await fs.exists(config.notes_dirpath)))
     await fs.mkdir(config.notes_dirpath);
 
+  console.log(`urls = ${[...urls]}`);
+
   const notes: Note[] = [];
 
   for (const url of urls) {

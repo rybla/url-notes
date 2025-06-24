@@ -175,9 +175,3 @@ console.table(outputTable);
 const buildTime = (end - start).toFixed(2);
 
 console.log(`\n✅ Build completed in ${buildTime}ms\n`);
-
-await cp(config.notes_dirpath, `${config.output_dirpath}/note`, {
-  recursive: true,
-});
-
-console.log(`✅ Copied notes directory to output\n`);
