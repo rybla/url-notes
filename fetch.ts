@@ -1,6 +1,6 @@
-import config from "./config";
-import { Note } from "./ontology";
-import { do_, encodeURIComponent_better } from "./utility";
+import config from "@/config";
+import { Note } from "@/ontology";
+import { do_, encodeURIComponent_better } from "@/utility";
 import * as fs from "fs/promises";
 
 do_(async () => {
@@ -29,8 +29,11 @@ do_(async () => {
     const getFilenameOfURL = (href: string) =>
       `${encodeURIComponent_better(href)}.json`;
 
+    if (!(await fs.exists(config.notes_dirpath)))
+      await fs.mkdir(config.notes_dirpath);
+
     for (const url of urls) {
-      const note_filepath = `src/note/${getFilenameOfURL(url)}`;
+      const note_filepath = `${config.notes_dirpath}/${getFilenameOfURL(url)}`;
       try {
         if (await fs.exists(note_filepath)) {
           const note_content = await fs.readFile(note_filepath, {
@@ -56,12 +59,16 @@ do_(async () => {
       }
     }
 
-    await fs.writeFile(
-      `src/notes.ts`,
-      `
-${urls.values().map((url, i) => `import note_${i} from "./note/${getFilenameOfURL(url)}"`)}
-`.trim(),
-      { encoding: "utf8" },
-    );
+    //     await fs.writeFile(
+    //       `src/notes.ts`,
+    //       `
+    // ${urls
+    //   .values()
+    //   .map((url, i) => `import note_${i} from "./note/${getFilenameOfURL(url)}"`)
+    //   .toArray()
+    //   .join("\n")}
+    // `.trim(),
+    //       { encoding: "utf8" },
+    //     );
   }
 });
