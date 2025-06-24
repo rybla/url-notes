@@ -4,6 +4,8 @@ export const config = {
   ],
   output_dirpath: "./output",
   notes_dirpath: "./note",
+  default_favicon_url:
+    "https://raw.githubusercontent.com/victrme/favicon-fetcher/main/package/icons/notfound.svg",
 };
 
 export default config;

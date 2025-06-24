@@ -3,6 +3,7 @@ import { z } from "genkit";
 export type Note = z.infer<typeof Note>;
 export const Note = z.object({
   url: z.string().url(),
+  faviconUrl: z.string().url(),
   date: z.string().date(),
   name: z.optional(z.string()),
   tags: z.optional(z.array(z.string())),

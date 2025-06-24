@@ -5,8 +5,9 @@ import { Readability } from "@mozilla/readability";
 import * as fs from "fs/promises";
 import { JSDOM } from "jsdom";
 import { generateMetadataOfArticle } from "./ai";
+import favicon from "@victr/favicon-fetcher";
 
-export default async function getNotes(): Promise<Note[]> {
+export async function fetchNotes(): Promise<Note[]> {
   const urls: Set<string> = new Set();
   for (const filepath of config.input_filepaths) {
     try {
@@ -71,6 +72,9 @@ export default async function getNotes(): Promise<Note[]> {
 
 async function generateNote(url: string): Promise<Note> {
   console.log(`generateNote("${url}")`);
+
+  const faviconUrl = await fetchFavicon(url);
+
   const date = new Date();
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -103,6 +107,7 @@ async function generateNote(url: string): Promise<Note> {
 
   return {
     url,
+    faviconUrl,
     date: dateString,
     name: article.title,
     tags,
@@ -157,6 +162,19 @@ async function fetchArticle(url: string): Promise<Article> {
     if (error instanceof Error) {
       console.error(error.toString());
       return {};
+    } else {
+      throw error;
+    }
+  }
+}
+
+async function fetchFavicon(url: string): Promise<string> {
+  try {
+    return await favicon.text(url);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error(error.toString());
+      return config.default_favicon_url;
     } else {
       throw error;
     }
