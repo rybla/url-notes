@@ -5,7 +5,8 @@
         transparent,
         light-dark(black, white) 20%
     );
-    --accent--color: color-mix(in hsl, transparent, orange 50%);
+    /* --accent--color: color-mix(in hsl, transparent, orange 50%); */
+    --accent--color: #cc8500;
     --text--color: light-dark(black, white);
 }
 
@@ -71,6 +72,13 @@ body {
     flex-direction: column;
     gap: 0.5rem;
 
+    &:target {
+        /* outline: none; */
+        /* box-shadow: 0 0 0 2px var(--accent--color); */
+
+        box-shadow: 0 0 0 0.3rem var(--accent--color);
+    }
+
     & > div {
         padding: 0 0.5rem;
     }
@@ -81,20 +89,30 @@ body {
 
         background: var(--accent--color);
         font-size: 1.5em;
-    }
 
-    & > .url {
-        word-break: break-all;
-    }
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        /* justify-content: center; */
+        gap: 1rem;
 
-    & > .name {
-        word-break: break-all;
+        .icon {
+            width: 1.5rem;
+        }
     }
 
     & > .date {
     }
 
     & > .abstract {
+        padding: 0.5rem;
+
+        line-height: 1.5;
+        background-color: color-mix(
+            in hsl,
+            transparent,
+            light-dark(white, black) 50%
+        );
     }
 
     & > .tags {
@@ -109,4 +127,8 @@ body {
     display: inline-block;
     padding: 0.2rem;
     background: var(--accent--color);
+}
+
+a.raw {
+    word-break: break-all;
 }
