@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "bun src/index.html",
-    "start": "NODE_ENV=production bun src/index.tsx",
-    "build": "bun build.ts",
-    "update": "bun build.ts && git add -A && git commit -m\"update\" && git push"
+    "build": "bun run build.ts",
+    "update": "bun run build.ts && git add -A && git commit -m\"update\" && git push"
   },
   "dependencies": {
     "@genkit-ai/googleai": "^1.13.0",
