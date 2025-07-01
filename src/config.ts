@@ -1,7 +1,6 @@
 export const config = {
-  input_filepaths: [
-    "/Users/henryblanchette/Library/Mobile Documents/com~apple~CloudDocs/url-notes/url-save.txt",
-  ],
+  input_filepath:
+    "/Users/henry/Library/Mobile Documents/com~apple~CloudDocs/url-notes/article_urls.txt",
   output_dirpath: "./output",
   notes_dirpath: "./note",
   default_favicon_url:

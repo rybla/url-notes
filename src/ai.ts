@@ -53,7 +53,7 @@ ${input.content}
       throw new Error(`generateMetadataOfArticle failed: ${input.url}`);
     return {
       abstract: res.output.abstract,
-      tags: res.output.tags,
+      tags: res.output.tags.map((tag) => tag.toLowerCase()),
     };
   },
 );

@@ -8,56 +8,60 @@ import { generateMetadataOfArticle } from "./ai";
 import favicon from "@victr/favicon-fetcher";
 
 export async function fetchNotes(): Promise<Note[]> {
-  const urls: Set<string> = new Set();
-  for (const filepath of config.input_filepaths) {
-    try {
-      const content = await fs.readFile(filepath, { encoding: "utf8" });
-      const lines = content.split("\n");
-      for (const line of lines) {
-        if (line.length === 0) continue;
-        try {
-          const url = new URL(line);
-          urls.add(`${url.origin}${url.pathname}`);
-        } catch (error: unknown) {
-          if (error instanceof Error) {
-            console.warn(`Invalid URL: ${line}\n${error.toString()}`);
-          } else throw error;
-        }
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.warn(`Error reading file: ${filepath}\n${error.toString()}`);
-      } else throw error;
-    }
-  }
-
   const getFilenameOfURL = (href: string) =>
     `${encodeURIComponent_better(href)}.json`;
 
   if (!(await fs.exists(config.notes_dirpath)))
     await fs.mkdir(config.notes_dirpath);
 
-  console.log(`urls = ${[...urls]}`);
+  const urls_failed: string[] = [];
+
+  const content = await fs.readFile(config.input_filepath, {
+    encoding: "utf8",
+  });
+  const lines = content.split("\n").filter((s) => s.length > 0);
+
+  console.log(`lines to process: ${lines.length}`);
+
+  for (const line of lines) {
+    console.log(`processing ${line}`);
+
+    const url_parsed = do_(() => {
+      try {
+        return new URL(line);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.warn(`Invalid URL: ${line}\n${error.toString()}`);
+          urls_failed.push(line);
+          return undefined;
+        } else throw error;
+      }
+    });
+
+    if (url_parsed === undefined) continue;
+
+    const url = `${url_parsed.origin}${url_parsed.pathname}`;
+
+    const note_filepath = `${config.notes_dirpath}/${getFilenameOfURL(url)}`;
+    if (!(await fs.exists(note_filepath))) {
+      const note = await generateNote(url);
+      await fs.writeFile(note_filepath, JSON.stringify(note), {
+        encoding: "utf8",
+      });
+    }
+  }
+
+  await fs.writeFile(config.input_filepath, urls_failed.join("\n"));
 
   const notes: Note[] = [];
-
-  for (const url of urls) {
-    const note_filepath = `${config.notes_dirpath}/${getFilenameOfURL(url)}`;
+  const note_filenames = await fs.readdir(config.notes_dirpath);
+  for (const note_filename of note_filenames) {
+    const note_filepath = `${config.notes_dirpath}/${note_filename}`;
     try {
-      if (await fs.exists(note_filepath)) {
-        const note_content = await fs.readFile(note_filepath, {
-          encoding: "utf8",
-        });
-        const note_data = JSON.parse(note_content);
-        const note: Note = Note.parse(note_data);
-        notes.push(note);
-      } else {
-        const note = await generateNote(url);
-        await fs.writeFile(note_filepath, JSON.stringify(note), {
-          encoding: "utf8",
-        });
-        notes.push(note);
-      }
+      const text = await fs.readFile(note_filepath, "utf8");
+      const note_data = JSON.parse(text);
+      const note = Note.parse(note_data);
+      notes.push(note);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.warn(
