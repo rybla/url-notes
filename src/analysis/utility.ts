@@ -55,3 +55,10 @@ export function parseDate(s: string): Date | null {
   if (isNaN(date.getTime())) return null;
   return date;
 }
+
+export function normString(s: string | undefined): string | undefined {
+  if (s === undefined) return undefined;
+  s = s.trim();
+  if (s.length === 0) return undefined;
+  return s;
+}

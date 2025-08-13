@@ -36,21 +36,14 @@
 .page {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
   background-color: var(--color-light-gray);
   font-family: var(--font-family);
-  padding-top: var(--header-height);
-  padding-bottom: var(--controls-height);
 }
 
 /* Header Styling */
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  height: calc(var(--header-height) - (2 * var(--space-3)));
+  flex: 0 0 auto;
   padding: var(--space-2) var(--space-3);
   background-color: var(--color-white);
   border-bottom: var(--border);
@@ -67,8 +60,9 @@
 
 /* Main Content Area */
 .content {
-  flex-grow: 1;
-  /*width: 100%;*/
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
   max-width: 900px; /* Max width for readability on larger screens */
   margin: 0 auto;
   padding: var(--space-4) var(--space-3);
@@ -93,10 +87,7 @@
 
 /* Controls Bar (Fixed at Bottom) */
 .controls {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  flex: 0 0 auto;
   height: var(--controls-height);
   background-color: var(--color-white);
   border-top: var(--border);
@@ -105,7 +96,6 @@
   align-items: center;
   gap: var(--space-3);
   padding: 0 var(--space-3);
-  z-index: 1000;
 }
 
 /* Button Styling */
@@ -126,6 +116,12 @@
     transform 0.1s ease-in-out,
     box-shadow 0.1s ease-in-out;
   user-select: none; /* Prevents text selection on click */
+}
+
+.button.disabled {
+  background-color: var(--color-gray);
+  color: var(--color-gray-dark);
+  cursor: not-allowed;
 }
 
 .button:hover {

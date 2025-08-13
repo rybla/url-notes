@@ -5,7 +5,7 @@ import { fetchFeed } from "@/analysis/feed";
 import { readJsonFile } from "@/analysis/file";
 import { Article, ArticleMetadata, RssFeedConfig } from "@/analysis/ontology";
 import paths from "@/analysis/paths";
-import { do_, formatDate } from "@/analysis/utility";
+import { do_, formatDate, normString } from "@/analysis/utility";
 import filenamifyUrl from "filenamify-url";
 const { error, log } = makeConsole({ __filename });
 
@@ -52,14 +52,19 @@ for (const feed of feeds) {
             const article = await fetchArticle(url);
             if (!article) return null;
             // fill in some extra info from the feed item
-            article.title = article.title ?? item.title ?? url;
+
+            article.title =
+              normString(article.title) ?? normString(item.title) ?? url;
             article.summary =
-              item.summary ?? article.excerpt ?? item.contentSnippet;
+              normString(item.summary) ??
+              normString(article.excerpt) ??
+              normString(item.contentSnippet);
             article.tags =
               article.tags?.map((tag) => tag.toLowerCase()) ??
               item.categories?.map((category) => category.toLowerCase()) ??
               [];
             article.publishedTime = article.publishedTime ?? item.pubDate;
+
             return article;
           },
         );

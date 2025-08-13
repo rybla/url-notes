@@ -89,20 +89,24 @@ export default async function Page(props: Props) {
             className={styles.button}
             href={`/all/${Number(params.pageIndex) - 1}`}
           >
-            prev
+            newer
           </Link>
         ) : (
-          <></>
+          <div className={[styles.button, styles.disabled].join(" ")}>
+            newer
+          </div>
         )}
         {Number(params.pageIndex) < pageIndex_max ? (
           <Link
             className={styles.button}
             href={`/all/${Number(params.pageIndex) + 1}`}
           >
-            next
+            older
           </Link>
         ) : (
-          <></>
+          <div className={[styles.button, styles.disabled].join(" ")}>
+            older
+          </div>
         )}
       </div>
     </div>
