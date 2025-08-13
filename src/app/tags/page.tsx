@@ -2,10 +2,7 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import paths from "@/analysis/paths";
 import { readArticleTags } from "@/analysis/article";
-
-function get_title() {
-  return "url-notes | tags";
-}
+import Header from "@/component/Header";
 
 export default async function Page() {
   const ids_all = await paths.get_ids_of_articles();
@@ -20,13 +17,7 @@ export default async function Page() {
 
   return (
     <div className={styles.Page}>
-      <div className={styles.header}>
-        <div className={styles.item}>
-          <Link href="/">url-notes</Link>
-        </div>
-        <div className={styles.separator}>{"|"}</div>
-        <div className={styles.item}>tags</div>
-      </div>
+      <Header path={[<span key={0}>tags</span>]} />
       <div className={styles.content}>
         <div className={styles.tags}>
           {Array.from(tags_all).map((tag, i) => (

@@ -1,148 +1,133 @@
 /*
-================================================================================
-|   DIGITAL NEO-BRUTALISM - DESIGN SYSTEM BLUEPRINT                          |
-================================================================================
-|
-|   CORE CONCEPT:
-|   Inspired by mid-20th century architectural brutalism, this system
-|   rejects decorative fluff for raw, exposed digital structures. It
-|   prioritizes honesty, clarity, and a strong, unapologetic presence.
-|   The aesthetic arises directly from function.
-|
-|   1. HONESTY OF MATERIAL:
-|      - Containers, grids, and boundaries are not hidden but are central
-|        to the aesthetic. The design reveals how it was built.
-|
-|   2. STRONG HIERARCHY:
-|      - Information is organized with a clear, logical, and visually
-|        dominant hierarchy using scale, weight, and placement.
-|
-|   3. UNAPOLOGETIC PRESENCE:
-|      - The design uses hard shadows, high contrast, and stark typography
-|        to create a memorable and solid three-dimensional feel.
-|
-|   4. FUNCTION OVER FORM:
-|      - Every design element must serve a purpose. Decoration for its
-|        own sake is eliminated.
-|
-|--------------------------------------------------------------------------------
-|
-|   IMPLEMENTATION GUIDE:
-|
-|   - SHADOWS:
-|     - Standard: Hard, black, no blur (e.g., box-shadow: 4px 4px 0px #000).
-|     - Offset: Consistently 45-degree diagonal offsets.
-|
-|   - COLORS:
-|     - Palette: High-contrast, limited, and functional.
-|     - Structure: Neutrals (#000, #FFF, #CCC, #888).
-|     - Accents: Vibrant, purposeful colors for actions and states
-|       (Blue, Red, Green, Orange, Purple, Yellow).
-|
-|   - STRUCTURE & SPACING:
-|     - Corners: Sharp, 0px radius. Rounded corners are forbidden.
-|     - Borders: Solid, 1px or 2px black/gray to define containers.
-|     - Layout: Strict, visible grid (e.g., 8pt grid).
-|
-|   - TYPOGRAPHY:
-|     - Style: Bold, often uppercase, with high contrast.
-|
-|   - COMPONENTS:
-|     - Buttons/Cards: Solid backgrounds, thick borders, hard shadows.
-|     - Interaction: Hover/active states manipulate shadows and position
-|       to create a physical, tactile response.
-|
-================================================================================
+  Digital Neo-Brutalism Blueprint for the Tags Page
+
+  1.  **Component**: `Page`
+      -   **Objective**: Display a collection of content tags in a bold, structured, and interactive manner.
+      -   **Structure**: The page is composed of a primary `Header` and a `content` area which contains a grid of `tags`.
+
+  2.  **Overall Layout (`.Page`)**
+      -   **Background**: Solid, high-contrast background (#FFFFFF - White) to ensure readability and starkness.
+      -   **Spacing**: Utilizes a consistent spacing unit defined in CSS variables to maintain a rigid grid structure.
+      -   **Typography**: A clean, sans-serif font will be used globally for clarity.
+
+  3.  **Content Area (`.content`)**
+      -   **Purpose**: To center and constrain the main tag grid, providing visual focus.
+      -   **Styling**: It will have ample padding to create a defined boundary between the page edges and the interactive elements.
+
+  4.  **Tags Grid (`.tags`)**
+      -   **Layout**: A responsive CSS grid will be used to display the tags. On desktop, it will be a multi-column layout. On mobile, it will collapse into a single or double column for optimal viewing.
+      -   **Spacing**: The gap between grid items will be controlled by our base spacing unit, reinforcing the grid system.
+
+  5.  **Individual Tag (`.tag`)**
+      -   **Concept**: Each tag is treated as a physical "block" or "plate". It's a primary interactive element.
+      -   **Appearance**:
+          -   **Shape**: Sharp, unforgiving corners (border-radius: 0).
+          -   **Border**: A thick, solid 2px black border to define its edges clearly.
+          -   **Background**: A neutral light gray (#CCCCCC) to differentiate it from the white page background.
+          -   **Shadow**: A hard, 4px offset black shadow (`box-shadow: 4px 4px 0px #000000;`) to give it a tangible, 3D presence. This is the core of the Neo-Brutalist aesthetic.
+      -   **Typography**: The text inside the tag link will be bold and uppercase to assert its importance.
+      -   **Interaction**:
+          -   **Hover/Focus**: To signify interactivity, hovering over a tag will cause it to shift. The shadow will disappear, and the tag will translate 4px down and to the right, appearing to press into the space its shadow once occupied. The background color will change to `Action Blue` (#007AFF) and the text to white, providing clear, functional feedback.
+          -   **Active**: The active state will be the same as the hover state to maintain consistency.
+      -   **Link Behavior**: The `<a>` tag within `.tag` will be styled to fill the entire container, ensuring the whole block is clickable, not just the text. It will have no default underline.
 */
 
-/*
-Global and Page Styles
-*/
-.page {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  background-color: var(--color-light-gray);
-  color: var(--color-black);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+.Page {
+  /* CSS Variables for the Digital Neo-Brutalism Design System */
+  --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
 
-/* Header Styling */
-.header {
-  flex: 0 0 auto;
-  padding: var(--space-sm) var(--space-md);
+  /* Colors */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-light-gray: #cccccc;
+  --color-mid-gray: #888888;
+  --color-action-blue: #007aff;
+  --color-destructive-red: #ff3b30;
+  --color-success-green: #34c759;
+
+  /* Dimensions & Spacing */
+  --spacing-unit: 8px;
+  --border-width: 2px;
+  --shadow-offset: 4px;
+  --border-radius: 0;
+
+  /* Transitions */
+  --transition-speed: 0.1s;
+  --transition-timing: ease-in-out;
+
+  font-family: var(--font-primary);
   background-color: var(--color-white);
-  border-bottom: var(--border);
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.2rem;
   color: var(--color-black);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
 }
 
-.title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  text-align: center;
-  color: var(--color-black);
-}
-
-/*
-Content and Tag Styles
-*/
 .content {
-  flex: 1 1 0;
-  min-height: 0;
-
-  align-self: center;
-  max-width: 800px;
-  position: relative;
-  z-index: 1;
-  padding: var(--space-lg);
-  overflow-y: auto;
+  padding: calc(var(--spacing-unit) * 4);
 }
 
 .tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-lg);
-  justify-content: center;
+  display: grid;
+  /* Use auto-fit to create as many columns as will fit with a min width of 150px */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: calc(var(--spacing-unit) * 3);
 }
 
 .tag {
-  background-color: var(--color-white);
-  border: var(--border);
-  box-shadow: var(--shadow);
-  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-light-gray);
+  border: var(--border-width) solid var(--color-black);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--color-black);
+  border-radius: var(--border-radius);
   transition: all var(--transition-speed) var(--transition-timing);
-  cursor: pointer;
 }
 
 .tag a {
+  display: block;
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
   text-decoration: none;
-  color: inherit;
-  font-weight: 600;
+  color: var(--color-black);
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  transition: all var(--transition-speed) var(--transition-timing);
 }
 
-/* Interaction States for Tags */
-.tag:hover {
-  transform: translate(var(--shadow-offset), var(--shadow-offset));
+/* Interaction States */
+.tag:hover,
+.tag:focus-within {
   box-shadow: none;
-  background-color: var(--color-attention-yellow);
-}
-
-.tag:active {
   transform: translate(var(--shadow-offset), var(--shadow-offset));
-  box-shadow: none;
   background-color: var(--color-action-blue);
+}
+
+.tag:hover a,
+.tag:focus-within a {
   color: var(--color-white);
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .content {
+    padding: calc(var(--spacing-unit) * 2);
+  }
+
+  .tags {
+    /* On smaller screens, have 2 columns */
+    grid-template-columns: repeat(2, 1fr);
+    gap: calc(var(--spacing-unit) * 2);
+  }
+
+  .tag a {
+    font-size: 0.9rem;
+    padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+  }
+}
+
+@media (max-width: 480px) {
+  .tags {
+    /* On very small screens, stack the tags in a single column */
+    grid-template-columns: 1fr;
+  }
 }
