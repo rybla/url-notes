@@ -1,0 +1,37 @@
+/*
+:root - Defines global CSS variables for the design system.
+This allows for easy theme adjustments and maintains consistency.
+*/
+:root {
+  /* Color Palette */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-light-gray: #cccccc;
+  --color-mid-gray: #888888;
+
+  /* Accent Colors */
+  --color-accent-blue: #007aff;
+  --color-accent-red: #ff3b30;
+  --color-accent-green: #34c759;
+  --color-accent-orange: #ff9500;
+  --color-accent-purple: #af52de;
+  --color-accent-yellow: #ffcc00;
+
+  /* Spacing (8pt Grid System) */
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem; /* 8px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 2rem; /* 32px */
+  --space-xl: 4rem; /* 64px */
+
+  /* Borders & Shadows */
+  --border-width: 2px;
+  --border-standard: var(--border-width) solid var(--color-black);
+  --border-radius: 0;
+  --shadow-hard: 4px 4px 0px var(--color-black);
+  --shadow-hard-interactive: 6px 6px 0px var(--color-black);
+
+  /* Transitions */
+  --transition-speed: 0.15s;
+  --transition-timing: ease-out;
+}

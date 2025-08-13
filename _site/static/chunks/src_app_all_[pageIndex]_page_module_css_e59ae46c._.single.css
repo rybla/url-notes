@@ -1,0 +1,126 @@
+/* [project]/src/app/all/[pageIndex]/page.module.css [app-client] (css) */
+.page-module__kXvtoq__page {
+  background-color: var(--color-light-gray);
+  min-height: 100vh;
+  font-family: var(--font-family);
+  padding-top: var(--header-height);
+  padding-bottom: var(--controls-height);
+  flex-direction: column;
+  display: flex;
+}
+
+.page-module__kXvtoq__header {
+  z-index: 1000;
+  height: calc(var(--header-height)  - (2 * var(--space-3)));
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--color-white);
+  border-bottom: var(--border);
+  text-align: center;
+  color: var(--color-black);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.page-module__kXvtoq__content {
+  max-width: 900px;
+  padding: var(--space-4) var(--space-3);
+  flex-grow: 1;
+  margin: 0 auto;
+}
+
+.page-module__kXvtoq__previews {
+  gap: var(--space-4);
+  display: grid;
+}
+
+.page-module__kXvtoq__previews > * {
+  background-color: var(--color-white);
+  border: var(--border);
+  box-shadow: var(--shadow-hard);
+  padding: var(--space-3);
+  transition: transform .2s ease-out, box-shadow .2s ease-out;
+}
+
+.page-module__kXvtoq__controls {
+  height: var(--controls-height);
+  background-color: var(--color-white);
+  border-top: var(--border);
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 var(--space-3);
+  z-index: 1000;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.page-module__kXvtoq__button {
+  background-color: var(--color-action-blue);
+  color: var(--color-white);
+  padding: var(--space-2) var(--space-4);
+  border: var(--border);
+  box-shadow: var(--shadow-hard);
+  border-radius: var(--border-radius);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  font-weight: bold;
+  text-decoration: none;
+  transition: transform .1s ease-in-out, box-shadow .1s ease-in-out;
+  display: inline-block;
+}
+
+.page-module__kXvtoq__button:hover {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
+}
+
+.page-module__kXvtoq__button:active {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
+  background-color: var(--color-highlight-purple);
+  transition-duration: 0s;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --space-1: 6px;
+    --space-2: 12px;
+    --space-3: 18px;
+    --space-4: 24px;
+    --space-5: 32px;
+    --space-6: 40px;
+    --controls-height: 70px;
+  }
+
+  .page-module__kXvtoq__header {
+    padding: var(--space-2);
+    font-size: 1rem;
+  }
+
+  .page-module__kXvtoq__content {
+    padding: var(--space-3) var(--space-2);
+  }
+
+  .page-module__kXvtoq__button {
+    padding: var(--space-2) var(--space-3);
+    font-size: .9rem;
+  }
+}
+
+/*# sourceMappingURL=src_app_all_%5BpageIndex%5D_page_module_css_e59ae46c._.single.css.map*/

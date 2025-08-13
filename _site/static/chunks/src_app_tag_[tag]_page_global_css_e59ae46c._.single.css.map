@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/app/tag/[tag]/page.global.css"],"sourcesContent":["/*\n:root - Defines global CSS variables for the design system.\nThis allows for easy theme adjustments and maintains consistency.\n*/\n:root {\n  /* Color Palette */\n  --color-black: #000000;\n  --color-white: #ffffff;\n  --color-light-gray: #cccccc;\n  --color-mid-gray: #888888;\n\n  /* Accent Colors */\n  --color-accent-blue: #007aff;\n  --color-accent-red: #ff3b30;\n  --color-accent-green: #34c759;\n  --color-accent-orange: #ff9500;\n  --color-accent-purple: #af52de;\n  --color-accent-yellow: #ffcc00;\n\n  /* Spacing (8pt Grid System) */\n  --space-xs: 0.25rem; /* 4px */\n  --space-sm: 0.5rem; /* 8px */\n  --space-md: 1rem; /* 16px */\n  --space-lg: 2rem; /* 32px */\n  --space-xl: 4rem; /* 64px */\n\n  /* Borders & Shadows */\n  --border-width: 2px;\n  --border-standard: var(--border-width) solid var(--color-black);\n  --border-radius: 0;\n  --shadow-hard: 4px 4px 0px var(--color-black);\n  --shadow-hard-interactive: 6px 6px 0px var(--color-black);\n\n  /* Transitions */\n  --transition-speed: 0.15s;\n  --transition-timing: ease-out;\n}\n"],"names":[],"mappings":"AAIA"}}]
+}

@@ -1,0 +1,209 @@
+/*
+================================================================================
+|   DIGITAL NEO-BRUTALISM - DESIGN SYSTEM BLUEPRINT                          |
+================================================================================
+|
+|   ## Core Principles
+|
+|   1.  **Honesty of Material**: The design exposes its own structure.
+|       Containers, grids, and borders are not hidden but are integral to the
+|       aesthetic, revealing how the interface is constructed.
+|
+|   2.  **Strong Hierarchy**: Information is organized with clear, dominant
+|       visual cues. Scale, weight, and placement guide the user's focus
+|       without ambiguity.
+|
+|   3.  **Unapologetic Presence**: The design is bold and solid. It uses
+|       hard shadows, high contrast, and stark typography to create a
+|       tangible, three-dimensional feel.
+|
+|   4.  **Function Over Form**: Every element serves a purpose. The aesthetic
+|       arises directly from the function of the components, with no
+|       superfluous decoration.
+|
+|   ## Component Styling Guide
+|
+|   -   **Containers/Cards**:
+|       -   Background: Solid, high-contrast (e.g., white).
+|       -   Border: 2px solid black.
+|       -   Shadow: 4px 4px 0px #000 (non-interactive), offset on a
+|         45-degree angle.
+|       -   Corners: 0px radius. Sharp corners are mandatory.
+|
+|   -   **Buttons & Interactive Elements**:
+|       -   Background: A vibrant accent color to denote function.
+|       -   Border: 2px solid black.
+|       -   Typography: Uppercase, bold.
+|       -   Interaction (Hover): Translate the element slightly and/or alter
+|         the shadow to provide clear feedback.
+|       -   Interaction (Active): "Press down" effect by removing the shadow
+|         and translating the element to the shadow's original position.
+|
+|   -   **Typography**:
+|       -   Headings: Large, bold, often uppercase.
+|       -   Body Text: High contrast, legible, sans-serif font.
+|       -   Hierarchy: Established through size and weight, not color alone.
+|
+|   -   **Color Palette**:
+|       -   Structure: Neutrals (#000, #FFF, #CCC, #888).
+|       -   Function: Purpose-driven accent colors for actions, states,
+|         and notifications.
+|
+================================================================================
+*/
+
+/*
+.page - The main container for the entire page.
+Sets the foundational background color and flexbox layout to organize
+the header and content sections vertically.
+*/
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-light-gray);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  padding: var(--space-md);
+}
+
+/*
+.header - The top bar of the page.
+Styled as a prominent, fixed-height bar with a solid background, border,
+and hard shadow to establish its place in the visual hierarchy.
+*/
+.header {
+  background-color: var(--color-white);
+  border: var(--border-standard);
+  box-shadow: var(--shadow-hard);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-black);
+}
+
+/*
+.content - The main content area below the header.
+This container holds the primary content of the page.
+*/
+.content {
+  flex-grow: 1;
+}
+
+/*
+.previews - A grid container for the article previews.
+Uses CSS Grid to create a responsive layout for the cards, with
+consistent spacing defined by our spacing variables.
+*/
+.previews {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--space-lg);
+}
+
+/*
+================================================================================
+|   ArticlePreviewComponent Styles                                           |
+================================================================================
+|
+|   NOTE: The following styles are for the `ArticlePreviewComponent`.
+|   Since the component's internal structure is not provided, these class
+|   names (.articleCard, .cardHeader, etc.) are assumed. You should apply
+|   these classes to the corresponding elements within your component.
+|
+*/
+
+/*
+.articleCard - The main container for a single article preview.
+This is the core "Card" component of the design system. It features a
+strong border, a hard shadow, and smooth transitions for interactions.
+*/
+.articleCard {
+  background-color: var(--color-white);
+  border: var(--border-standard);
+  box-shadow: var(--shadow-hard-interactive);
+  border-radius: var(--border-radius);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition:
+    transform var(--transition-speed) var(--transition-timing),
+    box-shadow var(--transition-speed) var(--transition-timing);
+}
+
+.articleCard:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0px var(--color-accent-purple);
+}
+
+/*
+.cardHeader - Container for the top section of the card, including the title.
+*/
+.cardHeader {
+  padding-bottom: var(--space-sm);
+  border-bottom: var(--border-standard);
+}
+
+/*
+.cardTitle - The title of the article.
+Styled to be prominent and clickable.
+*/
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.cardTitle:hover {
+  text-decoration: underline;
+  color: var(--color-accent-blue);
+}
+
+/*
+.cardSummary - The summary text of the article.
+*/
+.cardSummary {
+  flex-grow: 1;
+  color: var(--color-mid-gray);
+  line-height: 1.6;
+}
+
+/*
+.cardFooter - The bottom section of the card, containing tags.
+*/
+.cardFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-light-gray);
+}
+
+/*
+.cardTag - An individual tag element.
+Styled like a small button to be easily identifiable and clickable.
+It has its own interactive states.
+*/
+.cardTag {
+  background-color: var(--color-accent-yellow);
+  color: var(--color-black);
+  border: 1px solid var(--color-black);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all var(--transition-speed) var(--transition-timing);
+}
+
+.cardTag:hover {
+  background-color: var(--color-black);
+  color: var(--color-accent-yellow);
+  transform: translateY(-2px);
+}

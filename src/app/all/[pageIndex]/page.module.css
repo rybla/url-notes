@@ -1,0 +1,172 @@
+/*
+================================================================================
+|                                                                              |
+|                      DIGITAL NEO-BRUTALISM BLUEPRINT                         |
+|                                                                              |
+================================================================================
+|
+| CORE PRINCIPLES:
+| 1. HONESTY OF MATERIAL: Expose the digital structure. Containers, grids,
+|    and boundaries are not hidden but are central to the aesthetic. The
+|    design reveals how it was built.
+| 2. STRONG HIERARCHY: Information is organized clearly and logically. Scale,
+|    weight, and placement guide the user's eye without ambiguity.
+| 3. UNAPOLOGETIC PRESENCE: The design is bold and solid. Hard shadows, high
+|    contrast, and stark typography create a memorable and tangible feel.
+| 4. FUNCTION OVER FORM: Every element serves a purpose. The aesthetic
+|    arises directly from the function of the components.
+|
+|------------------------------------------------------------------------------
+|
+| EXECUTION:
+| - SHADOWS: Hard, solid, black shadows with no blur, offset diagonally.
+|   (e.g., box-shadow: 4px 4px 0px #000000;).
+| - COLORS: A high-contrast palette of neutrals for structure and vibrant,
+|   purposeful accent colors for interactive elements. No gradients.
+| - STRUCTURE: Sharp, 0px radius corners. Solid 1-2px borders to define
+|   all containers. A strict 8pt grid for spacing and layout.
+| - TYPOGRAPHY: Bold, often uppercase, with high contrast for clarity.
+| - INTERACTION: State changes (hover, active) are communicated through
+|   clear, physical-feeling transformations like shifts in position or
+|   the removal/inversion of shadows.
+|
+*/
+
+/* Base Page Layout */
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-light-gray);
+  font-family: var(--font-family);
+  padding-top: var(--header-height);
+  padding-bottom: var(--controls-height);
+}
+
+/* Header Styling */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: calc(var(--header-height) - (2 * var(--space-3)));
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--color-white);
+  border-bottom: var(--border);
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--color-black);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Main Content Area */
+.content {
+  flex-grow: 1;
+  /*width: 100%;*/
+  max-width: 900px; /* Max width for readability on larger screens */
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-3);
+}
+
+/* Container for Article Previews */
+.previews {
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* Card-like styling for each article preview component */
+.previews > * {
+  background-color: var(--color-white);
+  border: var(--border);
+  box-shadow: var(--shadow-hard);
+  padding: var(--space-3);
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.2s ease-out;
+}
+
+/* Controls Bar (Fixed at Bottom) */
+.controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--controls-height);
+  background-color: var(--color-white);
+  border-top: var(--border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 var(--space-3);
+  z-index: 1000;
+}
+
+/* Button Styling */
+.button {
+  display: inline-block;
+  background-color: var(--color-action-blue);
+  color: var(--color-white);
+  padding: var(--space-2) var(--space-4);
+  border: var(--border);
+  box-shadow: var(--shadow-hard);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition:
+    transform 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out;
+  user-select: none; /* Prevents text selection on click */
+}
+
+.button:hover {
+  /* On hover, the button moves up and to the left, appearing to meet its shadow */
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
+}
+
+.button:active {
+  /* On active click, the button is pressed down */
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
+  background-color: var(--color-highlight-purple);
+  transition-duration: 0s; /* Make the active state instant */
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  :root {
+    /* Slightly reduce spacing on mobile */
+    --space-1: 6px;
+    --space-2: 12px;
+    --space-3: 18px;
+    --space-4: 24px;
+    --space-5: 32px;
+    --space-6: 40px;
+
+    --controls-height: 70px;
+  }
+
+  .header {
+    padding: var(--space-2);
+    font-size: 1rem;
+  }
+
+  .content {
+    padding: var(--space-3) var(--space-2);
+  }
+
+  .button {
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.9rem;
+  }
+}

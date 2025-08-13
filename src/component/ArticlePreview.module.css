@@ -1,0 +1,150 @@
+/*
+ * =================================================================
+ * == RETRO FLUID DESIGN SYSTEM BLUEPRINT
+ * =================================================================
+ *
+ * --- CORE CONCEPT ---
+ * A fusion of 90s blocky, text-heavy web aesthetics with modern
+ * design's fluidity, minimalism, and dynamic effects. The goal
+ * is to evoke a sense of nostalgia while feeling fresh,
+ * responsive, and interactive.
+ *
+ * --- VISUAL THEMES APPLIED ---
+ * 1.  Glassy and Fluid Backgrounds:
+ * While the global background isn't defined here, these
+ * components are designed as "cards" that float on top of a
+ * dynamic, animated gradient background (defined in a global stylesheet).
+ *
+ * 2.  Blocky and Structured Foregrounds:
+ * The .ArticlePreview container is a defined card with a
+ * solid background, distinct border, and a soft box-shadow
+ * that gives it a tangible, "floating" feel. It lifts on hover
+ * to enhance this effect.
+ *
+ * 3.  Decorative and Interactive Text:
+ * The main interactive element, the title link, features a
+ * prominent animated underline that grows on hover, drawing
+ * attention and providing satisfying feedback.
+ *
+ * --- COLOR PALETTE (LIGHT MODE) ---
+ * -   Foreground Cards: Off-white for a clean, crisp look.
+ * -   Text: Dark charcoal for high readability.
+ * -   Accent: A vibrant electric blue for interactive elements.
+ * -   Borders/Tags: Subtle grays to add structure without being distracting.
+ *
+ * --- TYPOGRAPHY ---
+ * -   Title: A clean monospace font (ui-monospace, SFMono-Regular)
+ * for a retro, terminal-like feel. It's bold with slight
+ * letter-spacing to feel deliberate and important.
+ * -   Body/Tags: A standard, highly-readable system sans-serif font.
+ *
+ * --- ANIMATION & INTERACTIVITY ---
+ * -   Entrance Animation: Cards fade in and slide up gently on load.
+ * -   Hover Animation (Card): The card lifts and its shadow expands,
+ * creating a sense of depth and interactivity.
+ * -   Hover Animation (Link): The accent-colored underline smoothly
+ * animates from right to left, a classic-but-modern effect.
+ *
+ * =================================================================
+ */
+
+/* --- Keyframe Animations --- */
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Component Styles --- */
+
+/* The main container for the article preview card */
+.ArticlePreview {
+  background-color: var(--color-background-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: calc(var(--spacing-unit) * 3);
+  box-shadow: var(--shadow-soft);
+  transition:
+    box-shadow var(--transition-duration) var(--transition-timing),
+    transform var(--transition-duration) var(--transition-timing);
+  animation: fadeInSlideUp 0.5s ease-out forwards;
+  will-change: transform, box-shadow;
+}
+
+/* Card hover effect: lift and expand shadow */
+.ArticlePreview:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* The article title */
+.title {
+  font-family: var(--font-mono);
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: calc(var(--spacing-unit) * 1.5);
+  letter-spacing: 0.025em;
+}
+
+/* The link within the title */
+.title a {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px; /* Space for the underline */
+}
+
+/* The animated underline for the title link */
+.title a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right; /* Animates from right to left */
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* On hover, the underline animates in from the left */
+.title a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Container for the tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-unit);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+/* Individual tag style */
+.tag {
+  font-family: var(--font-sans);
+  font-size: 0.75rem; /* 12px */
+  background-color: var(--color-tag-background);
+  color: var(--color-text-secondary);
+  padding: calc(var(--spacing-unit) / 2) var(--spacing-unit);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  font-weight: 500;
+}
+
+/* The summary text */
+.summary {
+  font-family: var(--font-sans);
+  font-size: 0.9rem; /* 14.4px */
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}

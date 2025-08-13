@@ -1,0 +1,5 @@
+{
+  "name": "Haskell Weekly",
+  "feedUrl": "https://haskellweekly.news/newsletter.atom",
+  "maxItems": 1
+}

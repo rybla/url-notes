@@ -1,0 +1,57 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { inspect } from "util";
+
+export function trim(s: string): string {
+  return s.trim();
+}
+
+export function stringify(x: any): string {
+  return JSON.stringify(x, null, 4);
+}
+
+export function do_<A>(k: () => A): A {
+  return k();
+}
+
+export function formatDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+export function formatDateTime(date: Date): string {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  return `${year}-${month}-${day},${hours}:${minutes}`;
+}
+
+export function fromFormattedDateTime(s: string): Date | undefined {
+  const [dateStr, timeStr] = s.split(",");
+  if (dateStr === undefined || timeStr === undefined) return undefined;
+  const [year, month, day] = dateStr.split("-").map(Number);
+  if (year === undefined || month === undefined || day === undefined)
+    return undefined;
+  const [hours, minutes] = timeStr.split(":").map(Number);
+  if (hours === undefined || minutes === undefined) return undefined;
+  return new Date(year, month - 1, day, hours, minutes);
+}
+
+export function show<A>(x: A): string {
+  return inspect(x, {
+    colors: true,
+    compact: false,
+    depth: undefined,
+    sorted: false,
+  });
+}
+
+export function parseDate(s: string): Date | null {
+  const date = new Date(s);
+  if (isNaN(date.getTime())) return null;
+  return date;
+}

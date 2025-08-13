@@ -1,0 +1,27 @@
+/* [project]/src/app/tag/[tag]/page.global.css [app-client] (css) */
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-light-gray: #ccc;
+  --color-mid-gray: #888;
+  --color-accent-blue: #007aff;
+  --color-accent-red: #ff3b30;
+  --color-accent-green: #34c759;
+  --color-accent-orange: #ff9500;
+  --color-accent-purple: #af52de;
+  --color-accent-yellow: #fc0;
+  --space-xs: .25rem;
+  --space-sm: .5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --border-width: 2px;
+  --border-standard: var(--border-width) solid var(--color-black);
+  --border-radius: 0;
+  --shadow-hard: 4px 4px 0px var(--color-black);
+  --shadow-hard-interactive: 6px 6px 0px var(--color-black);
+  --transition-speed: .15s;
+  --transition-timing: ease-out;
+}
+
+/*# sourceMappingURL=src_app_tag_%5Btag%5D_page_global_css_e59ae46c._.single.css.map*/
