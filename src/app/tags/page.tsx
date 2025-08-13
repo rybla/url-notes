@@ -4,21 +4,21 @@ import "./page.global.css";
 import paths from "@/analysis/paths";
 import { readArticleTags } from "@/analysis/article";
 
-const ids_all = await paths.get_ids_of_articles();
-const tags_all: Set<string> = new Set();
-for (const id of ids_all) {
-  const tags = await readArticleTags(id);
-  if (!tags) continue;
-  for (const tag of tags) {
-    tags_all.add(tag);
-  }
-}
-
 function get_title() {
   return "url-notes | tags";
 }
 
 export default async function Page() {
+  const ids_all = await paths.get_ids_of_articles();
+  const tags_all: Set<string> = new Set();
+  for (const id of ids_all) {
+    const tags = await readArticleTags(id);
+    if (!tags) continue;
+    for (const tag of tags) {
+      tags_all.add(tag);
+    }
+  }
+
   return (
     <div className={styles.page}>
       <div className={styles.header}>
