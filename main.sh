@@ -12,4 +12,4 @@ git add -A
 git commit -m"deploy"
 git push
 
-echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] begin"
+echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] end"

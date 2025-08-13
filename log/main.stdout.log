@@ -1,0 +1,106 @@
+[2025-08-12,23:33] [main.sh] begin
+[2025-08-12,23:33] [fetch-articles.ts] fetching articles from feed: Hacker News Top
+[2025-08-12,23:33] [fetch-articles.ts] fetching article from feed item link: https://www.anthropic.com/news/1m-context
+[2025-08-12,23:33] [fetch-articles.ts] fetching article at url: https://www.anthropic.com/news/1m-context
+[2025-08-12,23:33] using cache: output-1/article/anthropic.com!news!1m-context.json
+[2025-08-12,23:33] using cache: output-1/article_metadata/anthropic.com!news!1m-context.json
+[2025-08-12,23:33] [fetch-articles.ts] fetching article from feed item link: https://twitter.com/p3b7_/status/1955173413992984988
+[2025-08-12,23:33] [fetch-articles.ts] fetching article at url: https://twitter.com/p3b7_/status/1955173413992984988
+[2025-08-12,23:33] using cache: output-1/article/twitter.com!p3b7_!status!1955173413992984988.json
+[2025-08-12,23:33] using cache: output-1/article_metadata/twitter.com!p3b7_!status!1955173413992984988.json
+[2025-08-12,23:33] [fetch-articles.ts] fetching article from feed item link: https://www.bbc.com/news/articles/cjr11qqvvwlo
+[2025-08-12,23:33] [fetch-articles.ts] fetching article at url: https://www.bbc.com/news/articles/cjr11qqvvwlo
+[2025-08-12,23:33] using cache: output-1/article/bbc.com!news!articles!cjr11qqvvwlo.json
+[2025-08-12,23:33] using cache: output-1/article_metadata/bbc.com!news!articles!cjr11qqvvwlo.json
+[2025-08-12,23:33] [fetch-articles.ts] fetching article from feed item link: https://www.theverge.com/news/757461/microsoft-github-thomas-dohmke-resignation-coreai-team-transition
+[2025-08-12,23:33] [fetch-articles.ts] fetching article at url: https://www.theverge.com/news/757461/microsoft-github-thomas-dohmke-resignation-coreai-team-transition
+[2025-08-12,23:33] using cache: output-1/article/theverge.com!news!757461!microsoft-github-thomas-dohmke-resignation-coreai-team-transition.json
+[2025-08-12,23:33] using cache: output-1/article_metadata/theverge.com!news!757461!microsoft-github-thomas-dohmke-resignation-coreai-team-transition.json
+[2025-08-12,23:33] [fetch-articles.ts] fetching article from feed item link: https://archive.org/details/meta_leaks_part_1
+[2025-08-12,23:33] [fetch-articles.ts] fetching article at url: https://archive.org/details/meta_leaks_part_1
+[2025-08-12,23:33] using cache: output-1/article/archive.org!details!meta_leaks_part_1.json
+[2025-08-12,23:33] using cache: output-1/article_metadata/archive.org!details!meta_leaks_part_1.json
+[2025-08-12,23:33] [fetch-articles.ts] fetching articles from feed: Haskell Weekly
+[2025-08-12,23:33] [fetch-articles.ts] fetching article from feed item link: https://haskellweekly.news/issue/484.html
+[2025-08-12,23:33] [fetch-articles.ts] fetching article at url: https://haskellweekly.news/issue/484.html
+[2025-08-12,23:33] using cache: output-1/article/haskellweekly.news!issue!484.html.json
+[2025-08-12,23:33] using cache: output-1/article_metadata/haskellweekly.news!issue!484.html.json
+[2025-08-12,23:33] [fetch-articles.ts] fetching article from feed item link: https://haskellweekly.news/issue/483.html
+[2025-08-12,23:33] [fetch-articles.ts] fetching article at url: https://haskellweekly.news/issue/483.html
+[2025-08-12,23:33] using cache: output-1/article/haskellweekly.news!issue!483.html.json
+[2025-08-12,23:33] using cache: output-1/article_metadata/haskellweekly.news!issue!483.html.json
+[2025-08-12,23:33] [get_ids_of_articles]
+[2025-08-12,23:33] [process-articles.ts] processing article: anthropic.com!news!1m-context
+[2025-08-12,23:33] using cache: output-2/article_content/anthropic.com!news!1m-context.md
+[2025-08-12,23:33] using cache: output-2/article_summary/anthropic.com!news!1m-context.md
+[2025-08-12,23:33] using cache: output-2/article_tags/anthropic.com!news!1m-context.csv
+[2025-08-12,23:33] [process-articles.ts] processing article: twitter.com!p3b7_!status!1955173413992984988
+[2025-08-12,23:33] using cache: output-2/article_content/twitter.com!p3b7_!status!1955173413992984988.md
+[2025-08-12,23:33] using cache: output-2/article_summary/twitter.com!p3b7_!status!1955173413992984988.md
+[2025-08-12,23:33] using cache: output-2/article_tags/twitter.com!p3b7_!status!1955173413992984988.csv
+[2025-08-12,23:33] [process-articles.ts] processing article: archive.org!details!meta_leaks_part_1
+[2025-08-12,23:33] using cache: output-2/article_content/archive.org!details!meta_leaks_part_1.md
+[2025-08-12,23:33] using cache: output-2/article_summary/archive.org!details!meta_leaks_part_1.md
+[2025-08-12,23:33] using cache: output-2/article_tags/archive.org!details!meta_leaks_part_1.csv
+[2025-08-12,23:33] [process-articles.ts] processing article: bbc.com!news!articles!cjr11qqvvwlo
+[2025-08-12,23:33] using cache: output-2/article_content/bbc.com!news!articles!cjr11qqvvwlo.md
+[2025-08-12,23:33] using cache: output-2/article_summary/bbc.com!news!articles!cjr11qqvvwlo.md
+[2025-08-12,23:33] using cache: output-2/article_tags/bbc.com!news!articles!cjr11qqvvwlo.csv
+[2025-08-12,23:33] [process-articles.ts] processing article: haskellweekly.news!issue!483.html
+[2025-08-12,23:33] using cache: output-2/article_content/haskellweekly.news!issue!483.html.md
+[2025-08-12,23:33] using cache: output-2/article_summary/haskellweekly.news!issue!483.html.md
+[2025-08-12,23:33] using cache: output-2/article_tags/haskellweekly.news!issue!483.html.csv
+[2025-08-12,23:33] [process-articles.ts] processing article: theverge.com!news!757461!microsoft-github-thomas-dohmke-resignation-coreai-team-transition
+[2025-08-12,23:33] using cache: output-2/article_content/theverge.com!news!757461!microsoft-github-thomas-dohmke-resignation-coreai-team-transition.md
+[2025-08-12,23:33] using cache: output-2/article_summary/theverge.com!news!757461!microsoft-github-thomas-dohmke-resignation-coreai-team-transition.md
+[2025-08-12,23:33] using cache: output-2/article_tags/theverge.com!news!757461!microsoft-github-thomas-dohmke-resignation-coreai-team-transition.csv
+[2025-08-12,23:33] [process-articles.ts] processing article: haskellweekly.news!issue!484.html
+[2025-08-12,23:33] using cache: output-2/article_content/haskellweekly.news!issue!484.html.md
+[2025-08-12,23:33] using cache: output-2/article_summary/haskellweekly.news!issue!484.html.md
+[2025-08-12,23:33] initialized cache: output-2/article_tags/haskellweekly.news!issue!484.html.csv
+   ▲ Next.js 15.4.6
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 0ms
+   Linting and checking validity of types ...
+
+./src/analysis/ai.ts
+8:3  Warning: 'opts' is defined but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+[2025-08-12,23:33] [get_ids_of_articles]
+[2025-08-12,23:33] [get_ids_of_articles]
+   Generating static pages (0/53) ...
+[2025-08-12,23:33] [get_ids_of_articles]
+[2025-08-12,23:33] [get_ids_of_articles]
+[2025-08-12,23:33] [get_ids_of_articles]
+[2025-08-12,23:33] [get_ids_of_articles]
+   Generating static pages (13/53) 
+   Generating static pages (26/53) 
+   Generating static pages (39/53) 
+ ✓ Generating static pages (53/53)
+   Finalizing page optimization ...
+   Collecting build traces ...
+   Exporting (0/3) ...
+ ✓ Exporting (3/3)
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                      180 B         103 kB
+├ ○ /_not-found                            994 B         101 kB
+├ ● /all/[pageIndex]                       436 B         104 kB
+├   └ /all/0
+└ ● /tag/[tag]                             430 B         104 kB
+    ├ /tag/x
+    ├ /tag/twitter
+    ├ /tag/error
+    └ [+45 more paths]
++ First Load JS shared by all            99.8 kB
+  ├ chunks/4bd1b696-cf72ae8a39fa05aa.js  54.1 kB
+  ├ chunks/964-a29425d4972030f1.js       43.7 kB
+  └ other shared chunks (total)          1.92 kB
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+

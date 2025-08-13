@@ -12,7 +12,7 @@ import styles from "./page.module.css";
 import { ArticlePreview } from "@/analysis/ontology";
 
 const config = {
-  articles_per_page: 2,
+  articles_per_page: 10,
 };
 
 type Params = {
