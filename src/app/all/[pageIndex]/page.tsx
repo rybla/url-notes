@@ -10,6 +10,7 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import { ArticlePreview } from "@/analysis/ontology";
 import { cache } from "react";
+import Header from "@/component/Header";
 
 const config = {
   articles_per_page: 10,
@@ -83,19 +84,16 @@ export default async function Page(props: Props) {
 
   return (
     <div className={styles.Page}>
-      <div className={styles.header}>
-        <div className={styles.item}>
-          <Link href="/">url-notes</Link>
-        </div>
-        <div className={styles.separator}>{"|"}</div>
-        <div className={styles.item}>
-          <Link href="/all/0">all</Link>
-        </div>
-        <div className={styles.separator}>{"|"}</div>
-        <div className={styles.item}>
-          page {pageIndex + 1} of {pageIndex_max + 1}
-        </div>
-      </div>
+      <Header
+        path={[
+          <Link href="/all/0" key={0}>
+            all
+          </Link>,
+          <span key={1}>
+            page {pageIndex + 1} of {pageIndex_max + 1}
+          </span>,
+        ]}
+      />
       <div className={styles.content}>
         <div className={styles.previews}>
           {previews.map((preview, i) => (

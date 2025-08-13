@@ -53,15 +53,15 @@
 
 .Page {
   /* CSS Variables */
-  --background-color: #FFFFFF;
+  --background-color: #ffffff;
   --text-color: #000000;
   --border-color: #000000;
-  --header-bg: #CCCCCC;
-  --background-pattern-color: #E0E0E0; /* A light gray for the dots */
+  --header-bg: #cccccc;
+  --background-pattern-color: #e0e0e0; /* A light gray for the dots */
 
   /* Accent Colors */
-  --action-blue: #007AFF;
-  --highlight-purple: #AF52DE;
+  --action-blue: #007aff;
+  --highlight-purple: #af52de;
 
   /* Sizing & Spacing */
   --spacing-unit: 8px;
@@ -76,25 +76,15 @@
   min-height: 100vh;
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 
   /* Animated Background */
-  background-image: radial-gradient(var(--background-pattern-color) 1px, transparent 1px);
+  background-image: radial-gradient(
+    var(--background-pattern-color) 1px,
+    transparent 1px
+  );
   background-size: var(--background-pattern-size) var(--background-pattern-size);
   animation: passive-background-animation 5s linear infinite;
-}
-
-.header {
-  padding: calc(var(--spacing-unit) * 3);
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  background-color: var(--header-bg);
-  border-bottom: var(--border-width) solid var(--border-color);
-  box-shadow: 0px var(--shadow-offset) 0px var(--border-color);
-  z-index: 10;
-  position: relative; /* Ensures header stays above the animated background */
 }
 
 .content {
@@ -144,11 +134,6 @@
 
 /* Mobile Optimization */
 @media (max-width: 600px) {
-  .header {
-    font-size: 1.2rem;
-    padding: calc(var(--spacing-unit) * 2);
-  }
-
   .links {
     flex-direction: column;
     width: 100%;

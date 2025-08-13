@@ -1,14 +1,11 @@
 import Link from "next/link";
 import styles from "./page.module.css";
-
-function get_title() {
-  return "url-notes | index";
-}
+import Header from "@/component/Header";
 
 export default async function Page() {
   return (
     <div className={styles.Page}>
-      <div className={styles.header}>{get_title()}</div>
+      <Header path={[<span key={0}>index</span>]} />
       <div className={styles.content}>
         <div className={styles.links}>
           <div className={styles.link}>
