@@ -1,177 +1,149 @@
 /*
-================================================================================
-|   DIGITAL NEO-BRUTALISM BLUEPRINT                                            |
-================================================================================
-|
-|   CORE PRINCIPLES:
-|   - Honesty of Material: The structure is exposed. Borders, containers, and
-|     grids are primary aesthetic elements, not hidden details.
-|   - Strong Hierarchy: Visual dominance is achieved through scale, weight,
-|     and placement. There is no ambiguity in the user's path.
-|   - Unapologetic Presence: Hard shadows, high contrast, and stark
-|     typography create a solid, three-dimensional, and memorable feel.
-|   - Function Over Form: Aesthetics arise directly from function. All
-|     decorative elements are eliminated.
-|
-|--------------------------------------------------------------------------------
-|
-|   DESIGN SPECIFICATIONS:
-|
-|   - Shadows:
-|     - Type: Hard, solid, black, no blur.
-|     - Standard: 4px 4px 0px #000000;
-|     - Emphasis: "Long shadow" effect for key elements.
-|
-|   - Colors:
-|     - Neutrals: #000000, #FFFFFF, #CCCCCC, #888888.
-|     - Accents: #007AFF (Action), #FF3B30 (Destructive), #34C759 (Success),
-|                #FF9500 (Warning), #AF52DE (Highlight), #FFCC00 (Attention).
-|     - Usage: Strict separation between structural neutrals and functional
-|              accents.
-|
-|   - Structure:
-|     - Corners: Sharp, 0px radius. NO rounded corners.
-|     - Borders: Solid, 1px or 2px black/gray to define all containers.
-|     - Spacing: Rigid 8pt grid system. Consistent and deliberate.
-|
-|   - Components:
-|     - Buttons/Links: Solid accent color, thick border, uppercase bold text.
-|       - Default: Hard block shadow.
-|       - Hover: Shadow disappears, slight transform.
-|       - Active: Appears pressed down (inset shadow or transform).
-|     - Cards/Containers: White/light gray background, prominent solid border,
-|       standard hard block shadow.
-|
-|================================================================================
+  Digital Neo-Brutalism Design Blueprint for the 'Page' Component
+
+  1. Core Concept & Philosophy:
+     - This design applies the Digital Neo-Brutalism system to the main page component.
+     - The aesthetic is raw, structural, and unapologetically digital. We expose the containers and use high-contrast, functional elements.
+     - The layout is mobile-first, using a flexible column structure that scales seamlessly to larger screens.
+
+  2. Layout and Structure:
+     - `.page`: The root container. It will occupy the full viewport height and use Flexbox to center its content in a column. This provides a strong, stable foundation.
+     - `.header`: The top-level banner. It's a simple, bold block with a thick bottom border to delineate it from the main content, reinforcing the structural honesty.
+     - `.content`: A flexible container that holds the primary interactive elements.
+     - `.links`: A Flexbox container that organizes the navigation links. On mobile, it stacks them vertically for easy tapping.
+     - `.link`: Each link is treated as a primary interactive element. It's styled as a card/button hybrid with a hard shadow and solid border, making it feel tangible and important.
+
+  3. Color & Typography:
+     - Palette: We'll stick to a high-contrast palette of black, white, and a vibrant action blue for interactivity.
+       - Background: White (#FFFFFF) for maximum clarity.
+       - Text, Borders, Shadows: Black (#000000) for a stark, unambiguous presence.
+       - Interactive Accent: Action Blue (#007AFF) for hover and focus states to clearly signify interactivity.
+     - Typography: We'll use a monospace font family to give it a classic, computer-terminal feel, aligning with the "digital raw" concept. Text will be bold to ensure readability and presence.
+
+  4. Interactivity & Animation:
+     - The primary interaction is with the `.link` elements.
+     - Default State: The link cards will have a prominent hard shadow, making them "pop" from the page.
+     - Hover State: On hover, the shadow will disappear, and the card will translate slightly (4px down and right). This creates a satisfying, physical "press" effect. The border will change to the accent blue to draw attention.
+     - Transitions: All transformations will be smooth (`transition: all 0.15s ease-out;`) to make the interactions feel responsive but not jarring.
 */
 
-/* --- Base & Page Layout --- */
+/* Defines all CSS variables for the component.
+  This is the first and only rule set that is not a class.
+*/
 .page {
-  font-family: var(--font-primary);
-  background-color: var(--light-gray);
-  color: var(--black);
-  min-height: 100vh;
+  /* Color Palette */
+  --color-background: #FFFFFF;
+  --color-text: #000000;
+  --color-border: #000000;
+  --color-shadow: #000000;
+  --color-accent: #007AFF;
+  --color-accent-text: #FFFFFF;
+
+  /* Spacing & Sizing */
+  --spacing-unit: 1rem; /* Approx 16px */
+  --spacing-small: calc(var(--spacing-unit) / 2); /* 8px */
+  --spacing-medium: var(--spacing-unit); /* 16px */
+  --spacing-large: calc(var(--spacing-unit) * 2); /* 32px */
+
+  /* Borders & Shadows */
+  --border-width: 2px;
+  --border-radius: 0; /* A core principle of Neo-Brutalism */
+  --shadow-offset: 4px;
+  --hard-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--color-shadow);
+
+  /* Typography */
+  --font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  /* Transitions */
+  --transition-speed: 0.15s;
+  --transition-timing: ease-out;
+
+  /* Component Specific Styles */
   display: flex;
   flex-direction: column;
-  position: relative;
-  overflow: hidden; /* Hide overflow from animated shapes */
-}
-
-/* Passive background animation */
-.page::before,
-.page::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background-color: var(--light-gray);
-  background-image:
-    linear-gradient(45deg, var(--mid-gray) 25%, transparent 25%),
-    linear-gradient(-45deg, var(--mid-gray) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, var(--mid-gray) 75%),
-    linear-gradient(-45deg, transparent 75%, var(--mid-gray) 75%);
-  background-size: var(--spacing-unit) var(--spacing-unit);
-  z-index: 0;
-  animation: background-pan 120s linear infinite;
-  opacity: 0.2;
-}
-
-.page::after {
-  animation-direction: reverse;
-  animation-duration: 150s;
-  opacity: 0.1;
-}
-
-@keyframes background-pan {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(25%, 25%);
-  }
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: var(--spacing-medium);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-family);
 }
 
 .header {
-  background-color: var(--white);
-  border-bottom: var(--border-width) solid var(--black);
-  padding: calc(var(--spacing-unit) * 2);
+  width: 100%;
+  max-width: 600px;
+  padding: var(--spacing-medium);
+  margin-bottom: var(--spacing-large);
   text-align: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  text-transform: lowercase;
-  box-shadow: 0px var(--shadow-offset) 0px var(--black);
-  position: relative;
-  z-index: 2;
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  border: var(--border-width) solid var(--color-border);
+  background-color: var(--color-background);
+  box-shadow: var(--hard-shadow);
 }
 
 .content {
-  flex-grow: 1;
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: calc(var(--spacing-unit) * 2);
-  position: relative;
-  z-index: 1;
+  flex-grow: 1;
 }
 
-/* --- Links --- */
 .links {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--spacing-unit) * 4);
   width: 100%;
   max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large);
 }
 
 .link {
-  background-color: var(--white);
-  border: var(--border-width) solid var(--black);
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--black);
-  transition: all 0.1s ease-out;
+  background-color: var(--color-background);
+  border: var(--border-width) solid var(--color-border);
+  box-shadow: var(--hard-shadow);
+  transition: all var(--transition-speed) var(--transition-timing);
 }
 
-.link:hover {
-  transform: translate(var(--shadow-offset), var(--shadow-offset));
-  box-shadow: 0px 0px 0px var(--black);
-}
-
+/* Styling the actual <a> tag inside the .link container */
 .link a {
   display: block;
-  padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 4);
-  text-decoration: none;
-  color: var(--black);
-  font-size: 2rem;
-  font-weight: bold;
+  padding: var(--spacing-medium);
   text-align: center;
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-text);
+  transition: all var(--transition-speed) var(--transition-timing);
 }
 
-/* --- Specific Link Colors on Hover --- */
-.link:nth-child(1):hover {
-  background-color: var(--action-blue);
-}
-.link:nth-child(2):hover {
-  background-color: var(--highlight-purple);
-}
-.link:nth-child(3):hover {
-  background-color: var(--attention-yellow);
+/* Interaction States */
+.link:hover {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
 }
 
-/* --- Mobile Responsiveness --- */
-@media (max-width: 768px) {
+.link:hover a {
+  background-color: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+.link:active {
+  transform: translate(calc(var(--shadow-offset) / 2), calc(var(--shadow-offset) / 2));
+  transition-duration: 0.05s;
+}
+
+/* Media query for larger screens if needed, though the current design is fluid */
+@media (min-width: 768px) {
   .header {
-    font-size: 1rem;
-    padding: var(--spacing-unit);
+    font-size: 1.5rem;
   }
 
   .link a {
-    font-size: 1.5rem;
-    padding: calc(var(--spacing-unit) * 2.5);
-  }
-
-  .links {
-    gap: calc(var(--spacing-unit) * 3);
+    font-size: 1.25rem;
   }
 }

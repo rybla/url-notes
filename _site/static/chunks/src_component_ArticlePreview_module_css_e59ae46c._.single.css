@@ -1,0 +1,90 @@
+/* [project]/src/component/ArticlePreview.module.css [app-client] (css) */
+@keyframes ArticlePreview-module__rjMMPa__fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ArticlePreview-module__rjMMPa__ArticlePreview {
+  background-color: var(--color-background-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: calc(var(--spacing-unit) * 3);
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow var(--transition-duration) var(--transition-timing), transform var(--transition-duration) var(--transition-timing);
+  will-change: transform, box-shadow;
+  animation: .5s ease-out forwards ArticlePreview-module__rjMMPa__fadeInSlideUp;
+}
+
+.ArticlePreview-module__rjMMPa__ArticlePreview:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-5px);
+}
+
+.ArticlePreview-module__rjMMPa__title {
+  font-family: var(--font-mono);
+  color: var(--color-text-primary);
+  margin-bottom: calc(var(--spacing-unit) * 1.5);
+  letter-spacing: .025em;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.ArticlePreview-module__rjMMPa__title a {
+  color: inherit;
+  padding-bottom: 2px;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+
+.ArticlePreview-module__rjMMPa__title a:after {
+  content: "";
+  background-color: var(--color-accent);
+  transform-origin: 100%;
+  width: 100%;
+  height: 2px;
+  transition: transform .4s cubic-bezier(.19, 1, .22, 1);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+}
+
+.ArticlePreview-module__rjMMPa__title a:hover:after {
+  transform-origin: 0;
+  transform: scaleX(1);
+}
+
+.ArticlePreview-module__rjMMPa__tags {
+  gap: var(--spacing-unit);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.ArticlePreview-module__rjMMPa__tag {
+  font-family: var(--font-sans);
+  background-color: var(--color-tag-background);
+  color: var(--color-text-secondary);
+  padding: calc(var(--spacing-unit) / 2) var(--spacing-unit);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+.ArticlePreview-module__rjMMPa__summary {
+  font-family: var(--font-sans);
+  color: var(--color-text-secondary);
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+/*# sourceMappingURL=src_component_ArticlePreview_module_css_e59ae46c._.single.css.map*/

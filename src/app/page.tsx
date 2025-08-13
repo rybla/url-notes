@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styles from "./page.module.css";
-import "./page.global.css";
 
 function get_title() {
   return "url-notes | index";
