@@ -140,7 +140,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$analysis$2f$console$2
 ;
 ;
 const execFileAsync = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$util__$5b$external$5d$__$28$util$2c$__cjs$29$__["promisify"])(__TURBOPACK__imported__module__$5b$externals$5d2f$child_process__$5b$external$5d$__$28$child_process$2c$__cjs$29$__["execFile"]);
-async function gemini(prompt, opts) {
+async function gemini(prompt, // eslint-disable-next-line @typescript-eslint/no-unused-vars
+opts) {
     const { stdout, stderr } = await execFileAsync(`gemini`, [
         // opts?.model ? [`--model`, opts.model] : [],
         `--prompt`,
@@ -660,8 +661,6 @@ __turbopack_context__.v({
 "[project]/src/app/all/[pageIndex]/page.tsx [app-rsc] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
-var { a: __turbopack_async_module__ } = __turbopack_context__;
-__turbopack_async_module__(async (__turbopack_handle_async_dependencies__, __turbopack_async_result__) => { try {
 __turbopack_context__.s({
     "default": ()=>Page,
     "generateMetadata": ()=>generateMetadata,
@@ -673,6 +672,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$analysis$2f$paths$2e$
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$component$2f$ArticlePreview$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/component/ArticlePreview.tsx [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$all$2f5b$pageIndex$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__ = __turbopack_context__.i("[project]/src/app/all/[pageIndex]/page.module.css [app-rsc] (css module)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react.js [app-rsc] (ecmascript)");
+;
 ;
 ;
 ;
@@ -683,23 +684,33 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$all$2f5b$pageI
 const config = {
     articles_per_page: 10
 };
-const ids_all = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$analysis$2f$paths$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].get_ids_of_articles();
-const mds_all = (await Promise.all(ids_all.map(async (id)=>await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$analysis$2f$article$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["readArticleMetadata"])(id)))).filter((md)=>md !== null);
-// sorted from newest (higher `addedTime` value) to oldest
-mds_all.sort((x, y)=>y.addedTime - x.addedTime);
-const previews_all = await Promise.all(mds_all.map(async (md)=>{
+const getCachedData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["cache"])(async ()=>{
+    const ids_all = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$analysis$2f$paths$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].get_ids_of_articles();
+    const mds_all = (await Promise.all(ids_all.map(async (id)=>await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$analysis$2f$article$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["readArticleMetadata"])(id)))).filter((md)=>md !== null);
+    // sorted from newest (higher `addedTime` value) to oldest
+    mds_all.sort((x, y)=>y.addedTime - x.addedTime);
+    const previews_all = await Promise.all(mds_all.map(async (md)=>{
+        return {
+            metadata: md,
+            summary: await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$analysis$2f$article$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["readArticleSummary"])(md.id) ?? undefined,
+            tags: await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$analysis$2f$article$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["readArticleTags"])(md.id) ?? undefined
+        };
+    }));
+    const pageIndex_max = Math.ceil(ids_all.length / config.articles_per_page) - 1;
+    const count_pages = Math.ceil(ids_all.length / config.articles_per_page);
     return {
-        metadata: md,
-        summary: await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$analysis$2f$article$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["readArticleSummary"])(md.id) ?? undefined,
-        tags: await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$analysis$2f$article$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["readArticleTags"])(md.id) ?? undefined
+        ids_all,
+        mds_all,
+        previews_all,
+        pageIndex_max,
+        count_pages
     };
-}));
-const pageIndex_max = Math.ceil(ids_all.length / config.articles_per_page) - 1;
-const count_pages = Math.ceil(ids_all.length / config.articles_per_page);
+});
 function get_title(pageIndex, pageIndex_max) {
     return `url-notes | all | page ${pageIndex + 1} of ${pageIndex_max + 1}`;
 }
 async function generateStaticParams() {
+    const { count_pages } = await getCachedData();
     const ps = [];
     for(let i = 0; i < count_pages; i++){
         ps.push({
@@ -711,6 +722,7 @@ async function generateStaticParams() {
 async function generateMetadata(props) {
     const params = await props.params;
     const pageIndex = Number(params.pageIndex);
+    const { pageIndex_max } = await getCachedData();
     return {
         title: get_title(pageIndex, pageIndex_max)
     };
@@ -718,6 +730,7 @@ async function generateMetadata(props) {
 async function Page(props) {
     const params = await props.params;
     const pageIndex = Number(params.pageIndex);
+    const { previews_all, pageIndex_max } = await getCachedData();
     const previews = previews_all.slice(pageIndex * config.articles_per_page, (pageIndex + 1) * config.articles_per_page);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$all$2f5b$pageIndex$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].page,
@@ -727,7 +740,7 @@ async function Page(props) {
                 children: get_title(pageIndex, pageIndex_max)
             }, void 0, false, {
                 fileName: "[project]/src/app/all/[pageIndex]/page.tsx",
-                lineNumber: 78,
+                lineNumber: 87,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -738,17 +751,17 @@ async function Page(props) {
                             preview: preview
                         }, i, false, {
                             fileName: "[project]/src/app/all/[pageIndex]/page.tsx",
-                            lineNumber: 82,
+                            lineNumber: 91,
                             columnNumber: 13
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/src/app/all/[pageIndex]/page.tsx",
-                    lineNumber: 80,
+                    lineNumber: 89,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/all/[pageIndex]/page.tsx",
-                lineNumber: 79,
+                lineNumber: 88,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -760,7 +773,7 @@ async function Page(props) {
                         children: "newer"
                     }, void 0, false, {
                         fileName: "[project]/src/app/all/[pageIndex]/page.tsx",
-                        lineNumber: 88,
+                        lineNumber: 97,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: [
@@ -770,7 +783,7 @@ async function Page(props) {
                         children: "newer"
                     }, void 0, false, {
                         fileName: "[project]/src/app/all/[pageIndex]/page.tsx",
-                        lineNumber: 95,
+                        lineNumber: 104,
                         columnNumber: 11
                     }, this),
                     Number(params.pageIndex) < pageIndex_max ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -779,7 +792,7 @@ async function Page(props) {
                         children: "older"
                     }, void 0, false, {
                         fileName: "[project]/src/app/all/[pageIndex]/page.tsx",
-                        lineNumber: 100,
+                        lineNumber: 109,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: [
@@ -789,24 +802,23 @@ async function Page(props) {
                         children: "older"
                     }, void 0, false, {
                         fileName: "[project]/src/app/all/[pageIndex]/page.tsx",
-                        lineNumber: 107,
+                        lineNumber: 116,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/all/[pageIndex]/page.tsx",
-                lineNumber: 86,
+                lineNumber: 95,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/all/[pageIndex]/page.tsx",
-        lineNumber: 77,
+        lineNumber: 86,
         columnNumber: 5
     }, this);
 }
-__turbopack_async_result__();
-} catch(e) { __turbopack_async_result__(e); } }, true);}),
+}),
 "[project]/src/app/all/[pageIndex]/page.tsx [app-rsc] (ecmascript, Next.js Server Component)": ((__turbopack_context__) => {
 
 __turbopack_context__.n(__turbopack_context__.i("[project]/src/app/all/[pageIndex]/page.tsx [app-rsc] (ecmascript)"));

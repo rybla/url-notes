@@ -5,6 +5,7 @@ const execFileAsync = promisify(execFile);
 
 export async function gemini(
   prompt: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   opts?: {
     model: "gemini-2.5-pro" | "gemini-2.5-flash";
   },

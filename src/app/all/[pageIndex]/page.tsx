@@ -10,6 +10,7 @@ import Link from "next/link";
 import "./page.global.css";
 import styles from "./page.module.css";
 import { ArticlePreview } from "@/analysis/ontology";
+import { cache } from "react";
 
 const config = {
   articles_per_page: 10,
@@ -23,33 +24,39 @@ type Props = {
   params: Promise<Params>;
 };
 
-const ids_all = await paths.get_ids_of_articles();
+const getCachedData = cache(async () => {
+  const ids_all = await paths.get_ids_of_articles();
 
-const mds_all = (
-  await Promise.all(ids_all.map(async (id) => await readArticleMetadata(id)))
-).filter((md) => md !== null);
-// sorted from newest (higher `addedTime` value) to oldest
-mds_all.sort((x, y) => y.addedTime - x.addedTime);
+  const mds_all = (
+    await Promise.all(ids_all.map(async (id) => await readArticleMetadata(id)))
+  ).filter((md) => md !== null);
+  // sorted from newest (higher `addedTime` value) to oldest
+  mds_all.sort((x, y) => y.addedTime - x.addedTime);
 
-const previews_all: ArticlePreview[] = await Promise.all(
-  mds_all.map(async (md) => {
-    return {
-      metadata: md,
-      summary: (await readArticleSummary(md.id)) ?? undefined,
-      tags: (await readArticleTags(md.id)) ?? undefined,
-    };
-  }),
-);
+  const previews_all: ArticlePreview[] = await Promise.all(
+    mds_all.map(async (md) => {
+      return {
+        metadata: md,
+        summary: (await readArticleSummary(md.id)) ?? undefined,
+        tags: (await readArticleTags(md.id)) ?? undefined,
+      };
+    }),
+  );
 
-const pageIndex_max = Math.ceil(ids_all.length / config.articles_per_page) - 1;
+  const pageIndex_max =
+    Math.ceil(ids_all.length / config.articles_per_page) - 1;
 
-const count_pages = Math.ceil(ids_all.length / config.articles_per_page);
+  const count_pages = Math.ceil(ids_all.length / config.articles_per_page);
+
+  return { ids_all, mds_all, previews_all, pageIndex_max, count_pages };
+});
 
 function get_title(pageIndex: number, pageIndex_max: number) {
   return `url-notes | all | page ${pageIndex + 1} of ${pageIndex_max + 1}`;
 }
 
 export async function generateStaticParams(): Promise<Params[]> {
+  const { count_pages } = await getCachedData();
   const ps: Params[] = [];
   for (let i = 0; i < count_pages; i++) {
     ps.push({ pageIndex: `${i}` });
@@ -60,6 +67,7 @@ export async function generateStaticParams(): Promise<Params[]> {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const pageIndex = Number(params.pageIndex);
+  const { pageIndex_max } = await getCachedData();
   return {
     title: get_title(pageIndex, pageIndex_max),
   };
@@ -68,6 +76,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function Page(props: Props) {
   const params = await props.params;
   const pageIndex = Number(params.pageIndex);
+  const { previews_all, pageIndex_max } = await getCachedData();
   const previews = previews_all.slice(
     pageIndex * config.articles_per_page,
     (pageIndex + 1) * config.articles_per_page,
