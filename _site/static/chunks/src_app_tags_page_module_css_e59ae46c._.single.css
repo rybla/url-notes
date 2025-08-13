@@ -1,0 +1,83 @@
+/* [project]/src/app/tags/page.module.css [app-client] (css) */
+.page-module__E5h5ua__page {
+  background-color: var(--color-light-gray);
+  color: var(--color-black);
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  display: flex;
+  position: relative;
+}
+
+.page-module__E5h5ua__header {
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-white);
+  border-bottom: var(--border);
+  text-align: center;
+  color: var(--color-black);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex-direction: column;
+  flex: none;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+}
+
+.page-module__E5h5ua__title {
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: center;
+  color: var(--color-black);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.page-module__E5h5ua__content {
+  z-index: 1;
+  max-width: 800px;
+  min-height: 0;
+  padding: var(--space-lg);
+  flex: 1 1 0;
+  align-self: center;
+  position: relative;
+  overflow-y: auto;
+}
+
+.page-module__E5h5ua__tags {
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  justify-content: center;
+  display: flex;
+}
+
+.page-module__E5h5ua__tag {
+  background-color: var(--color-white);
+  border: var(--border);
+  box-shadow: var(--shadow);
+  padding: var(--space-sm) var(--space-md);
+  transition: all var(--transition-speed) var(--transition-timing);
+  cursor: pointer;
+}
+
+.page-module__E5h5ua__tag a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.page-module__E5h5ua__tag:hover {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
+  background-color: var(--color-attention-yellow);
+}
+
+.page-module__E5h5ua__tag:active {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
+  background-color: var(--color-action-blue);
+  color: var(--color-white);
+}
+
+/*# sourceMappingURL=src_app_tags_page_module_css_e59ae46c._.single.css.map*/

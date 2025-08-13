@@ -7,7 +7,7 @@ function get_title() {
 
 export default async function Page() {
   return (
-    <div className={styles.page}>
+    <div className={styles.Page}>
       <div className={styles.header}>{get_title()}</div>
       <div className={styles.content}>
         <div className={styles.links}>

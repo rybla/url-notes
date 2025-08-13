@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styles from "./page.module.css";
-import "./page.global.css";
 import paths from "@/analysis/paths";
 import { readArticleTags } from "@/analysis/article";
 
@@ -20,9 +19,13 @@ export default async function Page() {
   }
 
   return (
-    <div className={styles.page}>
+    <div className={styles.Page}>
       <div className={styles.header}>
-        <div className={styles.title}>{get_title()}</div>
+        <div className={styles.item}>
+          <Link href="/">url-notes</Link>
+        </div>
+        <div className={styles.separator}>{"|"}</div>
+        <div className={styles.item}>tags</div>
       </div>
       <div className={styles.content}>
         <div className={styles.tags}>

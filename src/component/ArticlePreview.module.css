@@ -1,150 +1,204 @@
 /*
- * =================================================================
- * == RETRO FLUID DESIGN SYSTEM BLUEPRINT
- * =================================================================
- *
- * --- CORE CONCEPT ---
- * A fusion of 90s blocky, text-heavy web aesthetics with modern
- * design's fluidity, minimalism, and dynamic effects. The goal
- * is to evoke a sense of nostalgia while feeling fresh,
- * responsive, and interactive.
- *
- * --- VISUAL THEMES APPLIED ---
- * 1.  Glassy and Fluid Backgrounds:
- * While the global background isn't defined here, these
- * components are designed as "cards" that float on top of a
- * dynamic, animated gradient background (defined in a global stylesheet).
- *
- * 2.  Blocky and Structured Foregrounds:
- * The .ArticlePreview container is a defined card with a
- * solid background, distinct border, and a soft box-shadow
- * that gives it a tangible, "floating" feel. It lifts on hover
- * to enhance this effect.
- *
- * 3.  Decorative and Interactive Text:
- * The main interactive element, the title link, features a
- * prominent animated underline that grows on hover, drawing
- * attention and providing satisfying feedback.
- *
- * --- COLOR PALETTE (LIGHT MODE) ---
- * -   Foreground Cards: Off-white for a clean, crisp look.
- * -   Text: Dark charcoal for high readability.
- * -   Accent: A vibrant electric blue for interactive elements.
- * -   Borders/Tags: Subtle grays to add structure without being distracting.
- *
- * --- TYPOGRAPHY ---
- * -   Title: A clean monospace font (ui-monospace, SFMono-Regular)
- * for a retro, terminal-like feel. It's bold with slight
- * letter-spacing to feel deliberate and important.
- * -   Body/Tags: A standard, highly-readable system sans-serif font.
- *
- * --- ANIMATION & INTERACTIVITY ---
- * -   Entrance Animation: Cards fade in and slide up gently on load.
- * -   Hover Animation (Card): The card lifts and its shadow expands,
- * creating a sense of depth and interactivity.
- * -   Hover Animation (Link): The accent-colored underline smoothly
- * animates from right to left, a classic-but-modern effect.
- *
- * =================================================================
- */
+================================================================================
+| DIGITAL NEO-BRUTALISM BLUEPRINT: ArticlePreview Component                    |
+================================================================================
+|
+| COMPONENT: .ArticlePreview
+|
+| CONCEPT:
+| The ArticlePreview component is treated as a solid, tangible "data block" or
+| "content slab". It's a self-contained unit that feels constructed and
+| permanent. The design emphasizes its structure with hard borders and a
+| prominent, unapologetic shadow, making it feel like a physical object on
+| the screen. The internal elements are arranged with a clear hierarchy to
+| guide the user's focus from the title, to the tags, and finally to the
+| summary.
+|
+|---
+|
+| HIERARCHY & STRUCTURE:
+| 1. .ArticlePreview (Container): The root element. A thick-bordered card
+|    with a hard shadow to establish it as the primary container. It uses
+|    flexbox to vertically stack its children.
+|
+| 2. .title: The most important element. Given a large, bold font size to
+|    immediately draw attention. It's a link, and its interactivity is
+|    signaled by a color change on hover, using the primary action color.
+|
+| 3. .tags: A secondary, but visually distinct, element. This is a horizontal
+|    list of "chips" or "labels". Each tag is styled like a small, interactive
+|    button, using an accent color to differentiate it from the main content.
+|    Their button-like appearance invites interaction.
+|
+| 4. .summary: The body content. Styled for readability with standard text
+|    color and size. It has the lowest visual weight, allowing the user to
+|    focus on it after processing the title and tags. Links within the
+|    summary will inherit the standard link styling for consistency.
+|
+|---
+|
+| COLOR & SEMANTICS:
+| - Background (#FFFFFF): Clean, high-contrast canvas.
+| - Borders & Shadows (#000000): Defines the structure, raw and exposed.
+| - Primary Text (#000000): For core information (title, summary).
+| - Action Blue (#007AFF): For the main title link, signaling the primary
+|   clickable action of the component.
+| - Highlight Purple (#AF52DE): For tags. This secondary accent color groups
+|   the tags as metadata and makes them stand out as filterable/navigable
+|   items, distinct from the main article link.
+|
+|---
+|
+| INTERACTION & ANIMATION:
+| - .title Link: Smooth color transition on hover. Simple, clear feedback.
+| - .tag Button: A "physical" press-down effect. On hover, the shadow is
+|   removed and the button shifts into the space the shadow occupied. This
+|   provides a satisfying, tangible feedback loop.
+| - All transitions are quick and snappy (`0.15s ease-in-out`) to feel
+|   responsive and direct, avoiding slow, graceful fades which would
+|   contradict the brutalist aesthetic.
+|
+|---
+|
+| RESPONSIVENESS (MOBILE-FIRST):
+| The design is fluid by default. On smaller screens, padding is reduced to
+| maximize content space. The hard shadows are slightly reduced to prevent
+| them from consuming too much of the limited viewport. The overall layout
+| remains a simple vertical stack, which is inherently mobile-friendly.
+|
+*/
 
-/* --- Keyframe Animations --- */
-@keyframes fadeInSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* --- Component Styles --- */
-
-/* The main container for the article preview card */
+/* --- Root Variables & Container --- */
 .ArticlePreview {
-  background-color: var(--color-background-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius);
-  padding: calc(var(--spacing-unit) * 3);
-  box-shadow: var(--shadow-soft);
-  transition:
-    box-shadow var(--transition-duration) var(--transition-timing),
-    transform var(--transition-duration) var(--transition-timing);
-  animation: fadeInSlideUp 0.5s ease-out forwards;
-  will-change: transform, box-shadow;
-}
+  /* CSS Variables */
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --border-color: #000000;
+  --shadow-color: #000000;
+  --primary-accent-color: #007aff; /* Action Blue */
+  --secondary-accent-color: #af52de; /* Highlight Purple */
+  --tag-text-color: #ffffff;
 
-/* Card hover effect: lift and expand shadow */
-.ArticlePreview:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-}
+  --border-width: 2px;
+  --shadow-offset: 4px;
+  --shadow-offset-large: 8px;
+  --base-spacing: 16px;
+  --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
 
-/* The article title */
-.title {
-  font-family: var(--font-mono);
-  font-size: 1.25rem; /* 20px */
-  font-weight: 600;
-  color: var(--color-text-primary);
-  margin-bottom: calc(var(--spacing-unit) * 1.5);
-  letter-spacing: 0.025em;
-}
-
-/* The link within the title */
-.title a {
-  color: inherit;
-  text-decoration: none;
-  position: relative;
-  display: inline-block;
-  padding-bottom: 2px; /* Space for the underline */
-}
-
-/* The animated underline for the title link */
-.title a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  /* Structure & Style */
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--shadow-color);
+  padding: var(--base-spacing);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--base-spacing) * 0.75);
+  max-width: 700px; /* Ensures readability on wide screens */
   width: 100%;
-  height: 2px;
-  background-color: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: right; /* Animates from right to left */
-  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  box-sizing: border-box; /* Ensures padding and border are included in width */
+  transition: all 0.2s ease-in-out;
 }
 
-/* On hover, the underline animates in from the left */
-.title a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+/* --- Title --- */
+.title {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 700;
+  line-height: 1.2;
 }
 
-/* Container for the tags */
+.title a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.15s ease-in-out;
+}
+
+.title a:hover {
+  color: var(--primary-accent-color);
+  text-decoration: underline;
+}
+
+/* --- Tags Container --- */
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-unit);
-  margin-bottom: calc(var(--spacing-unit) * 2);
+  gap: calc(var(--base-spacing) / 2); /* 8px */
 }
 
-/* Individual tag style */
+/* --- Individual Tag --- */
 .tag {
-  font-family: var(--font-sans);
   font-size: 0.75rem; /* 12px */
-  background-color: var(--color-tag-background);
-  color: var(--color-text-secondary);
-  padding: calc(var(--spacing-unit) / 2) var(--spacing-unit);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--color-border);
-  font-weight: 500;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--tag-text-color);
+  background-color: var(--secondary-accent-color);
+  padding: 4px 8px;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  text-decoration: none;
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-/* The summary text */
+.tag:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px var(--shadow-color);
+}
+
+/* --- Summary --- */
 .summary {
-  font-family: var(--font-sans);
-  font-size: 0.9rem; /* 14.4px */
-  color: var(--color-text-secondary);
+  font-size: 1rem; /* 16px */
   line-height: 1.6;
+  color: var(--text-color);
+}
+
+/* Styling for Markdown elements inside the summary */
+.summary p {
+  margin: 0 0 var(--base-spacing) 0;
+}
+.summary p:last-child {
+  margin-bottom: 0;
+}
+
+.summary a {
+  color: var(--primary-accent-color);
+  font-weight: 600;
+  text-decoration: underline;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.summary a:hover {
+  opacity: 0.8;
+}
+
+.summary strong {
+  font-weight: 700;
+}
+
+.summary em {
+  font-style: italic;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .ArticlePreview {
+    --base-spacing: 12px;
+    --shadow-offset: 3px;
+  }
+
+  .title {
+    font-size: 1.25rem; /* 20px */
+  }
+
+  .summary {
+    font-size: 0.9rem; /* ~14.5px */
+  }
+
+  .tag {
+    box-shadow: 1px 1px 0px var(--shadow-color);
+  }
+
+  .tag:hover {
+    transform: translate(1px, 1px);
+  }
 }

@@ -1,6 +1,5 @@
 import { ArticlePreview } from "@/analysis/ontology";
 import styles from "./ArticlePreview.module.css";
-import "./ArticlePreview.global.css";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
