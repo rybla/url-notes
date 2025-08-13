@@ -64,12 +64,10 @@ Global and Page Styles
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   background-color: var(--color-light-gray);
   color: var(--color-black);
-  min-height: 100vh;
   position: relative;
-  overflow: hidden; /* Contains the pseudo-element */
-
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Header Styling */
@@ -104,6 +102,9 @@ Content and Tag Styles
 .content {
   flex: 1 1 0;
   min-height: 0;
+
+  align-self: center;
+  max-width: 800px;
   position: relative;
   z-index: 1;
   padding: var(--space-lg);
