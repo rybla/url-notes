@@ -1,0 +1,17 @@
+/* --- CSS Variables --- */
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --light-gray: #cccccc;
+  --mid-gray: #888888;
+
+  --action-blue: #007aff;
+  --highlight-purple: #af52de;
+  --attention-yellow: #ffcc00;
+
+  --font-primary: "Courier New", Courier, monospace;
+
+  --spacing-unit: 8px;
+  --border-width: 2px;
+  --shadow-offset: 4px;
+}

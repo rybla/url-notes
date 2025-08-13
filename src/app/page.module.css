@@ -1,0 +1,177 @@
+/*
+================================================================================
+|   DIGITAL NEO-BRUTALISM BLUEPRINT                                            |
+================================================================================
+|
+|   CORE PRINCIPLES:
+|   - Honesty of Material: The structure is exposed. Borders, containers, and
+|     grids are primary aesthetic elements, not hidden details.
+|   - Strong Hierarchy: Visual dominance is achieved through scale, weight,
+|     and placement. There is no ambiguity in the user's path.
+|   - Unapologetic Presence: Hard shadows, high contrast, and stark
+|     typography create a solid, three-dimensional, and memorable feel.
+|   - Function Over Form: Aesthetics arise directly from function. All
+|     decorative elements are eliminated.
+|
+|--------------------------------------------------------------------------------
+|
+|   DESIGN SPECIFICATIONS:
+|
+|   - Shadows:
+|     - Type: Hard, solid, black, no blur.
+|     - Standard: 4px 4px 0px #000000;
+|     - Emphasis: "Long shadow" effect for key elements.
+|
+|   - Colors:
+|     - Neutrals: #000000, #FFFFFF, #CCCCCC, #888888.
+|     - Accents: #007AFF (Action), #FF3B30 (Destructive), #34C759 (Success),
+|                #FF9500 (Warning), #AF52DE (Highlight), #FFCC00 (Attention).
+|     - Usage: Strict separation between structural neutrals and functional
+|              accents.
+|
+|   - Structure:
+|     - Corners: Sharp, 0px radius. NO rounded corners.
+|     - Borders: Solid, 1px or 2px black/gray to define all containers.
+|     - Spacing: Rigid 8pt grid system. Consistent and deliberate.
+|
+|   - Components:
+|     - Buttons/Links: Solid accent color, thick border, uppercase bold text.
+|       - Default: Hard block shadow.
+|       - Hover: Shadow disappears, slight transform.
+|       - Active: Appears pressed down (inset shadow or transform).
+|     - Cards/Containers: White/light gray background, prominent solid border,
+|       standard hard block shadow.
+|
+|================================================================================
+*/
+
+/* --- Base & Page Layout --- */
+.page {
+  font-family: var(--font-primary);
+  background-color: var(--light-gray);
+  color: var(--black);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden; /* Hide overflow from animated shapes */
+}
+
+/* Passive background animation */
+.page::before,
+.page::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: var(--light-gray);
+  background-image:
+    linear-gradient(45deg, var(--mid-gray) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--mid-gray) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--mid-gray) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--mid-gray) 75%);
+  background-size: var(--spacing-unit) var(--spacing-unit);
+  z-index: 0;
+  animation: background-pan 120s linear infinite;
+  opacity: 0.2;
+}
+
+.page::after {
+  animation-direction: reverse;
+  animation-duration: 150s;
+  opacity: 0.1;
+}
+
+@keyframes background-pan {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(25%, 25%);
+  }
+}
+
+.header {
+  background-color: var(--white);
+  border-bottom: var(--border-width) solid var(--black);
+  padding: calc(var(--spacing-unit) * 2);
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-transform: lowercase;
+  box-shadow: 0px var(--shadow-offset) 0px var(--black);
+  position: relative;
+  z-index: 2;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: calc(var(--spacing-unit) * 2);
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Links --- */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 4);
+  width: 100%;
+  max-width: 400px;
+}
+
+.link {
+  background-color: var(--white);
+  border: var(--border-width) solid var(--black);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--black);
+  transition: all 0.1s ease-out;
+}
+
+.link:hover {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: 0px 0px 0px var(--black);
+}
+
+.link a {
+  display: block;
+  padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 4);
+  text-decoration: none;
+  color: var(--black);
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* --- Specific Link Colors on Hover --- */
+.link:nth-child(1):hover {
+  background-color: var(--action-blue);
+}
+.link:nth-child(2):hover {
+  background-color: var(--highlight-purple);
+}
+.link:nth-child(3):hover {
+  background-color: var(--attention-yellow);
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .header {
+    font-size: 1rem;
+    padding: var(--spacing-unit);
+  }
+
+  .link a {
+    font-size: 1.5rem;
+    padding: calc(var(--spacing-unit) * 2.5);
+  }
+
+  .links {
+    gap: calc(var(--spacing-unit) * 3);
+  }
+}

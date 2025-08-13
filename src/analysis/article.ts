@@ -90,9 +90,9 @@ export async function getMarkdownContent(article: Article): Promise<string> {
 
 export async function generateSummary(content: string): Promise<string> {
   return await ai.gemini(`
-Write a very concise and technical bullet-point overview of the following article. Respond with JUST the overview.
+Write a very concise and technical bullet-point overview of the following article. Use markdown syntax. Respond with JUST the overview.
 
-${content}
+${content.slice(0, 200000)}
 `);
 }
 
@@ -103,7 +103,7 @@ export async function generateTags(
   return (
     await ai.gemini(
       `
-Consider the following article summary. Your task is to come up with the tags that best categorize the content. You may use as many tags as you want. Respond with JUST the comma-separated list of tags.
+Consider the following article summary. Your task is to come up with the tags that best categorize the content. You may use many tags with varying degrees of specificity. Respond with JUST the comma-separated list of tags.
 
 ${title ? `Summary of "${title}":` : "Summary:"}
 

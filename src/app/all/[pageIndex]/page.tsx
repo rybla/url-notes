@@ -46,7 +46,7 @@ const pageIndex_max = Math.ceil(ids_all.length / config.articles_per_page) - 1;
 const count_pages = Math.ceil(ids_all.length / config.articles_per_page);
 
 function get_title(pageIndex: number, pageIndex_max: number) {
-  return `url-notes | all | page ${pageIndex} of ${pageIndex_max}`;
+  return `url-notes | all | page ${pageIndex + 1} of ${pageIndex_max + 1}`;
 }
 
 export async function generateStaticParams(): Promise<Params[]> {

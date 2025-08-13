@@ -62,3 +62,7 @@ export function normString(s: string | undefined): string | undefined {
   if (s.length === 0) return undefined;
   return s;
 }
+
+export function encodeURIComponent_v2(s: string): string {
+  return encodeURIComponent(s.replaceAll(" ", "_"));
+}

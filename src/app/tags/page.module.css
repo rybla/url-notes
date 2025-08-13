@@ -1,0 +1,147 @@
+/*
+================================================================================
+|   DIGITAL NEO-BRUTALISM - DESIGN SYSTEM BLUEPRINT                          |
+================================================================================
+|
+|   CORE CONCEPT:
+|   Inspired by mid-20th century architectural brutalism, this system
+|   rejects decorative fluff for raw, exposed digital structures. It
+|   prioritizes honesty, clarity, and a strong, unapologetic presence.
+|   The aesthetic arises directly from function.
+|
+|   1. HONESTY OF MATERIAL:
+|      - Containers, grids, and boundaries are not hidden but are central
+|        to the aesthetic. The design reveals how it was built.
+|
+|   2. STRONG HIERARCHY:
+|      - Information is organized with a clear, logical, and visually
+|        dominant hierarchy using scale, weight, and placement.
+|
+|   3. UNAPOLOGETIC PRESENCE:
+|      - The design uses hard shadows, high contrast, and stark typography
+|        to create a memorable and solid three-dimensional feel.
+|
+|   4. FUNCTION OVER FORM:
+|      - Every design element must serve a purpose. Decoration for its
+|        own sake is eliminated.
+|
+|--------------------------------------------------------------------------------
+|
+|   IMPLEMENTATION GUIDE:
+|
+|   - SHADOWS:
+|     - Standard: Hard, black, no blur (e.g., box-shadow: 4px 4px 0px #000).
+|     - Offset: Consistently 45-degree diagonal offsets.
+|
+|   - COLORS:
+|     - Palette: High-contrast, limited, and functional.
+|     - Structure: Neutrals (#000, #FFF, #CCC, #888).
+|     - Accents: Vibrant, purposeful colors for actions and states
+|       (Blue, Red, Green, Orange, Purple, Yellow).
+|
+|   - STRUCTURE & SPACING:
+|     - Corners: Sharp, 0px radius. Rounded corners are forbidden.
+|     - Borders: Solid, 1px or 2px black/gray to define containers.
+|     - Layout: Strict, visible grid (e.g., 8pt grid).
+|
+|   - TYPOGRAPHY:
+|     - Style: Bold, often uppercase, with high contrast.
+|
+|   - COMPONENTS:
+|     - Buttons/Cards: Solid backgrounds, thick borders, hard shadows.
+|     - Interaction: Hover/active states manipulate shadows and position
+|       to create a physical, tactile response.
+|
+================================================================================
+*/
+
+/*
+Global and Page Styles
+*/
+.page {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background-color: var(--color-light-gray);
+  color: var(--color-black);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden; /* Contains the pseudo-element */
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styling */
+.header {
+  flex: 0 0 auto;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-white);
+  border-bottom: var(--border);
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--color-black);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: center;
+  color: var(--color-black);
+}
+
+/*
+Content and Tag Styles
+*/
+.content {
+  flex: 1 1 0;
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+  padding: var(--space-lg);
+  overflow-y: auto;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  justify-content: center;
+}
+
+.tag {
+  background-color: var(--color-white);
+  border: var(--border);
+  box-shadow: var(--shadow);
+  padding: var(--space-sm) var(--space-md);
+  transition: all var(--transition-speed) var(--transition-timing);
+  cursor: pointer;
+}
+
+.tag a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+}
+
+/* Interaction States for Tags */
+.tag:hover {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
+  background-color: var(--color-attention-yellow);
+}
+
+.tag:active {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
+  background-color: var(--color-action-blue);
+  color: var(--color-white);
+}
