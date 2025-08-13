@@ -7,9 +7,9 @@ import { ArticlePreview } from "@/analysis/ontology";
 import paths from "@/analysis/paths";
 import ArticlePreviewComponent from "@/component/ArticlePreview";
 import { Metadata } from "next";
-import "./page.global.css";
 import styles from "./page.module.css";
 import { cache } from "react";
+import Link from "next/link";
 
 type Params = {
   tag: string;
@@ -76,8 +76,18 @@ export default async function Page(props: Props) {
   );
 
   return (
-    <div className={styles.page}>
-      <div className={styles.header}>{get_title(tag)}</div>
+    <div className={styles.Page}>
+      <div className={styles.header}>
+        <div className={styles.item}>
+          <Link href="/">url-notes</Link>
+        </div>
+        <div className={styles.separator}>{"|"}</div>
+        <div className={styles.item}>
+          <Link href="/tags">tag</Link>
+        </div>
+        <div className={styles.separator}>{"|"}</div>
+        <div className={styles.item}>{tag}</div>
+      </div>
       <div className={styles.content}>
         <div className={styles.previews}>
           {previews.map((preview, i) => (

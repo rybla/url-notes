@@ -1,149 +1,163 @@
 /*
-  Digital Neo-Brutalism Design Blueprint for the 'Page' Component
+  Digital Neo-Brutalism Blueprint for the Page Component
 
-  1. Core Concept & Philosophy:
-     - This design applies the Digital Neo-Brutalism system to the main page component.
-     - The aesthetic is raw, structural, and unapologetically digital. We expose the containers and use high-contrast, functional elements.
-     - The layout is mobile-first, using a flexible column structure that scales seamlessly to larger screens.
+  1.  **Overall Structure (`.Page`)**:
+      -   The main container will use a flexbox layout with a column direction to stack the header and content vertically.
+      -   It will occupy the full viewport height and width to create an immersive, app-like feel.
+      -   A solid, neutral background color will be used to establish the base of our light-mode theme.
+      -   All CSS variables for colors, spacing, and shadows will be defined here for global consistency.
 
-  2. Layout and Structure:
-     - `.page`: The root container. It will occupy the full viewport height and use Flexbox to center its content in a column. This provides a strong, stable foundation.
-     - `.header`: The top-level banner. It's a simple, bold block with a thick bottom border to delineate it from the main content, reinforcing the structural honesty.
-     - `.content`: A flexible container that holds the primary interactive elements.
-     - `.links`: A Flexbox container that organizes the navigation links. On mobile, it stacks them vertically for easy tapping.
-     - `.link`: Each link is treated as a primary interactive element. It's styled as a card/button hybrid with a hard shadow and solid border, making it feel tangible and important.
+  2.  **Header (`.header`)**:
+      -   The header will be a bold, high-contrast element to establish a strong visual hierarchy.
+      -   It will have a solid background color, a thick bottom border, and a hard shadow to make it pop from the page.
+      -   The typography will be uppercase, bold, and large to be unapologetically present.
+      -   It will be centered and have ample padding to give it space to breathe.
 
-  3. Color & Typography:
-     - Palette: We'll stick to a high-contrast palette of black, white, and a vibrant action blue for interactivity.
-       - Background: White (#FFFFFF) for maximum clarity.
-       - Text, Borders, Shadows: Black (#000000) for a stark, unambiguous presence.
-       - Interactive Accent: Action Blue (#007AFF) for hover and focus states to clearly signify interactivity.
-     - Typography: We'll use a monospace font family to give it a classic, computer-terminal feel, aligning with the "digital raw" concept. Text will be bold to ensure readability and presence.
+  3.  **Content Area (`.content`)**:
+      -   This area will be the main flexible container, designed to grow and fill the available space between the header and the bottom of the screen.
+      -   It will use a flexbox layout to center its children (the links) both horizontally and vertically.
 
-  4. Interactivity & Animation:
-     - The primary interaction is with the `.link` elements.
-     - Default State: The link cards will have a prominent hard shadow, making them "pop" from the page.
-     - Hover State: On hover, the shadow will disappear, and the card will translate slightly (4px down and right). This creates a satisfying, physical "press" effect. The border will change to the accent blue to draw attention.
-     - Transitions: All transformations will be smooth (`transition: all 0.15s ease-out;`) to make the interactions feel responsive but not jarring.
+  4.  **Links Container (`.links`)**:
+      -   This will be a flex container that arranges the link cards.
+      -   On larger screens, it will display links in a row.
+      -   On mobile screens, it will switch to a column layout to ensure links are stacked vertically and are easily tappable.
+
+  5.  **Individual Links (`.link > a`)**:
+      -   Each link will be styled as a distinct, interactive "card" or "button".
+      -   **Appearance**: A solid background color, a thick 2px black border, and sharp, 0px corners are mandatory.
+      -   **Color Coding**:
+          -   The "source" link, being external and pointing to the code, will use the "Highlight Purple" to differentiate it.
+          -   The internal navigation links ("all", "tags") will use the primary "Action Blue" to signify standard navigation.
+      -   **Shadow**: Each link will have a prominent `4px 4px` hard black shadow to give it a tangible, 3D presence.
+      -   **Typography**: Text will be bold and uppercase for maximum clarity.
+      -   **Interaction**:
+          -   **Hover**: The shadow will disappear, and the card will translate slightly (e.g., `2px`), creating a subtle, satisfying motion that invites a click.
+          -   **Active**: On click/tap, the card will translate the full `4px` down and to the right, appearing to press into the space its shadow once occupied. This provides immediate, clear feedback.
+      -   **Spacing**: Generous margins will be applied to separate the links, ensuring they don't feel cramped and have large, easy-to-hit tap targets on mobile.
+
+  6.  **Passive Background Animation**:
+      -   To enhance the "digital material" feel, the background features a subtle, passive animation.
+      -   A grid of dots is generated using a `radial-gradient` for a clean, performant effect.
+      -   This grid slowly and continuously scrolls, creating a sense of depth and movement without distracting from the foreground content.
 */
 
-/* Defines all CSS variables for the component.
-  This is the first and only rule set that is not a class.
-*/
-.page {
-  /* Color Palette */
-  --color-background: #FFFFFF;
-  --color-text: #000000;
-  --color-border: #000000;
-  --color-shadow: #000000;
-  --color-accent: #007AFF;
-  --color-accent-text: #FFFFFF;
+@keyframes passive-background-animation {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    /* A larger value here will make the animation appear slower over the duration */
+    background-position: 40px 40px;
+  }
+}
 
-  /* Spacing & Sizing */
-  --spacing-unit: 1rem; /* Approx 16px */
-  --spacing-small: calc(var(--spacing-unit) / 2); /* 8px */
-  --spacing-medium: var(--spacing-unit); /* 16px */
-  --spacing-large: calc(var(--spacing-unit) * 2); /* 32px */
+.Page {
+  /* CSS Variables */
+  --background-color: #FFFFFF;
+  --text-color: #000000;
+  --border-color: #000000;
+  --header-bg: #CCCCCC;
+  --background-pattern-color: #E0E0E0; /* A light gray for the dots */
 
-  /* Borders & Shadows */
+  /* Accent Colors */
+  --action-blue: #007AFF;
+  --highlight-purple: #AF52DE;
+
+  /* Sizing & Spacing */
+  --spacing-unit: 8px;
   --border-width: 2px;
-  --border-radius: 0; /* A core principle of Neo-Brutalism */
   --shadow-offset: 4px;
-  --hard-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--color-shadow);
-
-  /* Typography */
-  --font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
-  --font-weight-normal: 400;
-  --font-weight-bold: 700;
-
-  /* Transitions */
   --transition-speed: 0.15s;
-  --transition-timing: ease-out;
+  --background-pattern-size: 20px;
 
-  /* Component Specific Styles */
+  /* Styles */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   min-height: 100vh;
-  padding: var(--spacing-medium);
-  background-color: var(--color-background);
-  color: var(--color-text);
-  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Courier New', Courier, monospace;
+
+  /* Animated Background */
+  background-image: radial-gradient(var(--background-pattern-color) 1px, transparent 1px);
+  background-size: var(--background-pattern-size) var(--background-pattern-size);
+  animation: passive-background-animation 5s linear infinite;
 }
 
 .header {
-  width: 100%;
-  max-width: 600px;
-  padding: var(--spacing-medium);
-  margin-bottom: var(--spacing-large);
+  padding: calc(var(--spacing-unit) * 3);
   text-align: center;
-  font-size: 1.25rem;
-  font-weight: var(--font-weight-bold);
+  font-weight: bold;
+  font-size: 1.5rem;
   text-transform: uppercase;
-  border: var(--border-width) solid var(--color-border);
-  background-color: var(--color-background);
-  box-shadow: var(--hard-shadow);
+  background-color: var(--header-bg);
+  border-bottom: var(--border-width) solid var(--border-color);
+  box-shadow: 0px var(--shadow-offset) 0px var(--border-color);
+  z-index: 10;
+  position: relative; /* Ensures header stays above the animated background */
 }
 
 .content {
-  width: 100%;
+  flex-grow: 1;
   display: flex;
   justify-content: center;
-  flex-grow: 1;
+  align-items: center;
+  padding: calc(var(--spacing-unit) * 2);
+  position: relative; /* Ensures content stays above the animated background */
 }
 
 .links {
-  width: 100%;
-  max-width: 400px;
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-large);
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: calc(var(--spacing-unit) * 3);
 }
 
-.link {
-  background-color: var(--color-background);
-  border: var(--border-width) solid var(--color-border);
-  box-shadow: var(--hard-shadow);
-  transition: all var(--transition-speed) var(--transition-timing);
-}
-
-/* Styling the actual <a> tag inside the .link container */
+/* Style the actual <a> tag inside the .link div */
 .link a {
   display: block;
-  padding: var(--spacing-medium);
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4);
+  background-color: var(--action-blue);
+  color: var(--background-color);
   text-decoration: none;
-  color: var(--color-text);
-  transition: all var(--transition-speed) var(--transition-timing);
+  text-transform: uppercase;
+  font-weight: bold;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color);
+  transition: all var(--transition-speed) ease-out;
 }
 
-/* Interaction States */
-.link:hover {
+/* Specific color for the source link */
+.link:first-child a {
+  background-color: var(--highlight-purple);
+}
+
+.link a:hover {
+  box-shadow: 0px 0px 0px var(--border-color);
   transform: translate(var(--shadow-offset), var(--shadow-offset));
-  box-shadow: none;
 }
 
-.link:hover a {
-  background-color: var(--color-accent);
-  color: var(--color-accent-text);
+.link a:active {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: 0px 0px 0px var(--border-color);
 }
 
-.link:active {
-  transform: translate(calc(var(--shadow-offset) / 2), calc(var(--shadow-offset) / 2));
-  transition-duration: 0.05s;
-}
-
-/* Media query for larger screens if needed, though the current design is fluid */
-@media (min-width: 768px) {
+/* Mobile Optimization */
+@media (max-width: 600px) {
   .header {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    padding: calc(var(--spacing-unit) * 2);
+  }
+
+  .links {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px; /* Prevents links from becoming too wide on mobile */
   }
 
   .link a {
-    font-size: 1.25rem;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box; /* Ensures padding is included in the width */
   }
 }

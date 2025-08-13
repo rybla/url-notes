@@ -7,7 +7,6 @@ import paths from "@/analysis/paths";
 import ArticlePreviewComponent from "@/component/ArticlePreview";
 import { Metadata } from "next";
 import Link from "next/link";
-import "./page.global.css";
 import styles from "./page.module.css";
 import { ArticlePreview } from "@/analysis/ontology";
 import { cache } from "react";
@@ -83,8 +82,20 @@ export default async function Page(props: Props) {
   );
 
   return (
-    <div className={styles.page}>
-      <div className={styles.header}>{get_title(pageIndex, pageIndex_max)}</div>
+    <div className={styles.Page}>
+      <div className={styles.header}>
+        <div className={styles.item}>
+          <Link href="/">url-notes</Link>
+        </div>
+        <div className={styles.separator}>{"|"}</div>
+        <div className={styles.item}>
+          <Link href="/all/0">all</Link>
+        </div>
+        <div className={styles.separator}>{"|"}</div>
+        <div className={styles.item}>
+          page {pageIndex + 1} of {pageIndex_max + 1}
+        </div>
+      </div>
       <div className={styles.content}>
         <div className={styles.previews}>
           {previews.map((preview, i) => (
