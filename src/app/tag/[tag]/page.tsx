@@ -9,6 +9,7 @@ import ArticlePreviewComponent from "@/component/ArticlePreview";
 import { Metadata } from "next";
 import "./page.global.css";
 import styles from "./page.module.css";
+import { cache } from "react";
 
 type Params = {
   tag: string;
@@ -18,29 +19,34 @@ type Props = {
   params: Promise<Params>;
 };
 
-const ids_all = await paths.get_ids_of_articles();
+const getCachedData = cache(async () => {
+  const ids_all = await paths.get_ids_of_articles();
 
-const mds_all = (
-  await Promise.all(ids_all.map(async (id) => await readArticleMetadata(id)))
-).filter((md) => md !== null);
-// sorted from newest (higher `addedTime` value) to oldest
-mds_all.sort((x, y) => y.addedTime - x.addedTime);
+  const mds_all = (
+    await Promise.all(ids_all.map(async (id) => await readArticleMetadata(id)))
+  ).filter((md) => md !== null);
+  // sorted from newest (higher `addedTime` value) to oldest
+  mds_all.sort((x, y) => y.addedTime - x.addedTime);
 
-const previews_all: ArticlePreview[] = await Promise.all(
-  mds_all.map(async (md) => {
-    return {
-      metadata: md,
-      summary: (await readArticleSummary(md.id)) ?? undefined,
-      tags: (await readArticleTags(md.id)) ?? undefined,
-    };
-  }),
-);
+  const previews_all: ArticlePreview[] = await Promise.all(
+    mds_all.map(async (md) => {
+      return {
+        metadata: md,
+        summary: (await readArticleSummary(md.id)) ?? undefined,
+        tags: (await readArticleTags(md.id)) ?? undefined,
+      };
+    }),
+  );
+
+  return { ids_all, mds_all, previews_all };
+});
 
 function get_title(tag: string) {
   return `url-notes | tag | ${tag}`;
 }
 
 export async function generateStaticParams(): Promise<Params[]> {
+  const { previews_all } = await getCachedData();
   const tags: Set<string> = new Set();
   for (const preview of previews_all) {
     if (preview.tags) {
@@ -64,6 +70,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function Page(props: Props) {
   const params = await props.params;
   const tag = decodeURIComponent(params.tag);
+  const { previews_all } = await getCachedData();
   const previews = previews_all.filter((preview) =>
     preview.tags?.includes(tag),
   );
