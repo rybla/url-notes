@@ -7,13 +7,15 @@ const dirpath_feed = path.join("input", "feed");
 // output-1
 const dirpath_article = path.join("output-1", "article");
 const dirpath_article_metadata = path.join("output-1", "article_metadata");
-const filepath_articeIds_ignored = path.join("output-1", "articleIds_ignored.json");
 // output-2
 const dirpath_article_content = path.join("output-2", "article_content");
 const dirpath_article_summary = path.join("output-2", "article_summary");
 const dirpath_article_tags = path.join("output-2", "article_tags");
 
 export const paths = {
+  // keywords
+  filepath_keywords_focused: path.join("input", "keywords_focused.json"),
+  filepath_topics_focused: path.join("input", "topics_focused.json"),
   // feed
   dirpath_feed,
   async get_filepaths_of_feeds(): Promise<string[]> {
@@ -30,15 +32,15 @@ export const paths = {
   dirpath_article_content,
   dirpath_article_summary,
   dirpath_article_tags,
-  async get_ids_of_articles(): Promise<string[]> {
-    log("[get_ids_of_articles]");
+  async get_articleIds(): Promise<string[]> {
+    log("[get_articleIds]");
     return (
       await fs.readdir(dirpath_article, { encoding: "utf8", recursive: false })
     ).flatMap((fn) =>
       fn.endsWith(".json") ? [path.basename(fn, ".json")] : [],
     );
   },
-  filepath_articeIds_ignored,
+  filepath_articleIds_ignored: path.join("output-1", "articleIds_ignored.json"),
   filepath_article(id_article: string) {
     return path.join(dirpath_article, `${id_article}.json`);
   },

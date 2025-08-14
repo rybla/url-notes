@@ -5,7 +5,7 @@ import { readArticleTags } from "@/analysis/article";
 import Header from "@/component/Header";
 
 export default async function Page() {
-  const ids_all = await paths.get_ids_of_articles();
+  const ids_all = await paths.get_articleIds();
   const tags_all: Set<string> = new Set();
   for (const id of ids_all) {
     const tags = await readArticleTags(id);
@@ -22,7 +22,7 @@ export default async function Page() {
         <div className={styles.tags}>
           {Array.from(tags_all).map((tag, i) => (
             <div className={styles.tag} key={i}>
-              <Link href={`/tag/${encodeURIComponent(tag)}`}>{tag}</Link>
+              <Link href={`/tag/${tag}`}>{tag}</Link>
             </div>
           ))}
         </div>

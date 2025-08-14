@@ -1,7 +1,20 @@
 import { execFile } from "child_process";
 import { promisify } from "util";
 import { error } from "./console";
+import { Ollama } from "ollama";
+
+// -----------------------------------------------------------------------------
+
 const execFileAsync = promisify(execFile);
+
+// -----------------------------------------------------------------------------
+
+export const ollama = new Ollama({
+  // host: "https://ollama.com",
+  // headers: {
+  //   Authorization: `Bearer ${process.env.OLLAMA_API_KEY}`,
+  // },
+});
 
 export async function gemini(
   prompt: string,

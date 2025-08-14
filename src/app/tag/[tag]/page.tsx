@@ -21,7 +21,7 @@ type Props = {
 };
 
 const getCachedData = cache(async () => {
-  const ids_all = await paths.get_ids_of_articles();
+  const ids_all = await paths.get_articleIds();
 
   const mds_all = (
     await Promise.all(ids_all.map(async (id) => await readArticleMetadata(id)))
@@ -42,10 +42,6 @@ const getCachedData = cache(async () => {
   return { ids_all, mds_all, previews_all };
 });
 
-function get_title(tag: string) {
-  return `url-notes | tag | ${tag}`;
-}
-
 export async function generateStaticParams(): Promise<Params[]> {
   const { previews_all } = await getCachedData();
   const tags: Set<string> = new Set();
@@ -64,7 +60,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const tag = decodeURIComponent(params.tag);
   return {
-    title: get_title(tag),
+    title: `url-notes | tag | ${tag}`,
   };
 }
 

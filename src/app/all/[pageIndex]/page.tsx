@@ -25,7 +25,7 @@ type Props = {
 };
 
 const getCachedData = cache(async () => {
-  const ids_all = await paths.get_ids_of_articles();
+  const ids_all = await paths.get_articleIds();
 
   const mds_all = (
     await Promise.all(ids_all.map(async (id) => await readArticleMetadata(id)))

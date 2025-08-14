@@ -13,14 +13,14 @@ const { log, error } = makeConsole({ __filename });
 
 // -----------------------------------------------------------------------------
 
-const ids_articles = await paths.get_ids_of_articles();
-for (const id_article of ids_articles) {
+const articleIds = await paths.get_articleIds();
+for (const articleId of articleIds) {
   try {
-    log(`processing article: ${id_article}`);
+    log(`processing article: ${articleId}`);
 
     const article = await do_(async () => {
       const result = await readJsonFile(
-        paths.filepath_article(id_article),
+        paths.filepath_article(articleId),
         Article,
       );
       if (!result) throw new Error(`Failed to read Article JSON file`);
@@ -30,17 +30,17 @@ for (const id_article of ids_articles) {
     });
 
     const content = await cacheText(
-      paths.filepath_article_content(id_article),
+      paths.filepath_article_content(articleId),
       async () => await getMarkdownContent(article),
     );
 
     const summary = await cacheText(
-      paths.filepath_article_summary(id_article),
+      paths.filepath_article_summary(articleId),
       async () => await generateSummary(content),
     );
 
     const tags = await cacheText(
-      paths.filepath_article_tags(id_article),
+      paths.filepath_article_tags(articleId),
       async () => (await generateTags(article.title, summary)).join(","),
     );
   } catch (e: unknown) {

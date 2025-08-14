@@ -116,9 +116,9 @@ ${summary}
     .map((s) => s.trim().toLowerCase());
 }
 
-export async function readArticle(id_article: string): Promise<Article | null> {
+export async function readArticle(articleId: string): Promise<Article | null> {
   const parseResult_article = await readJsonFile(
-    paths.filepath_article(id_article),
+    paths.filepath_article(articleId),
     Article,
   );
   if (!parseResult_article) return null;
@@ -128,10 +128,10 @@ export async function readArticle(id_article: string): Promise<Article | null> {
 }
 
 export async function readArticleMetadata(
-  id_article: string,
+  articleId: string,
 ): Promise<ArticleMetadata | null> {
   const result = await readJsonFile(
-    paths.filepath_article_metadata(id_article),
+    paths.filepath_article_metadata(articleId),
     ArticleMetadata,
   );
   if (!result) return null;
@@ -139,39 +139,39 @@ export async function readArticleMetadata(
 }
 
 export async function readArticleContent(
-  id_article: string,
+  articleId: string,
 ): Promise<string | null> {
-  return await readTextFile(paths.filepath_article_content(id_article));
+  return await readTextFile(paths.filepath_article_content(articleId));
 }
 
 export async function readArticleSummary(
-  id_article: string,
+  articleId: string,
 ): Promise<string | null> {
-  return await readTextFile(paths.filepath_article_summary(id_article));
+  return await readTextFile(paths.filepath_article_summary(articleId));
 }
 
 export async function readArticleTags(
-  id_article: string,
+  articleId: string,
 ): Promise<string[] | null> {
   const tags_string = await readTextFile(
-    paths.filepath_article_tags(id_article),
+    paths.filepath_article_tags(articleId),
   );
   if (!tags_string) return null;
   return tags_string.split(",").map((s) => s.trim());
 }
 
 export async function readArticlePlus(
-  id_article: string,
+  articleId: string,
 ): Promise<ArticlePlus | null> {
-  const article = await readArticle(id_article);
+  const article = await readArticle(articleId);
   if (!article) return null;
-  const metadata = await readArticleMetadata(id_article);
+  const metadata = await readArticleMetadata(articleId);
   if (!metadata) return null;
-  const content = (await readArticleContent(id_article)) ?? undefined;
-  const summary = (await readArticleSummary(id_article)) ?? undefined;
-  const tags = (await readArticleTags(id_article)) ?? undefined;
+  const content = (await readArticleContent(articleId)) ?? undefined;
+  const summary = (await readArticleSummary(articleId)) ?? undefined;
+  const tags = (await readArticleTags(articleId)) ?? undefined;
   const articlePlus: ArticlePlus = {
-    id: id_article,
+    id: articleId,
     article,
     metadata,
     content,

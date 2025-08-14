@@ -7,9 +7,18 @@ import { Article, ArticleMetadata, RssFeedConfig } from "@/analysis/ontology";
 import paths from "@/analysis/paths";
 import { do_, formatDate, normString } from "@/analysis/utility";
 import filenamifyUrl from "filenamify-url";
+import z from "zod";
 const { error, log } = makeConsole({ __filename });
 
 // -----------------------------------------------------------------------------
+
+const articleIds_ignored = new Set(
+  ...(await cacheJson(
+    paths.filepath_articleIds_ignored,
+    z.array(z.string()),
+    async () => [],
+  )),
+);
 
 const feeds = await Promise.all(
   (await paths.get_filepaths_of_feeds()).map(
@@ -41,12 +50,13 @@ for (const feed of feeds) {
         const url = item.link;
         if (!url) continue;
 
-        const id_article = filenamifyUrl(url);
+        const articleId = filenamifyUrl(url);
+        if (articleIds_ignored.has(articleId)) continue;
 
         log(`fetching article at url: ${url}`);
 
         const article = await cacheJson(
-          paths.filepath_article(id_article),
+          paths.filepath_article(articleId),
           Article,
           async () => {
             const article = await fetchArticle(url);
@@ -71,12 +81,12 @@ for (const feed of feeds) {
         if (!article) continue;
 
         const metadata = await cacheJson(
-          paths.filepath_article_metadata(id_article),
+          paths.filepath_article_metadata(articleId),
           ArticleMetadata,
           async () => {
             const d = new Date();
             return {
-              id: id_article,
+              id: articleId,
               url,
               addedDate: formatDate(d),
               addedTime: d.getTime(),
