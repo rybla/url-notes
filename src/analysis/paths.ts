@@ -7,6 +7,7 @@ const dirpath_feed = path.join("input", "feed");
 // output-1
 const dirpath_article = path.join("output-1", "article");
 const dirpath_article_metadata = path.join("output-1", "article_metadata");
+const filepath_articeIds_ignored = path.join("output-1", "articleIds_ignored.json");
 // output-2
 const dirpath_article_content = path.join("output-2", "article_content");
 const dirpath_article_summary = path.join("output-2", "article_summary");
@@ -37,6 +38,7 @@ export const paths = {
       fn.endsWith(".json") ? [path.basename(fn, ".json")] : [],
     );
   },
+  filepath_articeIds_ignored,
   filepath_article(id_article: string) {
     return path.join(dirpath_article, `${id_article}.json`);
   },
