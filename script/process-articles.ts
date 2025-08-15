@@ -1,8 +1,5 @@
-import {
-  generateSummary,
-  generateTags,
-  getMarkdownContent,
-} from "@/analysis/article";
+import { extractMarkdownContent } from "@/analysis/article/fetch";
+import { generateSummary, generateTags } from "@/analysis/article/generate";
 import { cacheText } from "@/analysis/cache";
 import { makeConsole } from "@/analysis/console";
 import { readJsonFile } from "@/analysis/file";
@@ -31,17 +28,24 @@ for (const articleId of articleIds) {
 
     const content = await cacheText(
       paths.filepath_article_content(articleId),
-      async () => await getMarkdownContent(article),
+      async () => await extractMarkdownContent(article),
     );
+    if (content === null) continue;
 
     const summary = await cacheText(
       paths.filepath_article_summary(articleId),
-      async () => await generateSummary(content),
+      async () => await generateSummary(article, content),
     );
+    if (summary === null) continue;
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const tags = await cacheText(
       paths.filepath_article_tags(articleId),
-      async () => (await generateTags(article.title, summary)).join(","),
+      async () => {
+        const tags = await generateTags(article, summary);
+        if (tags === null) return null;
+        return tags.join(",");
+      },
     );
   } catch (e: unknown) {
     error(e);

@@ -1,91 +1,194 @@
 import { ollama } from "@/analysis/ai";
-import { fetchArticle, readArticle } from "@/analysis/article";
+import { readArticle_new } from "@/analysis/article";
 import { cacheJson } from "@/analysis/cache";
 import { makeConsole } from "@/analysis/console";
-import { fetchFeed } from "@/analysis/feed";
-import { readJsonFile, writeJsonFile } from "@/analysis/file";
-import { Article, ArticleMetadata, RssFeedConfig } from "@/analysis/ontology";
+import { renameFile, writeJsonFile } from "@/analysis/file";
+import { Article } from "@/analysis/ontology";
 import paths from "@/analysis/paths";
-import { do_, formatDate, normString, trim } from "@/analysis/utility";
-import filenamifyUrl from "filenamify-url";
+import { trim } from "@/analysis/utility";
 import z from "zod";
 const { error, log } = makeConsole({ __filename });
 
 // -----------------------------------------------------------------------------
 
-const keywords_focused = (
-  await readJsonFile(paths.filepath_keywords_focused, z.array(z.string()))
-)?.data;
-if (!keywords_focused)
-  throw new Error(`Failed to read ${paths.filepath_keywords_focused}`);
+function getSample(article: Article): string {
+  if (article.title) {
+    if (article.summary) {
+      return trim(`
+# ${article.title}
 
-const topics_focused = (
-  await readJsonFile(paths.filepath_topics_focused, z.array(z.string()))
-)?.data;
-if (!topics_focused)
-  throw new Error(`Failed to read ${paths.filepath_topics_focused}`);
+${article.summary}
+`);
+    } else if (article.textContent && article.textContent.length < 2500) {
+      return trim(`
+# ${article.title}
 
-const articleIds_ignored = new Set(
-  ...(await cacheJson(
-    paths.filepath_articleIds_ignored,
-    z.array(z.string()),
-    async () => [],
-  )),
-);
+${article.textContent}
+`);
+    } else if (article.textContent) {
+      return trim(`
+URL: ${article.title}
 
-const articleIds = await paths.get_articleIds();
+Snippet:
 
-for (const articleId of articleIds) {
-  const article = await readArticle(articleId);
-  if (!article) continue;
+${article.textContent.slice(0, 2500)}
 
-  let shouldKeep = false;
+...
+`);
+    } else {
+      return trim(`
+URL: ${article.url!}
+Title: ${article.title}
+`);
+    }
+  } else {
+    if (article.summary) {
+      return trim(`
+URL: ${article.url}
 
-  //
+Summary:
 
-  if (
-    keywords_focused.find(
-      (kw) =>
-        articleId.toLowerCase().includes(kw.toLowerCase()) ||
-        article?.title?.toLowerCase().includes(kw.toLowerCase()),
-    ) !== undefined
-  )
-    shouldKeep = true;
+${article.summary}
+`);
+    } else if (article.textContent && article.textContent.length < 2500) {
+      return trim(`
+URL: ${article.url}
 
-  const snippet =
-    article.summary ?? article.title ?? article.content?.slice(0, 2500);
-  if (snippet) {
-    const response = await ollama.chat({
-      model: "gemma3:12b",
-      messages: [
+Content:
+
+${article.textContent}
+`);
+    } else if (article.textContent) {
+      return trim(`
+URL: ${article.url}
+
+Snippet:
+
+${article.textContent.slice(0, 2500)}
+
+...
+`);
+    } else {
+      return `URL: ${article.url!}`;
+    }
+  }
+}
+
+async function checkIfShouldKeepArticle(article: Article): Promise<boolean> {
+  if (!article.rssFeedConfig) return true;
+
+  if (article.rssFeedConfig.filters) {
+    const filters = article.rssFeedConfig.filters;
+
+    const sample = getSample(article);
+
+    if (filters.keywords) {
+      if (
+        filters.keywords
+          .concat(filters.topics ?? [])
+          .find((kw) => sample?.toLowerCase().includes(kw.toLowerCase()))
+      ) {
+        log(
+          `Keeping article ${article.title ?? article.url} because it included one of the keywords`,
+        );
+        return true;
+      }
+    }
+
+    if (filters.topics) {
+      const messages = [
         {
           role: "system",
           content: trim(`
-The user will provide a snippet of text. Your task is to determine if that snippet is related to any of the following topics:
-${topics_focused.map((topic) => `  - ${topic}`).join("\n")}
+The user will provide some sample content from an article. Your task is to determine if it is related to any of the following topics:
+${filters.topics.map((topic) => `  - ${topic}`).join("\n")}
+Respond just a single word:
+  - if the sample is related to any of the topic listed above, respond with "true"
+  - otherwise, respond with "false"
 `),
         },
-        { role: "user", content: `Text snippet:\n\n${snippet}` },
-      ],
-      format: {
-        type: "object",
-        properties: {
-          isRelatedToTopics: { type: "boolean" },
-        },
-        required: ["isRelatedToTopics"],
-      },
-    });
-    const { isRelatedToTopics } = z
-      .object({ isRelatedToTopics: z.boolean() })
-      .parse(JSON.parse(response.message.content));
-    if (!isRelatedToTopics) shouldKeep = false;
+        { role: "user", content: sample },
+      ];
+      const response = await ollama.chat({
+        model: "gemma3:12b",
+        messages: messages,
+        keep_alive: "5m",
+        format: { type: "boolean" },
+      });
+      if (response.message.content === "true") {
+        log(
+          `Keeping article ${article.title ?? article.url} because it is related to one of the topics`,
+        );
+        return true;
+      }
+    }
+  } else {
+    return true;
   }
 
-  //
+  return false;
+}
 
+const articleIds_ignored = new Set(
+  await cacheJson(
+    paths.filepath_articleIds_ignored,
+    z.array(z.string()),
+    async () => [],
+  ),
+);
+
+const articleIds = await paths.get_articleIds_new();
+
+for (const articleId of articleIds) {
+  log(`Filtering article: ${articleId}`);
+  const article = await readArticle_new(articleId);
+  if (!article) {
+    log(`Bad article: ${articleId}`);
+    try {
+      await renameFile(
+        paths.filepath_article_new(articleId),
+        paths.filepath_article_ignored(articleId),
+      );
+      await renameFile(
+        paths.filepath_article_new_metadata(articleId),
+        paths.filepath_article_ignored_metadata(articleId),
+      );
+    } catch (e: unknown) {
+      error(`Error when renaming bad article files: ${e}`);
+    }
+    continue;
+  }
+  const shouldKeep = await checkIfShouldKeepArticle(article);
   if (!shouldKeep) {
-    log(`ignoring article: ${articleId}`);
+    log(`Ignoring article: ${articleId}`);
     articleIds_ignored.add(articleId);
+    try {
+      await renameFile(
+        paths.filepath_article_new(articleId),
+        paths.filepath_article_ignored(articleId),
+      );
+      await renameFile(
+        paths.filepath_article_new_metadata(articleId),
+        paths.filepath_article_ignored_metadata(articleId),
+      );
+    } catch (e: unknown) {
+      error(`Error when renaming ignored article files: ${e}`);
+    }
+    continue;
+  }
+
+  log(`Keeping article: ${articleId}`);
+  try {
+    await renameFile(
+      paths.filepath_article_new(articleId),
+      paths.filepath_article(articleId),
+    );
+    await renameFile(
+      paths.filepath_article_new_metadata(articleId),
+      paths.filepath_article_metadata(articleId),
+    );
+  } catch (e: unknown) {
+    error(`Error when renaming kept article files: ${e}`);
   }
 }
 

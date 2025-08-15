@@ -1,7 +1,7 @@
-import { error } from "./console";
-import { readJsonFile, readTextFile } from "./file";
-import { Article, ArticleMetadata, ArticlePlus } from "./ontology";
-import paths from "./paths";
+import { error } from "../console";
+import { readJsonFile, readTextFile } from "../file";
+import { Article, ArticleMetadata, ArticlePlus } from "../ontology";
+import paths from "../paths";
 
 export async function readArticle(articleId: string): Promise<Article | null> {
   const parseResult_article = await readJsonFile(

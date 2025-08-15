@@ -1,5 +1,53 @@
 {
   "name": "Hacker News Top",
   "feedUrl": "https://hnrss.org/best",
-  "maxItems": 20
+  "maxItems": 30,
+  "filters": {
+    "topics": [
+      "programming languages",
+      "type theory",
+      "type system",
+      "haskell",
+      "AI",
+      "developer tools",
+      "video game development",
+      "functional programming",
+      "dev tools",
+      "rust",
+      "purescript",
+      "compilers",
+      "developer experience",
+      "category theory",
+      "liquid haskell",
+      "monad",
+      "metaprogramming",
+      "mac mini",
+      "logic programming",
+      "effect systems for purely functional programming langauges",
+      "typescript",
+      "ocaml",
+      "rust",
+      "purescript",
+      "compiler",
+      "mcp"
+    ],
+    "keywords": [
+      "haskell",
+      "functional",
+      "google",
+      "software",
+      "korea",
+      "japan",
+      "singapore",
+      "palantir",
+      "math",
+      "meta",
+      "gwern",
+      "type",
+      "lang",
+      "syntax",
+      "semantics",
+      "github"
+    ]
+  }
 }

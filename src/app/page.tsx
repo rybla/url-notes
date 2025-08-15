@@ -7,9 +7,6 @@ export default async function Page() {
     <div className={styles.Page}>
       <Header path={[<span key={0}>index</span>]} />
       <div className={styles.content}>
-        <div>
-          this is a test!
-        </div>
         <div className={styles.links}>
           <div className={styles.link}>
             <Link href="https://github.com/rybla/url-notes">source</Link>

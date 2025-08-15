@@ -1,8 +1,4 @@
-import {
-  generateSummary,
-  generateTags,
-  getMarkdownContent,
-} from "@/analysis/article";
+import { extractMarkdownContent } from "@/analysis/article/fetch";
 import { cacheText } from "@/analysis/cache";
 import { makeConsole } from "@/analysis/console";
 import { readJsonFile } from "@/analysis/file";
@@ -32,7 +28,7 @@ for (const articleId of articleIds) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const content = await cacheText(
       paths.filepath_article_content(articleId),
-      async () => await getMarkdownContent(article),
+      async () => await extractMarkdownContent(article),
     );
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

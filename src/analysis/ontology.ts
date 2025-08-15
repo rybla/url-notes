@@ -46,6 +46,7 @@ export const Article = z.object({
     .optional()
     .describe("A list of categorizational tags for the article content"),
   url: z.url().optional().describe("The URL of the article"),
+  rssFeedConfig: z.lazy(() => RssFeedConfig).optional(),
 });
 
 export type ArticleContent = z.infer<typeof ArticleContent>;
@@ -100,6 +101,12 @@ export const RssFeedConfig = z.object({
   name: z.string().nonempty(),
   feedUrl: z.url(),
   maxItems: z.optional(z.number().min(1)),
+  filters: z.optional(
+    z.object({
+      keywords: z.optional(z.array(z.string())),
+      topics: z.optional(z.array(z.string())),
+    }),
+  ),
 });
 
 /**

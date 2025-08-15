@@ -9,30 +9,32 @@ import {
 
 export async function cacheText(
   filepath: string,
-  initialize: () => Promise<string>,
-): Promise<string> {
+  initialize: () => Promise<string | null>,
+): Promise<string | null> {
   {
     const content = await readTextFile(filepath);
     if (content) {
-      log(`using cache: ${filepath}`);
+      log(`Using cache: ${filepath}`);
       return content;
     }
   }
   const content = await initialize();
+  log(`Failed to initialize cache: ${filepath}`);
+  if (content === null) return null;
   writeTextFile(filepath, content);
-  log(`initialized cache: ${filepath}`);
+  log(`Initializing cache: ${filepath}`);
   return content;
 }
 
 export async function cacheJson<A>(
   filepath: string,
   schema: z.ZodSchema<A>,
-  initialize: () => Promise<A>,
-): Promise<A> {
+  initialize: () => Promise<A | null | undefined>,
+): Promise<A | null> {
   {
     const result = await readJsonFile(filepath, schema);
     if (result) {
-      log(`using cache: ${filepath}`);
+      log(`Using cache: ${filepath}`);
       if (result.success) {
         return result.data;
       } else {
@@ -44,6 +46,7 @@ export async function cacheJson<A>(
   }
   const content = await initialize();
   writeJsonFile(filepath, content);
-  log(`initialized cache: ${filepath}`);
+  log(`Initialized cache: ${filepath}`);
+  if (content === null || content === undefined) return null;
   return content;
 }

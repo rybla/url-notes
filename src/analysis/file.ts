@@ -30,7 +30,11 @@ export async function readJsonFile<A>(
     return null;
   }
   // makes sure to still throw error if we cant even parse the JSON
-  return schema.safeParseAsync(JSON.parse(content));
+  try {
+    return schema.safeParseAsync(JSON.parse(content));
+  } catch (e) {
+    throw new Error(`Failed to parse JSON file ${filepath}: ${e}`);
+  }
 }
 
 export async function writeJsonFile(
@@ -41,4 +45,12 @@ export async function writeJsonFile(
   await fs.writeFile(filepath, JSON.stringify(data, null, 4), {
     encoding: "utf8",
   });
+}
+
+export async function renameFile(
+  filepath_source: string,
+  filepath_target: string,
+) {
+  await fs.mkdir(path.dirname(filepath_target), { recursive: true });
+  await fs.rename(filepath_source, filepath_target);
 }

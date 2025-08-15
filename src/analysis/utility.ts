@@ -66,3 +66,7 @@ export function normString(s: string | undefined): string | undefined {
 export function encodeURIComponent_v2(s: string): string {
   return encodeURIComponent(s.replaceAll(" ", "_"));
 }
+
+// export function any<A>(f: (x:A) => boolean, xs: A[]): boolean {
+
+// }
