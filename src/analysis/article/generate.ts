@@ -2,7 +2,7 @@ import * as ai from "../ai";
 import { Article } from "../ontology";
 
 const config = {
-  ai: false,
+  ai: true,
 };
 
 export async function generateSummary(
