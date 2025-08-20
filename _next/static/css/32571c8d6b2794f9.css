@@ -1,0 +1,1 @@
+:root{--spacing-unit:8px;--background-sidebar:gray;--box-shadow-panel:0 0 8px rgba(0,0,0,0.3);--dark-color:black}body,html{margin:0;padding:0;width:100svw;height:100svh;scroll-behavior:none;position:fixed;overflow:hidden}body{display:flex;flex-direction:column}*{box-sizing:border-box}p{margin:0;padding:0}
