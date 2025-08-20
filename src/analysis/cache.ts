@@ -19,8 +19,10 @@ export async function cacheText(
     }
   }
   const content = await initialize();
-  log(`Failed to initialize cache: ${filepath}`);
-  if (content === null) return null;
+  if (content === null) {
+    log(`Failed to initialize cache: ${filepath}`);
+    return null;
+  }
   writeTextFile(filepath, content);
   log(`Initializing cache: ${filepath}`);
   return content;

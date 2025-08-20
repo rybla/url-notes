@@ -5,7 +5,6 @@ import Header from "@/component/Header";
 export default async function Page() {
   return (
     <div className={styles.Page}>
-      <Header path={[<span key={0}>index</span>]} />
       <div className={styles.content}>
         <div className={styles.links}>
           <div className={styles.link}>
@@ -19,6 +18,7 @@ export default async function Page() {
           </div>
         </div>
       </div>
+      <Header path={[<span key={0}>index</span>]} />
     </div>
   );
 }

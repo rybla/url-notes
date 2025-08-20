@@ -53,7 +53,14 @@ export async function generateStaticParams(): Promise<Params[]> {
     }
   }
 
-  return Array.from(tags).map((tag) => ({ tag: encodeURIComponent(tag) }));
+  // TMP: disable tags
+  if (true) {
+    return Array.from(tags)
+      .slice(0, 1)
+      .map((tag) => ({ tag: encodeURIComponent(tag) }));
+  } else {
+    return Array.from(tags).map((tag) => ({ tag: encodeURIComponent(tag) }));
+  }
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {

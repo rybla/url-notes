@@ -1,3 +1,4 @@
+import { max_length_of_content_to_summarize } from "@/config";
 import * as ai from "../ai";
 import { Article } from "../ontology";
 
@@ -18,9 +19,9 @@ export async function generateSummary(
 
   const summary = (
     await ai.gemini(`
-Write a very concise and technical bullet-point overview of the following article. Use markdown syntax. Respond with JUST the overview.
+Write a very concise and technical bullet-point overview of the following ${content.length < max_length_of_content_to_summarize ? "article" : "article preview"}. Use markdown syntax. Respond with JUST the overview.
 
-${content.slice(0, 200000)}
+${content.slice(0, max_length_of_content_to_summarize)}
 `)
   ).trim();
   if (summary.length === 0) return null;
