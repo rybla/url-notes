@@ -1,7 +1,15 @@
 .Tag {
   display: inline-block;
-
-  color: var(--secondary-color);
-
+  color: var(--light-color);
+  background-color: var(--primary-color);
+  padding: calc(0.25 * var(--spacing-unit)) calc(0.75 * var(--spacing-unit));
+  border-radius: 12px;
   text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+  }
 }

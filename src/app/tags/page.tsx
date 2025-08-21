@@ -26,6 +26,7 @@ export default async function Page() {
         </LinkButton>,
       ]}
     >
+      <div className={styles.title}>Tags</div>
       <div className={styles.tags}>
         {Array.from(tags_all).map((tag, i) => (
           <div className={styles.tag} key={i}>

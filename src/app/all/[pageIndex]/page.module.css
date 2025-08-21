@@ -16,6 +16,7 @@
   height: var(--toolbar-size);
 
   background: var(--background-sidebar);
+  border-top: 1px solid #444;
 
   padding: 0 var(--spacing-unit);
 
@@ -41,5 +42,7 @@
     display: flex;
     flex-direction: row;
     gap: var(--spacing-unit);
+    color: var(--light-color);
+    font-size: 1rem;
   }
 }

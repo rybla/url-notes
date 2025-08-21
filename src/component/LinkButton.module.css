@@ -1,17 +1,27 @@
 .LinkButton {
   background-color: var(--background-button);
-
+  color: var(--color-button);
   padding: calc(0.5 * var(--spacing-unit)) var(--spacing-unit);
+  text-decoration: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+
   &.vertical {
     padding: var(--spacing-unit) calc(0.5 * var(--spacing-unit));
   }
 
-  color: var(--color-button);
-  text-decoration: none;
+  &:hover {
+    background-color: var(--secondary-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+  }
 
   &.disabled {
     color: var(--color-button-disabled);
     background-color: var(--background-button-disabled);
     cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
   }
 }
