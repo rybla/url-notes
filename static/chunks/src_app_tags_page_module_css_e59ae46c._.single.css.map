@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/app/tags/page.module.css"],"sourcesContent":[".tags {\n  flex: 1 1 0;\n  min-height: 0;\n  overflow-y: auto;\n  padding: calc(2 * var(--spacing-unit));\n  display: flex;\n  flex-direction: row; /* Changed to row for better tag layout */\n  flex-wrap: wrap; /* Allow tags to wrap */\n  gap: var(--spacing-unit);\n  align-content: flex-start;\n}\n"],"names":[],"mappings":"AAAA"}}]
-}
