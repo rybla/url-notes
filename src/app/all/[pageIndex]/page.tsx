@@ -118,7 +118,7 @@ export default async function Page(props: Props) {
           </LinkButton>
         </div>
         <div className={styles.location}>
-          page <FocusSpan>{pageIndex + 1}</FocusSpan> of {pageIndex_max + 1}
+          <FocusSpan>{pageIndex + 1}</FocusSpan>/{pageIndex_max + 1}
         </div>
       </div>
     </AppPage>
