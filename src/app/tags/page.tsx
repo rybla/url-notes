@@ -1,9 +1,8 @@
 import { readArticleTags } from "@/analysis/article";
 import paths from "@/analysis/paths";
 import AppPage from "@/component/AppPage";
-import Link from "next/link";
-import styles from "./page.module.css";
 import LinkButton from "@/component/LinkButton";
+import styles from "./page.module.css";
 
 export default async function Page() {
   const ids_all = await paths.get_articleIds();
