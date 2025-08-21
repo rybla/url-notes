@@ -1,0 +1,14 @@
+/* [project]/src/component/FocusSpan.module.css [app-client] (css) */
+.FocusSpan-module__IrJsIG__FocusSpan {
+  text-underline-offset: 4px;
+  -webkit-text-decoration-line: underline;
+  text-decoration-line: underline;
+  -webkit-text-decoration-style: dotted;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 2px;
+  -webkit-text-decoration-color: var(--color-border-dotted);
+  text-decoration-color: var(--color-border-dotted);
+  display: inline-block;
+}
+
+/*# sourceMappingURL=src_component_FocusSpan_module_css_e59ae46c._.single.css.map*/
