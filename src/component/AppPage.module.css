@@ -31,6 +31,7 @@
   display: inline-block;
   transform: rotate(180deg);
   font-family: var(--font-mono);
+  font-size: var(--toolbar-font-size);
 }
 
 .toolbar > .cornerstone {

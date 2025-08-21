@@ -25,6 +25,7 @@
   justify-content: space-between;
   border-top: 1px solid var(--color-border);
   background-color: transparent;
+  font-size: var(--toolbar-font-size);
 }
 
 .toolbar > .navigation {
