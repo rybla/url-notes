@@ -1,16 +1,18 @@
 .title {
   padding: var(--spacing-unit);
-  margin-bottom: var(--toolbar-size);
-
-  font-size: 2rem;
+  margin-bottom: calc(2 * var(--spacing-unit));
+  font-size: 2.5rem;
   font-weight: bold;
+  font-family: var(--font-mono);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--spacing-unit);
 }
 
 .links {
   padding: var(--spacing-unit);
-  margin-bottom: var(--toolbar-size);
-
+  margin-top: calc(2 * var(--spacing-unit));
   display: flex;
   flex-direction: column;
-  gap: calc(2 * var(--spacing-unit));
+  gap: var(--spacing-unit);
+  align-items: flex-start;
 }

@@ -2,9 +2,7 @@
   flex: 1 1 0;
   min-height: 0;
   overflow-y: auto;
-
-  padding: var(--spacing-unit);
-
+  padding: calc(2 * var(--spacing-unit));
   display: flex;
   flex-direction: column;
   gap: calc(2 * var(--spacing-unit));
@@ -12,34 +10,28 @@
 
 .toolbar {
   flex: 0 0 auto;
-
   height: var(--toolbar-size);
-
-  background: var(--background-sidebar);
-
   padding: 0 var(--spacing-unit);
-
   display: flex;
   flex-direction: row;
   align-items: center;
-
   justify-content: space-between;
+  border-top: 1px solid var(--color-border);
+  background-color: transparent;
+}
 
-  & > .navigation {
-    padding: var(--spacing-unit);
+.toolbar > .navigation {
+  padding: var(--spacing-unit);
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-unit);
+}
 
-    display: flex;
-    flex-direction: row;
-    gap: var(--spacing-unit);
-  }
-
-  & > .location {
-    justify-self: flex-end;
-
-    padding: var(--spacing-unit);
-
-    display: flex;
-    flex-direction: row;
-    gap: var(--spacing-unit);
-  }
+.toolbar > .location {
+  justify-self: flex-end;
+  padding: var(--spacing-unit);
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-unit);
+  font-family: var(--font-mono);
 }

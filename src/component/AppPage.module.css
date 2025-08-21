@@ -1,50 +1,52 @@
 .AppPage {
   flex: 1 1 0;
   min-height: 0;
-
   display: flex;
   flex-direction: row;
+  border-top: 1px solid var(--color-border);
 }
 
 .toolbar {
   flex: 0 0 auto;
-
   width: var(--toolbar-size);
-
   background: var(--background-sidebar);
-
+  border-right: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  background-color: transparent;
+}
 
-  & > .navigation {
-    padding: var(--spacing-unit) 0;
+.toolbar > .navigation {
+  padding: var(--spacing-unit) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-unit);
+}
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-unit);
+.toolbar > .navigation > .item {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  display: inline-block;
+  transform: rotate(180deg);
+  font-family: var(--font-mono);
+  padding: var(--spacing-unit);
+}
 
-    & > .item {
-      writing-mode: vertical-lr;
-      text-orientation: mixed;
-      display: inline-block;
-      transform: rotate(180deg);
-    }
-  }
-
-  & > .cornerstone {
-    background-color: var(--dark-color);
-    height: var(--toolbar-size);
-    width: var(--toolbar-size);
-  }
+.toolbar > .cornerstone {
+  background-color: transparent;
+  height: var(--toolbar-size);
+  width: var(--toolbar-size);
+  border-top: 1px solid var(--color-border);
 }
 
 .main {
   flex: 1 1 0;
   min-width: 0;
-
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start; /* Changed to start */
+  padding: calc(2 * var(--spacing-unit));
+  overflow-y: auto;
 }

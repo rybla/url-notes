@@ -1,17 +1,33 @@
 .LinkButton {
-  background-color: var(--background-button);
-
+  display: inline-block;
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
   padding: calc(0.5 * var(--spacing-unit)) var(--spacing-unit);
-  &.vertical {
-    padding: var(--spacing-unit) calc(0.5 * var(--spacing-unit));
-  }
-
-  color: var(--color-button);
   text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  background-color: transparent;
+}
 
-  &.disabled {
-    color: var(--color-button-disabled);
-    background-color: var(--background-button-disabled);
-    cursor: not-allowed;
-  }
+.LinkButton:hover {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.LinkButton.vertical {
+  padding: var(--spacing-unit) calc(0.5 * var(--spacing-unit));
+}
+
+.LinkButton.disabled {
+  color: var(--color-button-disabled);
+  background-color: var(--background-button-disabled);
+  border-color: var(--color-border);
+  cursor: not-allowed;
+}
+
+.LinkButton.disabled:hover {
+  background-color: var(--background-button-disabled);
+  color: var(--color-button-disabled);
+  border-color: var(--color-border);
 }

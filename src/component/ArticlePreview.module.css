@@ -1,36 +1,44 @@
 .ArticlePreview {
-  padding: var(--spacing-unit);
-
+  padding: calc(2 * var(--spacing-unit));
   display: flex;
   flex-direction: column;
   gap: var(--spacing-unit);
+  border: 1px dotted var(--color-border-dotted);
+  border-radius: 4px;
+  margin-bottom: calc(2 * var(--spacing-unit)); /* Add some space between articles */
+}
 
-  & > .title {
-    & > a {
-      text-decoration: none;
-    }
-  }
+.ArticlePreview > .title > a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-primary);
+}
 
-  & > .tags {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: var(--spacing-unit);
-  }
+.ArticlePreview > .title > a:hover {
+  text-decoration: underline;
+}
 
-  & > .addedDate {
-    text-align: right;
-    font-style: italic;
-  }
+.ArticlePreview > .tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--spacing-unit);
+}
 
-  & > .publishedTime {
-    text-align: right;
-    font-style: italic;
-  }
+.ArticlePreview > .addedDate,
+.ArticlePreview > .publishedTime {
+  text-align: right;
+  font-style: italic;
+  font-size: 0.8rem;
+  color: #666;
+  font-family: var(--font-mono);
+}
 
-  & > .summary {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--spacing-unit));
-  }
+.ArticlePreview > .summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-unit);
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
