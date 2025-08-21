@@ -1,24 +1,30 @@
-import Link from "next/link";
+import AppPage from "@/component/AppPage";
+import LinkButton from "@/component/LinkButton";
 import styles from "./page.module.css";
-import Header from "@/component/Header";
 
 export default async function Page() {
   return (
-    <div className={styles.Page}>
-      <Header path={[<span key={0}>index</span>]} />
-      <div className={styles.content}>
-        <div className={styles.links}>
-          <div className={styles.link}>
-            <Link href="https://github.com/rybla/url-notes">source</Link>
-          </div>
-          <div className={styles.link}>
-            <Link href="/all/0">all</Link>
-          </div>
-          <div className={styles.link}>
-            <Link href="/tags">tags</Link>
-          </div>
+    <AppPage
+      path={[
+        <LinkButton href="/" vertical={true} key={0}>
+          index
+        </LinkButton>,
+      ]}
+    >
+      <div className={styles.title}>url-notes</div>
+      <div className={styles.links}>
+        <div className={styles.link}>
+          <LinkButton href="https://github.com/rybla/url-notes">
+            source
+          </LinkButton>
+        </div>
+        <div className={styles.link}>
+          <LinkButton href="/tags">tags</LinkButton>
+        </div>
+        <div className={styles.link}>
+          <LinkButton href="/all/0">all</LinkButton>
         </div>
       </div>
-    </div>
+    </AppPage>
   );
 }

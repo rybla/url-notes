@@ -1,7 +1,7 @@
 import { ArticlePreview } from "@/analysis/ontology";
-import styles from "./ArticlePreview.module.css";
 import Link from "next/link";
 import Markdown from "react-markdown";
+import styles from "./ArticlePreview.module.css";
 
 export default function ArticlePreviewComponent(props: {
   preview: ArticlePreview;
@@ -16,7 +16,11 @@ export default function ArticlePreviewComponent(props: {
       {props.preview.tags && (
         <div className={styles.tags}>
           {props.preview.tags.map((tag, j) => (
-            <Link className={styles.tag} key={j} href={`/tag/${encodeURIComponent(tag)}`}>
+            <Link
+              className={styles.tag}
+              key={j}
+              href={`/tag/${encodeURIComponent(tag)}`}
+            >
               {tag}
             </Link>
           ))}

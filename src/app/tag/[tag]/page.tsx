@@ -6,11 +6,11 @@ import {
 import { ArticlePreview } from "@/analysis/ontology";
 import paths from "@/analysis/paths";
 import ArticlePreviewComponent from "@/component/ArticlePreview";
+import LinkButton from "@/component/LinkButton";
 import { Metadata } from "next";
-import styles from "./page.module.css";
 import { cache } from "react";
-import Link from "next/link";
-import Header from "@/component/Header";
+import styles from "./page.module.css";
+import AppPage from "@/component/AppPage";
 
 type Params = {
   tag: string;
@@ -80,18 +80,17 @@ export default async function Page(props: Props) {
   );
 
   return (
-    <div className={styles.Page}>
-      <Header
-        path={[
-          <Link key={0} href="/tags">
-            tag
-          </Link>,
-          <Link key={1} href="/tags">
-            tag
-          </Link>,
-          <span key={2}>{tag}</span>,
-        ]}
-      />
+    <AppPage
+      path={[
+        <LinkButton key={0} vertical={true} href="/tags">
+          tag
+        </LinkButton>,
+        <LinkButton key={1} vertical={true} href="/tags">
+          tag
+        </LinkButton>,
+        <span key={2}>{tag}</span>,
+      ]}
+    >
       <div className={styles.content}>
         <div className={styles.previews}>
           {previews.map((preview, i) => (
@@ -99,6 +98,6 @@ export default async function Page(props: Props) {
           ))}
         </div>
       </div>
-    </div>
+    </AppPage>
   );
 }

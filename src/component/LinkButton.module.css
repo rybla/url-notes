@@ -1,0 +1,17 @@
+.LinkButton {
+  background-color: var(--background-button);
+
+  padding: calc(0.5 * var(--spacing-unit)) var(--spacing-unit);
+  &.vertical {
+    padding: var(--spacing-unit) calc(0.5 * var(--spacing-unit));
+  }
+
+  color: var(--color-button);
+  text-decoration: none;
+
+  &.disabled {
+    color: var(--color-button-disabled);
+    background-color: var(--background-button-disabled);
+    cursor: not-allowed;
+  }
+}

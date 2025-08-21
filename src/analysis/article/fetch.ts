@@ -49,7 +49,6 @@ export async function fetchArticle(url: string): Promise<Article | null> {
 
     // special case: pdf
     const pdfData = await fetchPdfText(url);
-
     if (pdfData !== null) {
       if (pdfData.text === undefined) return null;
       return {
@@ -80,6 +79,11 @@ export async function fetchArticle(url: string): Promise<Article | null> {
       acc[key] = value === null ? undefined : value;
       return acc;
     }, {} as Article);
+    // article.summary = article.summary === undefined ? undefined : article.summary;
+    if (article.summary !== undefined && article.summary.length < 10)
+      article.summary = undefined;
+    if (article.tags !== undefined && article.tags.length === 0)
+      article.tags = undefined;
     article.url = url;
     return article;
   } catch (e) {

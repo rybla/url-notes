@@ -1,8 +1,9 @@
+import { readArticleTags } from "@/analysis/article";
+import paths from "@/analysis/paths";
+import AppPage from "@/component/AppPage";
 import Link from "next/link";
 import styles from "./page.module.css";
-import paths from "@/analysis/paths";
-import { readArticleTags } from "@/analysis/article";
-import Header from "@/component/Header";
+import LinkButton from "@/component/LinkButton";
 
 export default async function Page() {
   const ids_all = await paths.get_articleIds();
@@ -16,17 +17,23 @@ export default async function Page() {
   }
 
   return (
-    <div className={styles.Page}>
-      <Header path={[<span key={0}>tags</span>]} />
-      <div className={styles.content}>
-        <div className={styles.tags}>
-          {Array.from(tags_all).map((tag, i) => (
-            <div className={styles.tag} key={i}>
-              <Link href={`/tag/${tag}`}>{tag}</Link>
-            </div>
-          ))}
-        </div>
+    <AppPage
+      path={[
+        <LinkButton href="/" vertical={true} key={0}>
+          index
+        </LinkButton>,
+        <LinkButton href="/tags" vertical={true} key={1}>
+          tags
+        </LinkButton>,
+      ]}
+    >
+      <div className={styles.tags}>
+        {Array.from(tags_all).map((tag, i) => (
+          <div className={styles.tag} key={i}>
+            <LinkButton href={`/tag/${tag}`}>{tag}</LinkButton>
+          </div>
+        ))}
       </div>
-    </div>
+    </AppPage>
   );
 }

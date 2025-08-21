@@ -1,0 +1,16 @@
+.title {
+  padding: var(--spacing-unit);
+  margin-bottom: var(--toolbar-size);
+
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.links {
+  padding: var(--spacing-unit);
+  margin-bottom: var(--toolbar-size);
+
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--spacing-unit));
+}

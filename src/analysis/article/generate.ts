@@ -52,7 +52,8 @@ ${summary}
     )
   )
     .split(",")
-    .map((s) => s.trim().toLowerCase());
+    .map((s) => s.trim().toLowerCase())
+    .filter((s) => s.length > 1);
   if (
     tags.length === 0 &&
     (article.tags === undefined || article.tags.length === 0)

@@ -67,6 +67,11 @@ export function encodeURIComponent_v2(s: string): string {
   return encodeURIComponent(s.replaceAll(" ", "_"));
 }
 
-// export function any<A>(f: (x:A) => boolean, xs: A[]): boolean {
-
-// }
+export function intercalate<A>(sep: (i: number) => A[], xs: A[]): A[] {
+  const ys = [];
+  for (let i = 0; i < xs.length; i++) {
+    if (i > 0) ys.push(...sep(i - 1));
+    ys.push(xs[i]);
+  }
+  return ys;
+}

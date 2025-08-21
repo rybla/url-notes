@@ -3,14 +3,14 @@ import {
   readArticleSummary,
   readArticleTags,
 } from "@/analysis/article";
-import paths from "@/analysis/paths";
-import ArticlePreviewComponent from "@/component/ArticlePreview";
-import { Metadata } from "next";
-import Link from "next/link";
-import styles from "./page.module.css";
 import { ArticlePreview } from "@/analysis/ontology";
+import paths from "@/analysis/paths";
+import AppPage from "@/component/AppPage";
+import ArticlePreviewComponent from "@/component/ArticlePreview";
+import LinkButton from "@/component/LinkButton";
+import { Metadata } from "next";
 import { cache } from "react";
-import Header from "@/component/Header";
+import styles from "./page.module.css";
 
 const config = {
   articles_per_page: 10,
@@ -83,50 +83,40 @@ export default async function Page(props: Props) {
   );
 
   return (
-    <div className={styles.Page}>
-      <Header
-        path={[
-          <Link href="/all/0" key={0}>
-            all
-          </Link>,
-          <span key={1}>
-            page {pageIndex + 1} of {pageIndex_max + 1}
-          </span>,
-        ]}
-      />
-      <div className={styles.content}>
-        <div className={styles.previews}>
-          {previews.map((preview, i) => (
-            <ArticlePreviewComponent key={i} preview={preview} />
-          ))}
+    <AppPage
+      path={[
+        <LinkButton href="/" vertical={true} key={0}>
+          index
+        </LinkButton>,
+        <LinkButton href="/all/0" vertical={true} key={0}>
+          all
+        </LinkButton>,
+      ]}
+    >
+      <div className={styles.previews}>
+        {previews.map((preview, i) => (
+          <ArticlePreviewComponent key={i} preview={preview} />
+        ))}
+      </div>
+      <div className={styles.toolbar}>
+        <div className={styles.navigation}>
+          <LinkButton
+            href={`/all/${Number(params.pageIndex) - 1}`}
+            disabled={!(0 < Number(params.pageIndex))}
+          >
+            newer
+          </LinkButton>
+          <LinkButton
+            href={`/all/${Number(params.pageIndex) + 1}`}
+            disabled={!(Number(params.pageIndex) < pageIndex_max)}
+          >
+            older
+          </LinkButton>
+        </div>
+        <div className={styles.location}>
+          page {pageIndex + 1} of {pageIndex_max + 1}
         </div>
       </div>
-      <div className={styles.controls}>
-        {0 < Number(params.pageIndex) ? (
-          <Link
-            className={styles.button}
-            href={`/all/${Number(params.pageIndex) - 1}`}
-          >
-            newer
-          </Link>
-        ) : (
-          <div className={[styles.button, styles.disabled].join(" ")}>
-            newer
-          </div>
-        )}
-        {Number(params.pageIndex) < pageIndex_max ? (
-          <Link
-            className={styles.button}
-            href={`/all/${Number(params.pageIndex) + 1}`}
-          >
-            older
-          </Link>
-        ) : (
-          <div className={[styles.button, styles.disabled].join(" ")}>
-            older
-          </div>
-        )}
-      </div>
-    </div>
+    </AppPage>
   );
 }

@@ -1,0 +1,25 @@
+.ArticlePreview {
+  padding: var(--spacing-unit);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-unit);
+
+  & > .title {
+  }
+
+  & > .tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  & > .tag {
+  }
+
+  & > .summary {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing-unit));
+  }
+}

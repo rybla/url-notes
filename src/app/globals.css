@@ -1,3 +1,39 @@
 :root {
+  --spacing-unit: 8px;
+  --background-sidebar: gray;
+  --box-shadow-panel: 0 0 8px rgba(0, 0, 0, 0.3);
+  --dark-color: black;
+  --background-button: blue;
+  --color-button: white;
+  --background-button-disabled: black;
+  --color-button-disabled: lightgray;
 
+  --toolbar-size: calc(5 * var(--spacing-unit));
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100svw;
+  height: 100svh;
+
+  scroll-behavior: none;
+  position: fixed;
+  overflow: hidden;
+}
+
+ul,
+ol {
+  /*list-style-type: none;*/
+  margin-left: 2em;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
 }
