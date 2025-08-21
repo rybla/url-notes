@@ -1,9 +1,20 @@
 :root {
+  /* spacing */
   --spacing-unit: 8px;
-  --background-sidebar: gray;
-  --box-shadow-panel: 0 0 8px rgba(0, 0, 0, 0.3);
+
+  /* basic colors */
   --dark-color: black;
-  --background-button: blue;
+  --primary-color: blue;
+  --secondary-color: purple;
+
+  /* sidebar */
+  --background-sidebar: gray;
+
+  /* panel */
+  --box-shadow-panel: 0 0 8px rgba(0, 0, 0, 0.3);
+
+  /* button */
+  --background-button: var(--primary-color);
   --color-button: white;
   --background-button-disabled: black;
   --color-button-disabled: lightgray;

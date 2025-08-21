@@ -6,15 +6,26 @@
   gap: var(--spacing-unit);
 
   & > .title {
+    & > a {
+      text-decoration: none;
+    }
   }
 
   & > .tags {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: var(--spacing-unit);
   }
 
-  & > .tag {
+  & > .addedDate {
+    text-align: right;
+    font-style: italic;
+  }
+
+  & > .publishedTime {
+    text-align: right;
+    font-style: italic;
   }
 
   & > .summary {

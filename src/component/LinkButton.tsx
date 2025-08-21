@@ -18,7 +18,7 @@ export default function LinkButton(props: {
         ]
           .flatMap((s) => s)
           .join(" ")}
-        href={props.href}
+        href={props.disabled ? "#" : props.href}
       >
         {props.children}
       </Link>

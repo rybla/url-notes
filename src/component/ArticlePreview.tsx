@@ -2,6 +2,8 @@ import { ArticlePreview } from "@/analysis/ontology";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import styles from "./ArticlePreview.module.css";
+import { formatDate } from "@/analysis/utility";
+import Tag from "./Tag";
 
 export default function ArticlePreviewComponent(props: {
   preview: ArticlePreview;
@@ -16,16 +18,22 @@ export default function ArticlePreviewComponent(props: {
       {props.preview.tags && (
         <div className={styles.tags}>
           {props.preview.tags.map((tag, j) => (
-            <Link
-              className={styles.tag}
-              key={j}
-              href={`/tag/${encodeURIComponent(tag)}`}
-            >
-              {tag}
-            </Link>
+            <Tag tag={tag} key={j} />
           ))}
         </div>
       )}
+      {props.preview.metadata.publishedTime && (
+        <div className={styles.publishedTime}>
+          {"published: "}
+          {props.preview.metadata.publishedTime instanceof Date
+            ? formatDate(props.preview.metadata.publishedTime)
+            : props.preview.metadata.publishedTime}
+        </div>
+      )}
+      <div className={styles.addedDate}>
+        {"added: "}
+        {props.preview.metadata.addedDate}
+      </div>
       {props.preview.summary && (
         <div className={styles.summary}>
           <Markdown>{props.preview.summary}</Markdown>
