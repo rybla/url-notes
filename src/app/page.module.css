@@ -10,7 +10,9 @@
 }
 
 .description {
-  flex: 0 0 auto;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: auto;
 
   padding: var(--spacing-unit);
   font-size: 1rem;
@@ -21,8 +23,7 @@
 }
 
 .links {
-  flex: 1 1 0;
-  min-height: 0;
+  flex: 0 0 auto;
 
   padding: var(--spacing-unit);
   margin-top: calc(2 * var(--spacing-unit));
@@ -31,5 +32,5 @@
   gap: var(--spacing-unit);
   align-items: flex-start;
   justify-content: flex-end;
-  margin-bottom: var(--toolbar-size);
+  /*margin-bottom: var(--toolbar-size);*/
 }

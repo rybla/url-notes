@@ -22,7 +22,7 @@ This web app is the interface for viewing the compiled results from an automated
         <br />
         <p>
           {trim(`
-My intended use for this setup is to have a central feed that I can fully configure (both manually and automatically) to fill with content I'm interested in but also do some specialized analysis so that I can get a preview of the content before spending the time to start reading it. It just takes too much time to wade through my RSS feeds one item at a time, so this is my solution.
+My intended use for this setup is to have a central feed that I can fully configure (both manually and automatically) to fill with content I'm interested in but also do some specialized analysis so that I can get a preview of the content before spending the time to start reading it. It just takes too much time to wade through my RSS feeds one item at a time. I need a way to skim effectively to find the posts I'm especially interested in, so that I'm not ever hesitant to dump something into the list that could potentially be interesting for fear of it clogging up the feed.
 `)}
         </p>
         <br />
