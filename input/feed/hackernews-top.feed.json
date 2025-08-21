@@ -29,7 +29,9 @@
       "rust",
       "purescript",
       "compiler",
-      "mcp"
+      "mcp",
+      "prediction market",
+      "homotopy"
     ],
     "keywords": [
       "haskell",
