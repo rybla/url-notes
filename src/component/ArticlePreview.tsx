@@ -4,6 +4,7 @@ import Markdown from "react-markdown";
 import styles from "./ArticlePreview.module.css";
 import { formatDate } from "@/analysis/utility";
 import Tag from "./Tag";
+import LinkButton from "./LinkButton";
 
 export default function ArticlePreviewComponent(props: {
   preview: ArticlePreview;
@@ -35,6 +36,11 @@ export default function ArticlePreviewComponent(props: {
           <Markdown>{props.preview.summary}</Markdown>
         </div>
       )}
+      <div className={styles.footer}>
+        <LinkButton href={props.preview.metadata.url} target="_blank">
+          🔗
+        </LinkButton>
+      </div>
     </div>
   );
 }

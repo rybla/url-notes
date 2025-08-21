@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ReactNode } from "react";
+import { HTMLAttributeAnchorTarget, ReactNode } from "react";
 import styles from "./LinkButton.module.css";
 
 export default function LinkButton(props: {
@@ -7,6 +7,7 @@ export default function LinkButton(props: {
   disabled?: boolean;
   vertical?: boolean;
   children: ReactNode;
+  target?: HTMLAttributeAnchorTarget;
 }) {
   return (
     <Link
@@ -18,6 +19,7 @@ export default function LinkButton(props: {
         .flatMap((s) => s)
         .join(" ")}
       href={props.disabled ? "#" : props.href}
+      target={props.target}
     >
       {props.children}
     </Link>
