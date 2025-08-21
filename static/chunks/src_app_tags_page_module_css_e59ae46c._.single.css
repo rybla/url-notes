@@ -1,0 +1,13 @@
+/* [project]/src/app/tags/page.module.css [app-client] (css) */
+.page-module__E5h5ua__tags {
+  min-height: 0;
+  padding: calc(2 * var(--spacing-unit));
+  gap: var(--spacing-unit);
+  flex-flow: wrap;
+  flex: 1 1 0;
+  align-content: flex-start;
+  display: flex;
+  overflow-y: auto;
+}
+
+/*# sourceMappingURL=src_app_tags_page_module_css_e59ae46c._.single.css.map*/

@@ -1,0 +1,114 @@
+/* [project]/src/component/AppPage.module.css [app-client] (css) */
+.AppPage-module__r3Htna__AppPage {
+  border-top: 1px solid var(--color-border);
+  flex-direction: row;
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+}
+
+.AppPage-module__r3Htna__toolbar {
+  width: var(--toolbar-size);
+  background: var(--background-sidebar);
+  border-right: 1px solid var(--color-border);
+  background-color: rgba(0, 0, 0, 0);
+  flex-direction: column;
+  flex: none;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.AppPage-module__r3Htna__toolbar > .AppPage-module__r3Htna__navigation {
+  padding: var(--spacing-unit) 0;
+  align-items: center;
+  gap: var(--spacing-unit);
+  flex-direction: column;
+  display: flex;
+}
+
+.AppPage-module__r3Htna__toolbar > .AppPage-module__r3Htna__navigation > .AppPage-module__r3Htna__item {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  font-family: var(--font-mono);
+  display: inline-block;
+  transform: rotate(180deg);
+}
+
+.AppPage-module__r3Htna__toolbar > .AppPage-module__r3Htna__cornerstone {
+  height: var(--toolbar-size);
+  width: var(--toolbar-size);
+  border-top: 1px solid var(--color-border);
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.AppPage-module__r3Htna__main {
+  flex-direction: column;
+  flex: 1 1 0;
+  justify-content: flex-start;
+  min-width: 0;
+  display: flex;
+  overflow-y: auto;
+}
+
+/* [project]/src/component/LinkButton.module.css [app-client] (css) */
+.LinkButton-module___dH1Ra__LinkButton {
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+  padding: calc(.5 * var(--spacing-unit)) var(--spacing-unit);
+  background-color: rgba(0, 0, 0, 0);
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+  display: inline-block;
+}
+
+.LinkButton-module___dH1Ra__LinkButton:hover {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+  text-decoration: none;
+}
+
+.LinkButton-module___dH1Ra__LinkButton.LinkButton-module___dH1Ra__vertical {
+  padding: var(--spacing-unit) calc(.5 * var(--spacing-unit));
+}
+
+.LinkButton-module___dH1Ra__LinkButton.LinkButton-module___dH1Ra__disabled {
+  color: var(--color-button-disabled);
+  background-color: var(--background-button-disabled);
+  border-color: var(--color-border);
+  cursor: not-allowed;
+}
+
+.LinkButton-module___dH1Ra__LinkButton.LinkButton-module___dH1Ra__disabled:hover {
+  background-color: var(--background-button-disabled);
+  color: var(--color-button-disabled);
+  border-color: var(--color-border);
+}
+
+/* [project]/src/app/page.module.css [app-client] (css) */
+.page-module___8aEwW__title {
+  padding: var(--spacing-unit);
+  margin-bottom: calc(2 * var(--spacing-unit));
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-family: var(--font-mono);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--spacing-unit);
+  flex: none;
+}
+
+.page-module___8aEwW__links {
+  min-height: 0;
+  padding: var(--spacing-unit);
+  margin-top: calc(2 * var(--spacing-unit));
+  gap: var(--spacing-unit);
+  margin-bottom: var(--toolbar-size);
+  flex-direction: column;
+  flex: 1 1 0;
+  justify-content: flex-end;
+  align-items: flex-start;
+  display: flex;
+}
+
+/*# sourceMappingURL=src_819e901c._.css.map*/
