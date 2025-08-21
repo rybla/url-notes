@@ -30,10 +30,6 @@ export default function ArticlePreviewComponent(props: {
             : props.preview.metadata.publishedTime}
         </div>
       )}
-      <div className={styles.addedDate}>
-        {"added: "}
-        {props.preview.metadata.addedDate}
-      </div>
       {props.preview.summary && (
         <div className={styles.summary}>
           <Markdown>{props.preview.summary}</Markdown>

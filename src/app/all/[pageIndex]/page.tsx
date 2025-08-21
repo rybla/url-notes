@@ -11,6 +11,7 @@ import LinkButton from "@/component/LinkButton";
 import { Metadata } from "next";
 import { cache } from "react";
 import styles from "./page.module.css";
+import FocusSpan from "@/component/FocusSpan";
 
 const config = {
   articles_per_page: 10,
@@ -94,9 +95,12 @@ export default async function Page(props: Props) {
       ]}
     >
       <div className={styles.previews}>
-        {previews.map((preview, i) => (
-          <ArticlePreviewComponent key={i} preview={preview} />
-        ))}
+        {previews.flatMap((preview, i) => [
+          <div className={styles.addedDate} key={`sep-${i}`}>
+            {preview.metadata.addedDate}
+          </div>,
+          <ArticlePreviewComponent key={i} preview={preview} />,
+        ])}
       </div>
       <div className={styles.toolbar}>
         <div className={styles.navigation}>
@@ -114,7 +118,7 @@ export default async function Page(props: Props) {
           </LinkButton>
         </div>
         <div className={styles.location}>
-          page {pageIndex + 1} of {pageIndex_max + 1}
+          page <FocusSpan>{pageIndex + 1}</FocusSpan> of {pageIndex_max + 1}
         </div>
       </div>
     </AppPage>

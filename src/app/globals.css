@@ -7,8 +7,9 @@
   /* new color palette */
   --color-background: #fafafa;
   --color-text: #222222;
-  --color-primary: #007acc; /* A nice blue */
-  --color-secondary: #ff8c00; /* A complementary orange */
+  --color-primary: #6500e8;
+  --color-secondary: #945100;
+  --color-terciary: #666;
   --color-border: #dddddd;
   --color-border-dotted: #aaaaaa;
   --color-shadow: rgba(0, 0, 0, 0.1);

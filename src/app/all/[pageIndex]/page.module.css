@@ -8,6 +8,13 @@
   gap: calc(2 * var(--spacing-unit));
 }
 
+.addedDate {
+  text-align: right;
+  font-size: 1rem;
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+}
+
 .toolbar {
   flex: 0 0 auto;
   height: var(--toolbar-size);
@@ -28,10 +35,13 @@
 }
 
 .toolbar > .location {
+  font-style: italic;
+  color: var(--color-terciary);
   justify-self: flex-end;
   padding: var(--spacing-unit);
   display: flex;
   flex-direction: row;
   gap: var(--spacing-unit);
   font-family: var(--font-mono);
+  line-height: 7px;
 }
