@@ -12,6 +12,7 @@
   width: var(--toolbar-size);
 
   background: var(--background-sidebar);
+  border-right: 1px solid var(--primary-color);
 
   display: flex;
   flex-direction: column;
@@ -30,11 +31,12 @@
       text-orientation: mixed;
       display: inline-block;
       transform: rotate(180deg);
+      color: var(--secondary-color);
     }
   }
 
   & > .cornerstone {
-    background-color: var(--dark-color);
+    background-color: var(--primary-color);
     height: var(--toolbar-size);
     width: var(--toolbar-size);
   }

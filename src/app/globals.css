@@ -1,23 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
 :root {
   /* spacing */
   --spacing-unit: 8px;
 
   /* basic colors */
-  --dark-color: black;
-  --primary-color: blue;
-  --secondary-color: purple;
+  --dark-color: #0d1117;
+  --primary-color: #39ff14;
+  --secondary-color: #3d9970;
+  --text-color: #c9d1d9;
 
   /* sidebar */
-  --background-sidebar: gray;
+  --background-sidebar: #161b22;
 
   /* panel */
-  --box-shadow-panel: 0 0 8px rgba(0, 0, 0, 0.3);
+  --box-shadow-panel: 0 0 15px rgba(57, 255, 20, 0.2);
 
   /* button */
   --background-button: var(--primary-color);
-  --color-button: white;
-  --background-button-disabled: black;
-  --color-button-disabled: lightgray;
+  --color-button: var(--dark-color);
+  --background-button-disabled: #21262d;
+  --color-button-disabled: #8b949e;
 
   --toolbar-size: calc(5 * var(--spacing-unit));
 }
@@ -47,4 +50,7 @@ ol {
 body {
   display: flex;
   flex-direction: column;
+  font-family: "Space Mono", monospace;
+  background-color: var(--dark-color);
+  color: var(--text-color);
 }
