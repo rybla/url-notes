@@ -9,19 +9,17 @@ export default function LinkButton(props: {
   children: ReactNode;
 }) {
   return (
-    <div>
-      <Link
-        className={[
-          [styles.LinkButton],
-          props.disabled ? [styles.disabled] : [],
-          props.vertical ? [styles.vertical] : [],
-        ]
-          .flatMap((s) => s)
-          .join(" ")}
-        href={props.disabled ? "#" : props.href}
-      >
-        {props.children}
-      </Link>
-    </div>
+    <Link
+      className={[
+        [styles.LinkButton],
+        props.disabled ? [styles.disabled] : [],
+        props.vertical ? [styles.vertical] : [],
+      ]
+        .flatMap((s) => s)
+        .join(" ")}
+      href={props.disabled ? "#" : props.href}
+    >
+      {props.children}
+    </Link>
   );
 }

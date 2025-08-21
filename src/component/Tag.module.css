@@ -9,7 +9,3 @@
   font-family: var(--font-mono);
   transition: background-color 0.2s ease-in-out;
 }
-
-.Tag:hover {
-  background-color: #333; /* A darker shade for hover */
-}

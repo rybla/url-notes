@@ -13,17 +13,11 @@ export default async function Page() {
     >
       <div className={styles.title}>url-notes</div>
       <div className={styles.links}>
-        <div className={styles.link}>
-          <LinkButton href="https://github.com/rybla/url-notes">
-            source
-          </LinkButton>
-        </div>
-        <div className={styles.link}>
-          <LinkButton href="/tags">tags</LinkButton>
-        </div>
-        <div className={styles.link}>
-          <LinkButton href="/all/0">all</LinkButton>
-        </div>
+        <LinkButton href="https://github.com/rybla/url-notes">
+          source
+        </LinkButton>
+        <LinkButton href="/tags">tags</LinkButton>
+        <LinkButton href="/all/0">all</LinkButton>
       </div>
     </AppPage>
   );

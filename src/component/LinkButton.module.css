@@ -13,6 +13,7 @@
   background-color: var(--color-primary);
   color: white;
   border-color: var(--color-primary);
+  text-decoration: none;
 }
 
 .LinkButton.vertical {

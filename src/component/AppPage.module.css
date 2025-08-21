@@ -31,7 +31,6 @@
   display: inline-block;
   transform: rotate(180deg);
   font-family: var(--font-mono);
-  padding: var(--spacing-unit);
 }
 
 .toolbar > .cornerstone {
@@ -47,6 +46,5 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Changed to start */
-  padding: calc(2 * var(--spacing-unit));
   overflow-y: auto;
 }
