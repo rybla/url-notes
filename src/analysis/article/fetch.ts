@@ -4,6 +4,10 @@ import { PdfData, VerbosityLevel } from "pdfdataextract";
 import TurndownService from "turndown";
 import { error, log } from "../console";
 import { Article } from "../ontology";
+import {
+  max_length_of_textContent_to_use_as_summary,
+  min_length_of_summary,
+} from "@/config";
 
 /**
  * Extracts an article from the HTML page at a given URL.
@@ -79,9 +83,28 @@ export async function fetchArticle(url: string): Promise<Article | null> {
       acc[key] = value === null ? undefined : value;
       return acc;
     }, {} as Article);
-    // article.summary = article.summary === undefined ? undefined : article.summary;
-    if (article.summary !== undefined && article.summary.length < 10)
+    // if the article summary is too short, then it's probably a placeholder so
+    // don't use it
+    if (
+      article.summary !== undefined &&
+      article.summary.length < min_length_of_summary
+    )
       article.summary = undefined;
+    // if there is no summary, but the content is short, then just use the
+    // content as the summary
+    if (
+      article.summary === undefined &&
+      article.textContent !== undefined &&
+      article.textContent.length < max_length_of_textContent_to_use_as_summary
+    )
+      article.summary = article.textContent;
+    // if there is no summary but there is an excerpt, then use the excerpt as the summary
+    if (article.summary === undefined && article.excerpt !== undefined)
+      article.summary = article.excerpt;
+    // if there is no excerpt but there is a summary, then use the summary as the exerpt
+    if (article.summary !== undefined && article.excerpt === undefined)
+      article.excerpt = article.summary;
+
     if (article.tags !== undefined && article.tags.length === 0)
       article.tags = undefined;
     article.url = url;
