@@ -1,13 +1,23 @@
 .ArticlePreview {
   padding: var(--spacing-unit);
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  box-shadow: var(--box-shadow-panel);
+  background-color: var(--background-sidebar);
 
   display: flex;
   flex-direction: column;
   gap: var(--spacing-unit);
 
   & > .title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
     & > a {
       text-decoration: none;
+      color: var(--primary-color);
+    }
+    & > a:hover {
+      text-decoration: underline;
     }
   }
 
@@ -21,16 +31,21 @@
   & > .addedDate {
     text-align: right;
     font-style: italic;
+    font-size: 0.8rem;
+    color: #888;
   }
 
   & > .publishedTime {
     text-align: right;
     font-style: italic;
+    font-size: 0.8rem;
+    color: #888;
   }
 
   & > .summary {
     display: flex;
     flex-direction: column;
     gap: calc(var(--spacing-unit));
+    font-size: 0.9rem;
   }
 }

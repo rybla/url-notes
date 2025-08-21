@@ -1,25 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=STIX+Two+Math&display=swap");
+
 :root {
   /* spacing */
   --spacing-unit: 8px;
 
   /* basic colors */
-  --dark-color: black;
-  --primary-color: blue;
-  --secondary-color: purple;
+  --dark-color: #1a1a1a;
+  --light-color: #f2f2f2;
+  --primary-color: #4caf50; /* A green color, like a chalkboard */
+  --secondary-color: #2196f3; /* A blue color, like a blueprint */
 
   /* sidebar */
-  --background-sidebar: gray;
+  --background-sidebar: #2a2a2a;
 
   /* panel */
-  --box-shadow-panel: 0 0 8px rgba(0, 0, 0, 0.3);
+  --box-shadow-panel: 0 0 12px rgba(0, 0, 0, 0.5);
 
   /* button */
   --background-button: var(--primary-color);
-  --color-button: white;
-  --background-button-disabled: black;
-  --color-button-disabled: lightgray;
+  --color-button: var(--light-color);
+  --background-button-disabled: #444;
+  --color-button-disabled: #888;
 
   --toolbar-size: calc(5 * var(--spacing-unit));
+
+  /* fonts */
+  --font-main: "Roboto", sans-serif;
+  --font-heading: "STIX Two Math", serif;
 }
 
 * {
@@ -36,15 +43,26 @@ body {
   scroll-behavior: none;
   position: fixed;
   overflow: hidden;
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  font-family: var(--font-main);
 }
 
 ul,
 ol {
-  /*list-style-type: none;*/
   margin-left: 2em;
 }
 
 body {
   display: flex;
   flex-direction: column;
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

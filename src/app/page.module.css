@@ -4,6 +4,9 @@
 
   font-size: 2rem;
   font-weight: bold;
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+  text-align: center;
 }
 
 .links {
@@ -13,4 +16,5 @@
   display: flex;
   flex-direction: column;
   gap: calc(2 * var(--spacing-unit));
+  align-items: center;
 }
