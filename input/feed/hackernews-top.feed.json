@@ -1,7 +1,7 @@
 {
   "name": "Hacker News Top",
   "feedUrl": "https://hnrss.org/best",
-  "maxItems": 30,
+  "maxItems": 40,
   "filters": {
     "topics": [
       "programming languages",

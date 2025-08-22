@@ -1,7 +1,7 @@
 import { execFile } from "child_process";
 import { promisify } from "util";
 import { makeConsole } from "@/analysis/console";
-const { log, error } = makeConsole({ __filename });
+const { log } = makeConsole({ __filename });
 
 // -----------------------------------------------------------------------------
 

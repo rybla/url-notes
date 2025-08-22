@@ -10,6 +10,15 @@ export function stringify(x: any): string {
   return JSON.stringify(x, null, 4);
 }
 
+export function jsonify(s: string): JSON | null {
+  try {
+    return JSON.parse(s);
+  } catch (e) {
+    console.error("jsonify:", e);
+    return null;
+  }
+}
+
 export function do_<A>(k: () => A): A {
   return k();
 }

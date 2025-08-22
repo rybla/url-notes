@@ -2,6 +2,7 @@
 import type z from "zod";
 import * as fs from "fs/promises";
 import path from "path";
+import { jsonify } from "./utility";
 
 export async function readTextFile(filepath: string): Promise<string | null> {
   try {
@@ -29,12 +30,9 @@ export async function readJsonFile<A>(
   } catch {
     return null;
   }
-  // makes sure to still throw error if we cant even parse the JSON
-  try {
-    return schema.safeParseAsync(JSON.parse(content));
-  } catch (e) {
-    throw new Error(`Failed to parse JSON file ${filepath}: ${e}`);
-  }
+  const data = jsonify(content);
+  if (data === null) return null;
+  return await schema.safeParseAsync(data);
 }
 
 export async function writeJsonFile(

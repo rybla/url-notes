@@ -89,29 +89,28 @@ async function checkIfShouldKeepArticle(article: Article): Promise<boolean> {
           .find((kw) => sample?.toLowerCase().includes(kw.toLowerCase()))
       ) {
         log(
-          `Keeping article ${article.title ?? article.url} because it included one of the keywords`,
+          `Keeping article because it included one of the keywords: ${article.title ?? article.url}`,
         );
         return true;
       }
     }
 
     if (filters.topics) {
-      const messages = [
-        {
-          role: "system",
-          content: trim(`
+      const response = await ollama.chat({
+        model: "gemma3:12b",
+        messages: [
+          {
+            role: "system",
+            content: trim(`
 The user will provide some sample content from an article. Your task is to determine if it is related to any of the following topics:
 ${filters.topics.map((topic) => `  - ${topic}`).join("\n")}
 Respond just a single word:
   - if the sample is related to any of the topic listed above, respond with "true"
   - otherwise, respond with "false"
 `),
-        },
-        { role: "user", content: sample },
-      ];
-      const response = await ollama.chat({
-        model: "gemma3:12b",
-        messages: messages,
+          },
+          { role: "user", content: sample },
+        ],
         keep_alive: "5m",
         format: { type: "boolean" },
       });
