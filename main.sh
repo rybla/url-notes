@@ -14,4 +14,4 @@ echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] begin"
 # # deploy site
 # bun run deploy &&
 
-# echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] end"
+echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] end"
