@@ -12,7 +12,7 @@ const execFileAsync = promisify(execFile);
 log("begin");
 
 // pull remote changes
-await execFileAsync("git", ["pull", "-X", "theirs"]);
+// await execFileAsync("git", ["pull", "-X", "theirs"]);
 
 // // update articles
 // await execFileAsync("bun", ["run", "script/fetch-articles.ts"]);
