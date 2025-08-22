@@ -14,15 +14,15 @@ log("begin");
 // pull remote changes
 await execFileAsync("git", ["pull", "-X", "theirs"]);
 
-// update articles
-await execFileAsync("bun", ["run", "script/fetch-articles.ts"]);
-await execFileAsync("bun", ["run", "script/filter-articles.ts"]);
-await execFileAsync("bun", ["run", "script/process-articles.ts"]);
+// // update articles
+// await execFileAsync("bun", ["run", "script/fetch-articles.ts"]);
+// await execFileAsync("bun", ["run", "script/filter-articles.ts"]);
+// await execFileAsync("bun", ["run", "script/process-articles.ts"]);
 
-// build site
-await execFileAsync("bun", ["run", "build"]);
+// // build site
+// await execFileAsync("bun", ["run", "build"]);
 
-// deploy site
-await execFileAsync("bun", ["run", "deploy"]);
+// // deploy site
+// await execFileAsync("bun", ["run", "deploy"]);
 
 log("end");
