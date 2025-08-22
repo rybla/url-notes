@@ -93,6 +93,7 @@ async function doArticle(
         addedTime: d.getTime(),
         publishedTime: article.publishedTime,
         title: article.title,
+        rssFeedConfig: feedItem?.config,
       };
     },
   );

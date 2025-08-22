@@ -1,5 +1,5 @@
 import { ollama } from "@/analysis/ai";
-import { readArticle_new } from "@/analysis/article";
+import { readArticle_new } from "@/analysis/article/read";
 import { cacheJson } from "@/analysis/cache";
 import { makeConsole } from "@/analysis/console";
 import { renameFile, writeJsonFile } from "@/analysis/file";
@@ -140,55 +140,54 @@ const articleIds = await paths.get_articleIds_new();
 
 for (const articleId of articleIds) {
   log(`Filtering article: ${articleId}`);
-  const article = await readArticle_new(articleId);
-  if (!article) {
-    log(`Bad article: ${articleId}`);
+
+  async function purge() {
+    log(`Purging article: ${articleId}`);
     try {
       await renameFile(
         paths.filepath_article_new(articleId),
         paths.filepath_article_ignored(articleId),
       );
+    } catch {}
+    try {
       await renameFile(
         paths.filepath_article_new_metadata(articleId),
         paths.filepath_article_ignored_metadata(articleId),
       );
+    } catch {}
+  }
+
+  async function keep() {
+    log(`Keeping article: ${articleId}`);
+    try {
+      await renameFile(
+        paths.filepath_article_new(articleId),
+        paths.filepath_article(articleId),
+      );
+      await renameFile(
+        paths.filepath_article_new_metadata(articleId),
+        paths.filepath_article_metadata(articleId),
+      );
     } catch (e: unknown) {
-      error(`Error when renaming bad article files: ${e}`);
+      error(`Error when renaming kept article files: ${e}`);
     }
+  }
+
+  const article = await readArticle_new(articleId);
+  if (!article) {
+    log(`Bad article: ${articleId}`);
+    await purge();
     continue;
   }
   const shouldKeep = await checkIfShouldKeepArticle(article);
   if (!shouldKeep) {
-    log(`Ignoring article: ${articleId}`);
+    log(`Ignored article: ${articleId}`);
     articleIds_ignored.add(articleId);
-    try {
-      await renameFile(
-        paths.filepath_article_new(articleId),
-        paths.filepath_article_ignored(articleId),
-      );
-      await renameFile(
-        paths.filepath_article_new_metadata(articleId),
-        paths.filepath_article_ignored_metadata(articleId),
-      );
-    } catch (e: unknown) {
-      error(`Error when renaming ignored article files: ${e}`);
-    }
+    await purge();
     continue;
   }
 
-  log(`Keeping article: ${articleId}`);
-  try {
-    await renameFile(
-      paths.filepath_article_new(articleId),
-      paths.filepath_article(articleId),
-    );
-    await renameFile(
-      paths.filepath_article_new_metadata(articleId),
-      paths.filepath_article_metadata(articleId),
-    );
-  } catch (e: unknown) {
-    error(`Error when renaming kept article files: ${e}`);
-  }
+  await keep();
 }
 
 await writeJsonFile(

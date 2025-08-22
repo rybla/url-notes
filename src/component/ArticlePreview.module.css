@@ -17,6 +17,18 @@
   text-decoration: underline;
 }
 
+.ArticlePreview > .feedName {
+  font-size: 0.8rem;
+
+  & > .punctuation {
+    font-style: italic;
+  }
+  & > .value {
+    font-weight: bold;
+    color: var(--color-secondary);
+  }
+}
+
 .ArticlePreview > .tags {
   display: flex;
   flex-direction: row;

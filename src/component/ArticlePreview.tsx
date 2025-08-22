@@ -16,13 +16,19 @@ export default function ArticlePreviewComponent(props: {
           {props.preview.metadata.title ?? props.preview.metadata.url}
         </Link>
       </div>
-      {props.preview.tags && (
+      {props.preview.metadata.rssFeedConfig && (
+        <div className={styles.feedName}>
+          <span className={styles.punctuation}>from</span>{" "}
+          <span className={styles.value}>{props.preview.metadata.rssFeedConfig?.name}</span>
+        </div>
+      )}
+      {/*{props.preview.tags && (
         <div className={styles.tags}>
           {props.preview.tags.map((tag, j) => (
             <Tag tag={tag} key={j} />
           ))}
         </div>
-      )}
+      )}*/}
       {props.preview.metadata.publishedTime && (
         <div className={styles.publishedTime}>
           {"published: "}

@@ -60,6 +60,7 @@ export const ArticleMetadata = z.object({
   addedDate: z.iso.date(),
   addedTime: z.number(),
   publishedTime: z.optional(FuzzyDate),
+  rssFeedConfig: z.lazy(() => RssFeedConfig).optional(),
 });
 
 export type ArticleSummary = z.infer<typeof ArticleSummary>;
@@ -68,15 +69,15 @@ export const ArticleSummary = z.string();
 export type ArticleTags = z.infer<typeof ArticleTags>;
 export const ArticleTags = z.array(z.string());
 
-export type ArticlePlus = z.infer<typeof ArticlePlus>;
-export const ArticlePlus = z.object({
-  id: z.string(),
-  article: Article,
-  metadata: ArticleMetadata,
-  content: z.optional(ArticleContent),
-  summary: z.optional(ArticleSummary),
-  tags: z.optional(ArticleTags),
-});
+// export type ArticlePlus = z.infer<typeof ArticlePlus>;
+// export const ArticlePlus = z.object({
+//   id: z.string(),
+//   article: Article,
+//   metadata: ArticleMetadata,
+//   content: z.optional(ArticleContent),
+//   summary: z.optional(ArticleSummary),
+//   tags: z.optional(ArticleTags),
+// });
 
 export type ArticlePreview = {
   metadata: ArticleMetadata;

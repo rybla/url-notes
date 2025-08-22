@@ -2,7 +2,7 @@ import {
   readArticleMetadata,
   readArticleSummary,
   readArticleTags,
-} from "@/analysis/article";
+} from "@/analysis/article/read";
 import { ArticlePreview } from "@/analysis/ontology";
 import paths from "@/analysis/paths";
 import AppPage from "@/component/AppPage";

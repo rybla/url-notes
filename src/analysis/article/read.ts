@@ -1,6 +1,6 @@
 import { error } from "../console";
 import { readJsonFile, readTextFile } from "../file";
-import { Article, ArticleMetadata, ArticlePlus } from "../ontology";
+import { Article, ArticleMetadata } from "../ontology";
 import paths from "../paths";
 
 export async function readArticle(articleId: string): Promise<Article | null> {
@@ -76,23 +76,23 @@ export async function readArticleTags(
   return tags_string.split(",").map((s) => s.trim());
 }
 
-export async function readArticlePlus(
-  articleId: string,
-): Promise<ArticlePlus | null> {
-  const article = await readArticle(articleId);
-  if (!article) return null;
-  const metadata = await readArticleMetadata(articleId);
-  if (!metadata) return null;
-  const content = (await readArticleContent(articleId)) ?? undefined;
-  const summary = (await readArticleSummary(articleId)) ?? undefined;
-  const tags = (await readArticleTags(articleId)) ?? undefined;
-  const articlePlus: ArticlePlus = {
-    id: articleId,
-    article,
-    metadata,
-    content,
-    summary,
-    tags,
-  };
-  return articlePlus;
-}
+// export async function readArticlePlus(
+//   articleId: string,
+// ): Promise<ArticlePlus | null> {
+//   const article = await readArticle(articleId);
+//   if (!article) return null;
+//   const metadata = await readArticleMetadata(articleId);
+//   if (!metadata) return null;
+//   const content = (await readArticleContent(articleId)) ?? undefined;
+//   const summary = (await readArticleSummary(articleId)) ?? undefined;
+//   const tags = (await readArticleTags(articleId)) ?? undefined;
+//   const articlePlus: ArticlePlus = {
+//     id: articleId,
+//     article,
+//     metadata,
+//     content,
+//     summary,
+//     tags,
+//   };
+//   return articlePlus;
+// }

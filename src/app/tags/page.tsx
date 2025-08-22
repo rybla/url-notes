@@ -1,4 +1,4 @@
-import { readArticleTags } from "@/analysis/article";
+import { readArticleTags } from "@/analysis/article/read";
 import paths from "@/analysis/paths";
 import AppPage from "@/component/AppPage";
 import LinkButton from "@/component/LinkButton";
