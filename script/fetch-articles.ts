@@ -30,16 +30,25 @@ const articleIds_old = new Set(await paths.get_articleIds());
 
 // -----------------------------------------------------------------------------
 
+type DoArticleResult = "success" | "failed" | "ignored" | "old";
+
 async function doArticle(
   url: string,
   feedItem?: {
     item: Item;
     config: RssFeedConfig;
   },
-): Promise<boolean> {
+): Promise<DoArticleResult> {
   const articleId = filenamifyUrl(url);
-  if (articleIds_ignored.has(articleId)) return false;
-  if (articleIds_old.has(articleId)) return false;
+  log(`Processing article: ${articleId}`);
+  if (articleIds_ignored.has(articleId)) {
+    log(`Ignoring url: ${articleId}`);
+    return "ignored";
+  }
+  if (articleIds_old.has(articleId)) {
+    log(`Skipping old url: ${articleId}`);
+    return "old";
+  }
 
   const article = await cacheJson(
     paths.filepath_article_new(articleId),
@@ -68,8 +77,8 @@ async function doArticle(
     },
   );
   if (!article) {
-    articleIds_ignored.add(url);
-    return false;
+    log("Failed to fetch article for url:", articleId);
+    return "failed";
   }
 
   const metadata = await cacheJson(
@@ -88,11 +97,11 @@ async function doArticle(
     },
   );
   if (!metadata) {
-    articleIds_ignored.add(url);
-    return false;
+    log("Failed to fetch metadata for url:", articleId);
+    return "failed";
   }
 
-  return true;
+  return "success";
 }
 
 // -----------------------------------------------------------------------------
@@ -100,7 +109,7 @@ async function doArticle(
 // -----------------------------------------------------------------------------
 
 for (const filepath_articleUrlList of paths.filepaths_articleUrlLists) {
-  log(`Reading article urls from link list: ${filepath_articleUrlList}`);
+  log(`Reading article urls from url list: ${filepath_articleUrlList}`);
   const urls_string = await readTextFile(filepath_articleUrlList);
   if (urls_string === null) {
     error(`Failed to read: ${filepath_articleUrlList}`);
@@ -113,12 +122,14 @@ for (const filepath_articleUrlList of paths.filepaths_articleUrlLists) {
 
   const failed_urls = [];
   for (const url of urls) {
-    const success = await doArticle(url);
-    if (!success) {
+    const result = await doArticle(url);
+    if (result === "failed") {
       failed_urls.push(url);
     }
   }
-  // write back any URLs that failed for some reason
+  log(
+    `Failed to fetch articles for urls from url list: ${failed_urls.map((s) => `\n  - ${s}`).join()}`,
+  );
   await writeTextFile(filepath_articleUrlList, failed_urls.join("\n"));
 }
 

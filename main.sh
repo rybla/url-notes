@@ -11,7 +11,7 @@ git pull -X theirs
 # # build site
 # bun run build
 
-# # deploy site
-# bun run deploy
+# deploy site
+bun run deploy
 
 echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] end"
