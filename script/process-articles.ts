@@ -7,7 +7,6 @@ import { Article } from "@/analysis/ontology";
 import paths from "@/analysis/paths";
 import { do_ } from "@/analysis/utility";
 const { log, error } = makeConsole({ __filename });
-import * as config from "@/config";
 
 // -----------------------------------------------------------------------------
 
@@ -15,7 +14,6 @@ const articleIds = await paths.get_articleIds();
 for (const articleId of articleIds) {
   try {
     log(`processing article: ${articleId}`);
-    let isNew = false;
     let shouldBreak = false;
 
     const article = await do_(async () => {
@@ -38,7 +36,6 @@ for (const articleId of articleIds) {
     const summary = await cacheText(
       paths.filepath_article_summary(articleId),
       async () => {
-        isNew = true;
         const result = await generateSummary(article, content);
         if (result.type === "error") {
           if (result.broken) shouldBreak = true;
@@ -56,7 +53,6 @@ for (const articleId of articleIds) {
     const tags = await cacheText(
       paths.filepath_article_tags(articleId),
       async () => {
-        isNew = true;
         const result = await generateTags(article, summary);
         if (result.type === "error") {
           if (result.broken) shouldBreak = true;
@@ -70,8 +66,6 @@ for (const articleId of articleIds) {
       break;
     }
     if (tags === null) continue;
-
-    if (isNew && config.Once) break;
   } catch (e: unknown) {
     error(e);
   }
