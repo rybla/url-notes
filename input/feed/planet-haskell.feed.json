@@ -1,0 +1,5 @@
+{
+  "name": "Planet Haskell",
+  "feedUrl": "https://planet.haskell.org/rss20.xml",
+  "maxItems": 4
+}
