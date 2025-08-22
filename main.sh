@@ -7,8 +7,8 @@ git pull -X theirs
 
 # update articles
 bun run script/fetch-articles.ts
-# bun run script/filter-articles.ts
-# bun run script/process-articles.ts
+bun run script/filter-articles.ts
+bun run script/process-articles.ts
 
 # build site
 bun run build
