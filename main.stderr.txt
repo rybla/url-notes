@@ -1,0 +1,22 @@
+main.sh:7: command not found: bun
+main.sh:8: command not found: bun
+main.sh:9: command not found: bun
+main.sh:12: command not found: bun
+main.sh:14: command not found: deploy
+main.sh:15: command not found: bun
+main.sh:7: command not found: bun
+main.sh:8: command not found: bun
+main.sh:9: command not found: bun
+main.sh:12: command not found: bun
+main.sh:14: command not found: deploy
+main.sh:15: command not found: bun
+main.sh:7: command not found: bun
+main.sh:8: command not found: bun
+main.sh:9: command not found: bun
+main.sh:12: command not found: bun
+main.sh:14: command not found: deploy
+main.sh:15: command not found: bun
+zsh:source:1: no such file or directory: /Users/yourusername/.zshrc
+zsh:1: command not found: main.sh
+zsh:1: command not found: main.sh
+$ gh-pages --nojekyll -d output-site
