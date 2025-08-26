@@ -34,6 +34,9 @@ export const paths = {
   filepaths_articleUrlLists: [
     "/Users/henry/Library/Mobile\ Documents/com\~apple\~CloudDocs/url-notes/article_urls.txt",
   ],
+  filepaths_feedLists: [
+    "/Users/henry/Library/Mobile\ Documents/com\~apple\~CloudDocs/url-notes/feeds.txt",
+  ],
   // feed
   dirpath_feed,
   async get_filepaths_of_feeds(): Promise<string[]> {

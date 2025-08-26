@@ -135,23 +135,29 @@ for (const filepath_articleUrlList of paths.filepaths_articleUrlLists) {
 // fetch from feeds
 // -----------------------------------------------------------------------------
 
-const feeds = await Promise.all(
-  (await paths.get_filepaths_of_feeds()).map(
-    async (filepath_feed) =>
-      await fetchFeed(
-        await do_(async () => {
-          const result = await readJsonFile(filepath_feed, RssFeedConfig);
-          if (!result)
-            throw new Error("Failed to read RssFeedConfig JSON file");
-          if (!result.success)
-            throw new Error(
-              `Failed to parse RssFeedConfig JSON file: ${result.error}`,
-            );
-          return result.data;
-        }),
-      ),
-  ),
-);
+const feeds = (
+  await Promise.all(
+    (await paths.get_filepaths_of_feeds()).map(async (filepath_feed) => {
+      const feedConfig_result = await readJsonFile(
+        filepath_feed,
+        RssFeedConfig,
+      );
+      if (!feedConfig_result)
+        throw new Error("Failed to read RssFeedConfig JSON file");
+      if (!feedConfig_result.success)
+        throw new Error(
+          `Failed to parse RssFeedConfig JSON file: ${feedConfig_result.error}`,
+        );
+      const feed = await fetchFeed(feedConfig_result.data);
+      if (feed === null) {
+        error(`Failed to fetch feed: ${filepath_feed}`);
+        return [];
+      } else {
+        return [feed];
+      }
+    }),
+  )
+).flat();
 
 for (const feed of feeds) {
   try {
