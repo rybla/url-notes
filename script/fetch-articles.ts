@@ -40,13 +40,10 @@ async function doArticle(
   },
 ): Promise<DoArticleResult> {
   const articleId = filenamifyUrl(url);
-  log(`Processing article: ${articleId}`);
   if (articleIds_ignored.has(articleId)) {
-    log(`Ignoring url: ${articleId}`);
     return "ignored";
   }
   if (articleIds_old.has(articleId)) {
-    log(`Skipping old url: ${articleId}`);
     return "old";
   }
 
@@ -162,8 +159,6 @@ for (const feed of feeds) {
 
     for (const item of feed.rss.items.slice(0, feed.config.maxItems)) {
       try {
-        log(`Reading article url from feed item link: ${item.link}`);
-
         const url = item.link;
         if (!url) continue;
 
