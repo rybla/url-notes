@@ -1,7 +1,7 @@
 import { makeConsole } from "@/analysis/console";
 import { getFeeds } from "@/analysis/feed";
 import { readTextFile, writeJsonFile, writeTextFile } from "@/analysis/file";
-import { RssFeed, RssFeedConfig } from "@/analysis/ontology";
+import { RssFeedConfig } from "@/analysis/ontology";
 import paths from "@/analysis/paths";
 import { jsonify } from "@/analysis/utility";
 import filenamify from "filenamify";
@@ -10,8 +10,8 @@ const { error, log } = makeConsole({ __filename });
 
 // -----------------------------------------------------------------------------
 
-const feeds_old: RssFeed[] = await getFeeds();
-const feedUrls_old = new Set(feeds_old.map((f) => f.config.feedUrl));
+const feeds_old: RssFeedConfig[] = await getFeeds();
+const feedUrls_old = new Set(feeds_old.map((cfg) => cfg.feedUrl));
 const feeds: RssFeedConfig[] = [];
 
 for (const filepath_feedList of paths.filepaths_feedLists) {
