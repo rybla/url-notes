@@ -40,6 +40,7 @@ for (const filepath_feedList of paths.filepaths_feedLists) {
       log(`Feed already exists: ${feed_result.data.feedUrl}`);
       continue;
     }
+    log(`Adding feed "${feed_result.data.name}": ${feed_result.data.feedUrl}`);
     feeds.push(feed_result.data);
   }
 

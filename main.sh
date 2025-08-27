@@ -5,10 +5,9 @@ echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] begin"
 # pull remote changes
 git pull -X theirs
 
-# update feeds
+# update input
 bun run script/fetch-articles.ts
-
-git add input/feed && git commit -m"added new feeds" && git push
+git add input && git commit -m"added new feeds" && git push
 
 # update articles
 bun run script/filter-articles.ts
