@@ -1,9 +1,8 @@
 import { ArticlePreview } from "@/analysis/ontology";
+import { formatDate } from "@/analysis/utility";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import styles from "./ArticlePreview.module.css";
-import { formatDate } from "@/analysis/utility";
-import Tag from "./Tag";
 import LinkButton from "./LinkButton";
 
 export default function ArticlePreviewComponent(props: {
