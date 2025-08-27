@@ -8,7 +8,7 @@ git pull -X theirs
 # update feeds
 bun run script/fetch-articles.ts
 
-git add input/feed && git commit -m"added new feeds"
+git add input/feed && git commit -m"added new feeds" && git push
 
 # update articles
 bun run script/filter-articles.ts
