@@ -2,21 +2,21 @@
 
 echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] begin"
 
-# pull remote changes
+echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] pull remote changes"
 git pull -X theirs
 
-# update input
+echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] update input"
 bun run script/fetch-articles.ts
 git add input && git commit -m"added new feeds" && git push
 
-# update articles
+echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] update articles"
 bun run script/filter-articles.ts
 bun run script/process-articles.ts
 
-# build site
+echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] build site"
 bun run build
 
-# deploy site
+echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] deploy site"
 bun run deploy
 
 echo "[$(date "+%Y-%m-%d,%H:%M")] [main.sh] end"
