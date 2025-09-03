@@ -39,7 +39,7 @@ async function doArticle(
     config: RssFeedConfig;
   },
 ): Promise<DoArticleResult> {
-  const articleId = filenamifyUrl(url);
+  const articleId = filenamifyUrl(url, { replacement: "_" });
   if (articleIds_ignored.has(articleId)) {
     return "ignored";
   }
