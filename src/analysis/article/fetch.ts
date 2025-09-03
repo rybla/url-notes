@@ -200,6 +200,7 @@ export async function fetchGithubRepositoryReadme(
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/readme`;
 
     const apiResponse = await fetch(apiUrl, {
+      signal: AbortSignal.timeout(10000),
       headers: {
         Accept: "application/vnd.github.v3+json",
       },
@@ -216,7 +217,9 @@ export async function fetchGithubRepositoryReadme(
       return null;
     }
 
-    const contentResponse = await fetch(downloadUrl);
+    const contentResponse = await fetch(downloadUrl, {
+      signal: AbortSignal.timeout(10000),
+    });
 
     if (!contentResponse.ok) {
       return null;
@@ -255,6 +258,7 @@ export async function fetchGithubRepositoryData(
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}`;
 
     const apiResponse = await fetch(apiUrl, {
+      signal: AbortSignal.timeout(10000),
       headers: {
         Accept: "application/vnd.github.v3+json",
       },
@@ -336,7 +340,9 @@ export async function fetchArxivArticleData(
 
     const apiUrl = `https://export.arxiv.org/api/query?id_list=${articleId}`;
 
-    const response = await fetch(apiUrl);
+    const response = await fetch(apiUrl, {
+      signal: AbortSignal.timeout(10000),
+    });
     if (!response.ok) {
       console.error(
         `Failed to fetch from ArXiv API. Status: ${response.status}`,
@@ -575,7 +581,7 @@ const ARXIV_CATEGORY_MAP: { [key: string]: string } = {
  */
 export async function fetchPdfText(url: string): Promise<PdfData | null> {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { signal: AbortSignal.timeout(10000) });
 
     if (!response.ok) {
       console.error(`HTTP error! status: ${response.status} for URL: ${url}`);
