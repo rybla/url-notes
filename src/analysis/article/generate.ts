@@ -1,10 +1,10 @@
-import { max_length_of_content_to_summarize } from "@/config";
 import * as ai from "../ai";
 import { Article } from "../ontology";
 import { error } from "../console";
 import * as config from "@/config";
 import { jsonify, trim } from "../utility";
 import z from "zod";
+import { log } from "../console";
 
 export type GenerateResult<A> =
   | { type: "ok"; value: A }
@@ -22,10 +22,14 @@ export async function generateSummary(
     return { type: "error", broken: false };
   }
 
+  const content_short = content.slice(
+    0,
+    config.max_length_of_content_to_summarize,
+  );
   const summary_result = await ai.gemini(`
-Write a very concise and technical bullet-point overview of the following ${content.length < max_length_of_content_to_summarize ? "article" : "article preview"}. Use markdown syntax. Respond with JUST the overview.
+Write a very concise and technical bullet-point overview of the following ${content.length < config.max_length_of_content_to_summarize ? "article" : "article preview"}. Use markdown syntax. Respond with JUST the overview.
 
-${content.slice(0, max_length_of_content_to_summarize)}
+${content_short}
 `);
   if (summary_result.type === "error") {
     error("error when generating summary:", summary_result.reason);
@@ -59,7 +63,7 @@ Consider the following article summary. Your task is to come up with the tags th
 
 ${title ? `Summary of "${title}":` : "Summary:"}
 
-${summary}
+${summary.slice(0, config.max_length_of_summary_to_tag)}
 `,
       { model: "gemini-2.5-flash" },
     );

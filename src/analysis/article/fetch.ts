@@ -19,6 +19,12 @@ export async function fetchArticle(url: string): Promise<Article | null> {
   try {
     log(`Fetching article at URL: ${url}`);
 
+    if (
+      url ===
+      "https://www.washingtonpost.com/technology/2025/08/29/tesla-autopilot-crashes-evidence-testimony-wrongful-death/"
+    )
+      return null;
+
     // special case: github
     if (url.includes("github.com")) {
       const readme = await fetchGithubRepositoryReadme(url);
