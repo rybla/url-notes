@@ -15,6 +15,7 @@ import FocusSpan from "@/component/FocusSpan";
 
 const config = {
   articles_per_page: 10,
+  max_articles: 400,
 };
 
 type Params = {
@@ -33,6 +34,9 @@ const getCachedData = cache(async () => {
   ).filter((md) => md !== null);
   // sorted from newest (higher `addedTime` value) to oldest
   mds_all.sort((x, y) => y.addedTime - x.addedTime);
+
+  // truncate mds_all to be of max length confi.max_articles, removing from the back
+  mds_all.splice(config.max_articles, mds_all.length - config.max_articles);
 
   const previews_all: ArticlePreview[] = await Promise.all(
     mds_all.map(async (md) => {
